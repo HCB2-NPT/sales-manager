@@ -1,2 +1,2 @@
 # sales-manager
-Final Project: Java development
+Final Project: Java Application Development
