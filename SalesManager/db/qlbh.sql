@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2016 lúc 09:13 SA
+-- Thời gian đã tạo: Th10 14, 2016 lúc 11:01 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -92,8 +92,8 @@ INSERT INTO `customer` (`id`, `name`, `phonenumber`, `company`) VALUES
 (1, 'Nguyễn Thị Lạ', '0909776724', 'Tin Học Hoàng'),
 (2, 'Huỳnh Thị Út', '0909232323', 'Tin Học Linh Trung'),
 (3, 'Nguyễn Thị Đẹt', '7878343434', 'Tin Học B'),
-(4, 'Tống Trương', '6534234567', 'Tin Học Hoàng'),
-(5, 'Nguyễn Hoàng', '2131231236', NULL);
+(4, 'Nguyễn Hoàng', '6534234567', 'Tin Học B'),
+(5, 'Võ Hoài Thanh', '0907653527', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,12 +132,12 @@ CREATE TABLE `import` (
 --
 
 INSERT INTO `import` (`id`, `creater`, `date`) VALUES
-(1, 1, '2016-10-10'),
-(2, 1, '2016-10-01'),
-(3, 1, '2016-10-02'),
-(4, 1, '2016-10-03'),
-(5, 1, '2016-10-04'),
-(6, 1, '2016-10-05');
+(1, 2, '2016-10-01'),
+(2, 2, '2016-10-01'),
+(3, 2, '2016-10-02'),
+(4, 2, '2016-10-03'),
+(5, 2, '2016-10-04'),
+(6, 2, '2016-10-05');
 
 -- --------------------------------------------------------
 
@@ -198,8 +198,9 @@ CREATE TABLE `invoice` (
 INSERT INTO `invoice` (`id`, `date`, `creater`, `payment`, `paymentdate`, `customerid`, `isdeleted`) VALUES
 (1, '2016-10-10', 2, b'0', NULL, 1, b'0'),
 (2, '2016-10-11', 3, b'0', NULL, 2, b'0'),
-(3, '2016-10-11', 2, b'0', NULL, 1, b'0'),
-(4, '2016-10-12', 2, b'0', NULL, 3, b'0');
+(3, '2016-10-11', 2, b'0', NULL, 3, b'0'),
+(4, '2016-10-12', 2, b'0', NULL, 4, b'0'),
+(5, '2016-10-12', 2, b'0', NULL, 5, b'0');
 
 -- --------------------------------------------------------
 
@@ -233,7 +234,8 @@ INSERT INTO `invoiceext` (`invoiceid`, `itemid`, `cost`, `num`) VALUES
 (3, 13, 5000000, 1),
 (3, 14, 4000000, 1),
 (4, 3, 16599990, 3),
-(4, 4, 4439996, 1);
+(4, 4, 4439996, 1),
+(5, 16, 1800000, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +273,7 @@ INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dram`, `cat`, `img`) VALUES
 (13, 'Philips 273G3 27', 5000000, 7, 2, 5, NULL),
 (14, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD', 4000000, 12, 2, 5, NULL),
 (15, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD', 42000000, 0, 2, 5, NULL),
-(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 5, 2, 6, NULL),
+(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 4, 2, 6, NULL),
 (17, 'infinity Side 108 Black - Side RGB + Rainbow led Mechanical Blue Keyboard', 2000000, 0, 2, 6, NULL),
 (18, 'CM Storm Devastator - Gaming keyboard & Mouse combo', 750000, 0, 1, 10, NULL);
 
@@ -336,7 +338,8 @@ ALTER TABLE `category`
 -- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`);
 
 --
 -- Chỉ mục cho bảng `dram`
