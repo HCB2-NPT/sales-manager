@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2016 lúc 11:01 SA
+-- Thời gian đã tạo: Th10 14, 2016 lúc 11:42 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -123,7 +123,7 @@ INSERT INTO `dram` (`id`, `name`) VALUES
 
 CREATE TABLE `import` (
   `id` int(11) NOT NULL,
-  `creater` int(11) NOT NULL,
+  `createrid` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -131,7 +131,7 @@ CREATE TABLE `import` (
 -- Đang đổ dữ liệu cho bảng `import`
 --
 
-INSERT INTO `import` (`id`, `creater`, `date`) VALUES
+INSERT INTO `import` (`id`, `createrid`, `date`) VALUES
 (1, 2, '2016-10-01'),
 (2, 2, '2016-10-01'),
 (3, 2, '2016-10-02'),
@@ -184,8 +184,8 @@ INSERT INTO `importext` (`importid`, `itemid`, `providerid`, `cost`, `num`) VALU
 CREATE TABLE `invoice` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `creater` int(11) NOT NULL,
-  `payment` bit(1) NOT NULL DEFAULT b'0',
+  `createrid` int(11) NOT NULL,
+  `ispayment` bit(1) NOT NULL DEFAULT b'0',
   `paymentdate` date DEFAULT NULL,
   `customerid` int(11) NOT NULL,
   `isdeleted` bit(1) NOT NULL DEFAULT b'0'
@@ -195,7 +195,7 @@ CREATE TABLE `invoice` (
 -- Đang đổ dữ liệu cho bảng `invoice`
 --
 
-INSERT INTO `invoice` (`id`, `date`, `creater`, `payment`, `paymentdate`, `customerid`, `isdeleted`) VALUES
+INSERT INTO `invoice` (`id`, `date`, `createrid`, `ispayment`, `paymentdate`, `customerid`, `isdeleted`) VALUES
 (1, '2016-10-10', 2, b'0', NULL, 1, b'0'),
 (2, '2016-10-11', 3, b'0', NULL, 2, b'0'),
 (3, '2016-10-11', 2, b'0', NULL, 3, b'0'),
