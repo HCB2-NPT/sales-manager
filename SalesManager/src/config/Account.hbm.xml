@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="qlbh" name="pojo.Account" table="account">
+		<id name="id" type="int" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string" column="name"/>
+		<property name="username" type="string" column="username"/>
+		<property name="password" type="string" column="password"/>
+		<property name="permissionId" type="int" column="permissionid"/>
+		<property name="isDeleted" type="boolean" column="isdeleted"/>
+	</class>
+</hibernate-mapping>

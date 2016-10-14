@@ -17,7 +17,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/jfoenix.jar"/>
-	<classpathentry kind="lib" path="libs/log4j-1.2.17.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JFoenix"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Log4j"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDbc"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
