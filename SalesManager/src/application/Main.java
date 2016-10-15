@@ -1,10 +1,8 @@
 package application;
 
-import dao.AccountAdapter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import pojo.Account;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
