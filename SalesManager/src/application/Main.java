@@ -1,6 +1,8 @@
 package application;
 
 import org.apache.log4j.PropertyConfigurator;
+
+import dao.hibernate_adapters.AccountAdapter;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -37,6 +39,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("log4j.properties");
+		AccountAdapter.getAll();
 		launch(args);
 	}
 }

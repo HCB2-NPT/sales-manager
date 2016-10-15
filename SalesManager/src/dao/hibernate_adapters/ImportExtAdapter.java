@@ -2,10 +2,14 @@ package dao.hibernate_adapters;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import dao.HibernateUtil;
 import pojo.ImportExt;
 
 public class ImportExtAdapter {
+	private static final Logger logger = Logger.getLogger(ImportExtAdapter.class);
+	
 	public enum OneColumn{
 		Import, Item, Provider
 	}
@@ -15,10 +19,12 @@ public class ImportExtAdapter {
 	}
 	
 	public static List<ImportExt> getAll() {
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getList("from ImportExt", null);
 	}
 	
 	public static List<ImportExt> where(OneColumn e, int p0){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		String hql = "from ImportExt";
 		switch (e){
 			case Import:
@@ -35,6 +41,7 @@ public class ImportExtAdapter {
 	}
 	
 	public static List<ImportExt> where(TwoColumn e, int p0, int p1){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		String hql = "from ImportExt";
 		switch (e){
 			case Import_Item:
@@ -51,6 +58,7 @@ public class ImportExtAdapter {
 	}
 	
 	public static ImportExt where(int importid, int itemid, int providerid){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from ImportExt where importId = :p0 and itemId = :p1 and providerId = :p2", new Object[]{ importid, itemid, providerid });
 	}
 }

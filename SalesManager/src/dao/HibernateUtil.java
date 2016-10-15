@@ -19,7 +19,7 @@ public class HibernateUtil {
 		try {
 			sessionFactory = new Configuration().configure("config/hibernate.cfg.xml").buildSessionFactory();
 		} catch (Throwable ex) {
-			System.err.println("Initial SessionFactory creation failed." + ex);
+			logger.error("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
@@ -44,7 +44,7 @@ public class HibernateUtil {
 			session.getTransaction().commit();
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -67,7 +67,7 @@ public class HibernateUtil {
 			session.getTransaction().commit();
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -90,7 +90,7 @@ public class HibernateUtil {
 			session.getTransaction().commit();
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -107,7 +107,7 @@ public class HibernateUtil {
 			success = true;
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -124,7 +124,7 @@ public class HibernateUtil {
 			success = true;
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -141,7 +141,7 @@ public class HibernateUtil {
 			success = true;
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -158,7 +158,7 @@ public class HibernateUtil {
 			success = true;
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
@@ -175,7 +175,7 @@ public class HibernateUtil {
 			success = true;
 		} catch (HibernateException ex) {
 			session.getTransaction().rollback();
-			logger.debug(ex.getMessage());
+			logger.error(ex.getMessage());
 		} finally {
 			session.close();
 		}
