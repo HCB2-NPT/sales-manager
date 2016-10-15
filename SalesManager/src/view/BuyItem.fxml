@@ -20,13 +20,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.BuyItem">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.BuyItem">
    <center>
-      <Accordion BorderPane.alignment="CENTER">
+      <Accordion maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
         <panes>
-          <TitledPane text="Nhà phân phối">
+          <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Nhà phân phối">
                <content>
-                  <FlowPane>
+                  <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <children>
                         <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0">
                           <columnConstraints>
@@ -79,14 +79,14 @@
                   </FlowPane>
                </content>
           </TitledPane>
-          <TitledPane text="Danh sách sản phẩm">
+          <TitledPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Danh sách sản phẩm">
                <content>
-                  <BorderPane>
+                  <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <center>
-                        <TableView fx:id="table_insertitem" BorderPane.alignment="CENTER">
+                        <TableView fx:id="table_insertitem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="ID" />
-                            <TableColumn prefWidth="75.0" text="Name Item" />
+                            <TableColumn minWidth="0.0" prefWidth="75.0" text="ID" />
+                            <TableColumn maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="600.0" text="Name Item" />
                               <TableColumn prefWidth="75.0" text="Unit" />
                               <TableColumn prefWidth="75.0" text="Price" />
                               <TableColumn prefWidth="75.0" text="Number" />
@@ -147,7 +147,7 @@
       </Accordion>
    </center>
    <top>
-      <HBox BorderPane.alignment="CENTER">
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
             <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff;" text="Refresh">
                <graphic>

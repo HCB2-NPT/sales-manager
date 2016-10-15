@@ -6,6 +6,7 @@ import com.jfoenix.controls.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 public class Main {
@@ -18,7 +19,9 @@ public class Main {
     @FXML
     void Buy_Click() throws IOException {
     	BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../BuyItem.fxml"));
-		bp_xuly.getChildren().setAll(root);
+		Scene sc = new Scene(root,bp_xuly.getWidth(),bp_xuly.getHeight());
+    	bp_xuly.getChildren().setAll(root);
+		
 		
 		
     }
