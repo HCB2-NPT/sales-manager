@@ -24,16 +24,16 @@
     	<property name="show_sql">true</property>
 		
 		<!-- Mapping models -->
-		<mapping resource="config/hibernate-config/Account.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Category.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Customer.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Dram.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Import.hbm.xml"/>
-		<mapping resource="config/hibernate-config/ImportExt.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Invoice.hbm.xml"/>
-		<mapping resource="config/hibernate-config/InvoiceExt.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Item.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Permission.hbm.xml"/>
-		<mapping resource="config/hibernate-config/Provider.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Account.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Category.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Customer.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Dram.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Import.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/ImportExt.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Invoice.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/InvoiceExt.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Item.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Permission.hbm.xml"/>
+		<mapping resource="config/hibernate-maps/Provider.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
