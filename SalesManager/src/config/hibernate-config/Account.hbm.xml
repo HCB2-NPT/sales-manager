@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="qlbh" name="pojo.Account" table="account">
+		<id name="accountId" type="int">
+			<column name="id"/>
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string">
+			<column name="name" not-null="true"/>
+		</property>
+		<property name="username" type="string">
+			<column name="username" not-null="true"/>
+		</property>
+		<property name="password" type="string">
+			<column name="password" not-null="true"/>
+		</property>
+		<many-to-one name="permission" class="pojo.Permission" fetch="join" lazy="false" insert="false" update="false" cascade="none" not-null="true" column="permissionId"/>
+		<property name="isDeleted" type="boolean">
+			<column name="isdeleted" not-null="true" default="False"/>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="qlbh" name="pojo.Invoice" table="invoice">
+		<id name="invoiceId" type="int">
+			<column name="id"/>
+			<generator class="native"/>
+		</id>
+		<property name="date" type="date">
+			<column name="date" not-null="true"/>
+		</property>
+		<many-to-one name="creater" class="pojo.Account" insert="false" update="false" cascade="none" not-null="true" column="accountId"/>
+		<property name="isPayment" type="boolean">
+			<column name="ispayment" not-null="true" default="False"/>
+		</property>
+		<property name="paymentDate" type="date">
+			<column name="paymentdate"/>
+		</property>
+		<many-to-one name="customer" class="pojo.Customer" insert="false" update="false" cascade="none" not-null="true" column="customerId"/>
+		<property name="isDeleted" type="boolean">
+			<column name="isdeleted" not-null="true" default="False"/>
+		</property>
+	</class>
+</hibernate-mapping>

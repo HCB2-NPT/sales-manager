@@ -3,14 +3,14 @@ package pojo;
 import java.io.Serializable;
 
 public class Category implements Serializable {
-	private int id;
-	private String name;
+	private int catId = 0;
+	private String name = null;
 	
-	public int getId() {
-		return id;
+	public int getCatId() {
+		return catId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCatId(int id) {
+		this.catId = id;
 	}
 	public String getName() {
 		return name;

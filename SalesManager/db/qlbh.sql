@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2016 lúc 11:42 SA
+-- Thời gian đã tạo: Th10 15, 2016 lúc 03:55 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -33,7 +33,7 @@ CREATE TABLE `account` (
   `password` varchar(45) NOT NULL,
   `permissionid` int(11) NOT NULL,
   `isdeleted` bit(1) NOT NULL DEFAULT b'0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `account`
@@ -53,7 +53,7 @@ INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `is
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `category`
@@ -80,20 +80,21 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
+  `personalid` varchar(45) NOT NULL,
   `phonenumber` varchar(45) NOT NULL,
   `company` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `phonenumber`, `company`) VALUES
-(1, 'Nguyễn Thị Lạ', '0909776724', 'Tin Học Hoàng'),
-(2, 'Huỳnh Thị Út', '0909232323', 'Tin Học Linh Trung'),
-(3, 'Nguyễn Thị Đẹt', '7878343434', 'Tin Học B'),
-(4, 'Nguyễn Hoàng', '6534234567', 'Tin Học B'),
-(5, 'Võ Hoài Thanh', '0907653527', NULL);
+INSERT INTO `customer` (`id`, `name`, `personalid`, `phonenumber`, `company`) VALUES
+(1, 'Nguyễn Thị Lạ', '028441254', '0909776724', 'Tin Học Hoàng'),
+(2, 'Huỳnh Thị Út', '021342525', '0909232323', 'Tin Học Linh Trung'),
+(3, 'Nguyễn Thị Đẹt', '025355452', '7878343434', 'Tin Học B'),
+(4, 'Nguyễn Hoàng', '024352521', '6534234567', 'Tin Học B'),
+(5, 'Võ Hoài Thanh', '025346265', '0907653527', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,7 @@ INSERT INTO `customer` (`id`, `name`, `phonenumber`, `company`) VALUES
 CREATE TABLE `dram` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `dram`
@@ -125,7 +126,7 @@ CREATE TABLE `import` (
   `id` int(11) NOT NULL,
   `createrid` int(11) NOT NULL,
   `date` date NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `import`
@@ -151,7 +152,7 @@ CREATE TABLE `importext` (
   `providerid` int(11) NOT NULL,
   `cost` double NOT NULL,
   `num` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `importext`
@@ -166,11 +167,11 @@ INSERT INTO `importext` (`importid`, `itemid`, `providerid`, `cost`, `num`) VALU
 (2, 10, 2, 500000, 20),
 (2, 16, 2, 1550000, 10),
 (3, 3, 3, 15700000, 5),
-(3, 9, 2, 3000000, 20),
 (3, 8, 4, 950000, 6),
-(4, 14, 2, 3800000, 10),
-(4, 13, 4, 4800000, 5),
+(3, 9, 2, 3000000, 20),
 (4, 13, 2, 4700000, 5),
+(4, 13, 4, 4800000, 5),
+(4, 14, 2, 3800000, 10),
 (5, 11, 2, 1750000, 10),
 (5, 12, 3, 1700000, 5),
 (6, 9, 1, 3050000, 10);
@@ -189,7 +190,7 @@ CREATE TABLE `invoice` (
   `paymentdate` date DEFAULT NULL,
   `customerid` int(11) NOT NULL,
   `isdeleted` bit(1) NOT NULL DEFAULT b'0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `invoice`
@@ -213,7 +214,7 @@ CREATE TABLE `invoiceext` (
   `itemid` int(11) NOT NULL,
   `cost` double NOT NULL,
   `num` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `invoiceext`
@@ -221,18 +222,18 @@ CREATE TABLE `invoiceext` (
 
 INSERT INTO `invoiceext` (`invoiceid`, `itemid`, `cost`, `num`) VALUES
 (1, 1, 24999920, 1),
-(2, 7, 6299986, 5),
-(3, 16, 1800000, 1),
-(4, 2, 5199986, 3),
 (1, 2, 5199986, 1),
+(1, 13, 5000000, 2),
 (1, 14, 4000000, 1),
 (1, 16, 1800000, 4),
-(1, 13, 5000000, 2),
+(2, 7, 6299986, 5),
 (2, 8, 1049994, 2),
 (2, 9, 3199988, 2),
 (2, 10, 550000, 2),
 (3, 13, 5000000, 1),
 (3, 14, 4000000, 1),
+(3, 16, 1800000, 1),
+(4, 2, 5199986, 3),
 (4, 3, 16599990, 3),
 (4, 4, 4439996, 1),
 (5, 16, 1800000, 1);
@@ -251,7 +252,7 @@ CREATE TABLE `item` (
   `dram` int(11) NOT NULL,
   `cat` int(11) NOT NULL,
   `img` varchar(128) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `item`
@@ -286,7 +287,7 @@ INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dram`, `cat`, `img`) VALUES
 CREATE TABLE `permission` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `permission`
@@ -306,7 +307,7 @@ INSERT INTO `permission` (`id`, `name`) VALUES
 CREATE TABLE `provider` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `provider`
@@ -326,7 +327,8 @@ INSERT INTO `provider` (`id`, `name`) VALUES
 -- Chỉ mục cho bảng `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permission_idx` (`permissionid`);
 
 --
 -- Chỉ mục cho bảng `category`
@@ -339,7 +341,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`);
+  ADD UNIQUE KEY `personalid_UNIQUE` (`personalid`);
 
 --
 -- Chỉ mục cho bảng `dram`
@@ -351,31 +353,39 @@ ALTER TABLE `dram`
 -- Chỉ mục cho bảng `import`
 --
 ALTER TABLE `import`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `import->account_idx` (`createrid`);
 
 --
 -- Chỉ mục cho bảng `importext`
 --
 ALTER TABLE `importext`
-  ADD PRIMARY KEY (`importid`,`itemid`,`providerid`);
+  ADD PRIMARY KEY (`importid`,`itemid`,`providerid`),
+  ADD KEY `import->provider_idx` (`providerid`),
+  ADD KEY `importext->item_idx` (`itemid`);
 
 --
 -- Chỉ mục cho bảng `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoice->account_idx` (`createrid`),
+  ADD KEY `invoice->customer_idx` (`customerid`);
 
 --
 -- Chỉ mục cho bảng `invoiceext`
 --
 ALTER TABLE `invoiceext`
-  ADD PRIMARY KEY (`invoiceid`,`itemid`);
+  ADD PRIMARY KEY (`invoiceid`,`itemid`),
+  ADD KEY `invoiceext->item_idx` (`itemid`);
 
 --
 -- Chỉ mục cho bảng `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item->cat_idx` (`cat`),
+  ADD KEY `item->dram_idx` (`dram`);
 
 --
 -- Chỉ mục cho bảng `permission`
@@ -438,6 +448,51 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `provider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `account`
+--
+ALTER TABLE `account`
+  ADD CONSTRAINT `account->permission` FOREIGN KEY (`permissionid`) REFERENCES `permission` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `import`
+--
+ALTER TABLE `import`
+  ADD CONSTRAINT `import->account` FOREIGN KEY (`createrid`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `importext`
+--
+ALTER TABLE `importext`
+  ADD CONSTRAINT `importext->import` FOREIGN KEY (`importid`) REFERENCES `import` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `importext->item` FOREIGN KEY (`itemid`) REFERENCES `item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `importext->provider` FOREIGN KEY (`providerid`) REFERENCES `provider` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice->account` FOREIGN KEY (`createrid`) REFERENCES `account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `invoice->customer` FOREIGN KEY (`customerid`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `invoiceext`
+--
+ALTER TABLE `invoiceext`
+  ADD CONSTRAINT `invoiceext->invoice` FOREIGN KEY (`invoiceid`) REFERENCES `invoice` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `invoiceext->item` FOREIGN KEY (`itemid`) REFERENCES `item` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Các ràng buộc cho bảng `item`
+--
+ALTER TABLE `item`
+  ADD CONSTRAINT `item->cat` FOREIGN KEY (`cat`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `item->dram` FOREIGN KEY (`dram`) REFERENCES `dram` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -3,10 +3,10 @@ package pojo;
 import java.io.Serializable;
 
 public class InvoiceExt implements Serializable {
-	private int invoiceId;
-	private int itemId;
-	private double cost;
-	private int num;
+	private int invoiceId = 0;
+	private int itemId = 0;
+	private double cost = 0d;
+	private int num = 0;
 	
 	public int getInvoiceId() {
 		return invoiceId;

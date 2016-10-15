@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="qlbh" name="pojo.Item" table="item">
+		<id name="itemId" type="int">
+			<column name="id"/>
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string">
+			<column name="name" not-null="true"/>
+		</property>
+		<property name="cost" type="double">
+			<column name="cost" not-null="true"/>
+		</property>
+		<property name="num" type="int">
+			<column name="num" not-null="true"/>
+		</property>
+		<many-to-one name="cat" class="pojo.Category" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="catId"/>
+		<many-to-one name="dram" class="pojo.Dram" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="dramId"/>
+		<property name="img" type="string">
+			<column name="img"/>
+		</property>
+	</class>
+</hibernate-mapping>

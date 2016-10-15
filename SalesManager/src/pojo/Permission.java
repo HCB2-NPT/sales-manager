@@ -3,14 +3,14 @@ package pojo;
 import java.io.Serializable;
 
 public class Permission implements Serializable {
-	private int id;
-	private String name;
+	private int permissionId = 0;
+	private String name = null;
 	
-	public int getId() {
-		return id;
+	public int getPermissionId() {
+		return permissionId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPermissionId(int id) {
+		this.permissionId = id;
 	}
 	public String getName() {
 		return name;

@@ -3,18 +3,18 @@ package pojo;
 import java.io.Serializable;
 
 public class Account implements Serializable {
-	private int id;
-	private String name;
-	private String username;
-	private String password;
-	private int permissionId;
-	private boolean isDeleted;
+	private int accountId = 0;
+	private String name = null;
+	private String username = null;
+	private String password = null;
+	private Permission permission = null;
+	private boolean isDeleted = false;
 	
-	public int getId() {
-		return id;
+	public int getAccountId() {
+		return accountId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setAccountId(int id) {
+		this.accountId = id;
 	}
 	public String getName() {
 		return name;
@@ -34,16 +34,16 @@ public class Account implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getPermissionId() {
-		return permissionId;
-	}
-	public void setPermissionId(int permissionId) {
-		this.permissionId = permissionId;
-	}
 	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+	public Permission getPermission() {
+		return permission;
+	}
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 }

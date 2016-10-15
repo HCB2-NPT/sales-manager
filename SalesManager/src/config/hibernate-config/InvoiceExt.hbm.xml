@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class catalog="qlbh" name="pojo.InvoiceExt" table="invoiceext">
+		<composite-id>
+			<key-property name="invoiceId" type="int">
+				<column name="invoiceid" not-null="true"/>
+			</key-property>
+			<key-property name="itemId" type="int">
+				<column name="itemid" not-null="true"/>
+			</key-property>
+		</composite-id>
+		<property name="cost" type="double">
+			<column name="cost" not-null="true"/>
+		</property>
+		<property name="num" type="int">
+			<column name="num" not-null="true"/>
+		</property>
+	</class>
+</hibernate-mapping>

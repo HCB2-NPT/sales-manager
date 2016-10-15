@@ -4,21 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Import implements Serializable {
-	private int id;
-	private int createrId;
-	private Date date;
+	private int importId = 0;
+	private Account creater = null;
+	private Date date = null;
 	
-	public int getId() {
-		return id;
+	public int getImportId() {
+		return importId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setImportId(int id) {
+		this.importId = id;
 	}
-	public int getCreaterId() {
-		return createrId;
+	public Account getCreater() {
+		return creater;
 	}
-	public void setCreaterId(int creater) {
-		this.createrId = creater;
+	public void setCreater(Account creater) {
+		this.creater = creater;
 	}
 	public Date getDate() {
 		return date;

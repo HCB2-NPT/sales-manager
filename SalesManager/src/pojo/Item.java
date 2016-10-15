@@ -3,19 +3,19 @@ package pojo;
 import java.io.Serializable;
 
 public class Item implements Serializable {
-	private int id;
-	private String name;
-	private double cost;
-	private int num;
-	private int dram;
-	private int cat;
-	private String img;
+	private int itemId = 0;
+	private String name = null;
+	private double cost = 0d;
+	private int num = 0;
+	private Dram dram = null;
+	private Category cat = null;
+	private String img = null;
 	
-	public int getId() {
-		return id;
+	public int getItemId() {
+		return itemId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setItemId(int id) {
+		this.itemId = id;
 	}
 	public String getName() {
 		return name;
@@ -35,16 +35,16 @@ public class Item implements Serializable {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public int getDram() {
+	public Dram getDram() {
 		return dram;
 	}
-	public void setDram(int dram) {
+	public void setDram(Dram dram) {
 		this.dram = dram;
 	}
-	public int getCat() {
+	public Category getCat() {
 		return cat;
 	}
-	public void setCat(int cat) {
+	public void setCat(Category cat) {
 		this.cat = cat;
 	}
 	public String getImg() {

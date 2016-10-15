@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Invoice implements Serializable {
-	private int id;
-	private Date date;
-	private int createrId;
-	private boolean isPayment;
-	private Date paymentDate;
-	private int customerId;
-	private boolean isDeleted;
+	private int invoiceId = 0;
+	private Date date = null;
+	private Account creater = null;
+	private boolean isPayment = false;
+	private Date paymentDate = null;
+	private Customer customer = null;
+	private boolean isDeleted = false;
 	
-	public int getId() {
-		return id;
+	public int getInvoiceId() {
+		return invoiceId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setInvoiceId(int id) {
+		this.invoiceId = id;
 	}
 	public Date getDate() {
 		return date;
@@ -24,16 +24,16 @@ public class Invoice implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getCreaterId() {
-		return createrId;
+	public Account getCreater() {
+		return creater;
 	}
-	public void setCreaterId(int creater) {
-		this.createrId = creater;
+	public void setCreater(Account creater) {
+		this.creater = creater;
 	}
-	public boolean isPayment() {
+	public boolean getIsPayment() {
 		return isPayment;
 	}
-	public void setPayment(boolean isPayment) {
+	public void setIsPayment(boolean isPayment) {
 		this.isPayment = isPayment;
 	}
 	public Date getPaymentDate() {
@@ -42,16 +42,16 @@ public class Invoice implements Serializable {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	public boolean isDeleted() {
+	public boolean getIsDeleted() {
 		return isDeleted;
 	}
-	public void setDeleted(boolean isDeleted) {
+	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 }

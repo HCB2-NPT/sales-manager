@@ -21,9 +21,19 @@
     	<!-- <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> -->
 
     	<!-- Echo all executed SQL to stdout -->
-    	<!-- <property name="show_sql">true</property> -->
+    	<property name="show_sql">true</property>
 		
 		<!-- Mapping models -->
-		<mapping resource="config/Account.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Account.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Category.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Customer.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Dram.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Import.hbm.xml"/>
+		<mapping resource="config/hibernate-config/ImportExt.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Invoice.hbm.xml"/>
+		<mapping resource="config/hibernate-config/InvoiceExt.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Item.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Permission.hbm.xml"/>
+		<mapping resource="config/hibernate-config/Provider.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

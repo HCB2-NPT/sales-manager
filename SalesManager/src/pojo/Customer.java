@@ -3,16 +3,17 @@ package pojo;
 import java.io.Serializable;
 
 public class Customer implements Serializable {
-	private int id;
-	private String name;
-	private String phoneNumber;
-	private String company;
+	private int customerId = 0;
+	private String name = null;
+	private String personalId = null;
+	private String phoneNumber = null;
+	private String company = null;
 	
-	public int getId() {
-		return id;
+	public int getCustomerId() {
+		return customerId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCustomerId(int id) {
+		this.customerId = id;
 	}
 	public String getName() {
 		return name;
@@ -31,5 +32,11 @@ public class Customer implements Serializable {
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+	public String getPersonalId() {
+		return personalId;
+	}
+	public void setPersonalId(String personalId) {
+		this.personalId = personalId;
 	}
 }

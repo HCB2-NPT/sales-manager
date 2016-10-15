@@ -3,14 +3,14 @@ package pojo;
 import java.io.Serializable;
 
 public class Dram implements Serializable {
-	private int id;
-	private String name;
+	private int dramId = 0;
+	private String name = null;
 	
-	public int getId() {
-		return id;
+	public int getDramId() {
+		return dramId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setDramId(int id) {
+		this.dramId = id;
 	}
 	public String getName() {
 		return name;

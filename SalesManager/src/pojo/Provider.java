@@ -3,14 +3,14 @@ package pojo;
 import java.io.Serializable;
 
 public class Provider implements Serializable {
-	private int id;
-	private String name;
+	private int providerId = 0;
+	private String name = null;
 	
-	public int getId() {
-		return id;
+	public int getProviderId() {
+		return providerId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setProviderId(int id) {
+		this.providerId = id;
 	}
 	public String getName() {
 		return name;
