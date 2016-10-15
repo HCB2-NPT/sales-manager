@@ -13,4 +13,12 @@ public class DramAdapter {
 	public static Dram get(int id){
 		return HibernateUtil.getSingle("from Dram where dramId = :p0", new Object[]{ id });
 	}
+	
+	public static boolean insert(Dram obj){
+		return obj.getDramId() == 0 && HibernateUtil.save(obj);
+	}
+	
+	public static boolean update(Dram obj){
+		return obj.getDramId() > 0 && HibernateUtil.update(obj);
+	}
 }

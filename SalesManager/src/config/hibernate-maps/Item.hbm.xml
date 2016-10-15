@@ -7,7 +7,7 @@
 			<generator class="native"/>
 		</id>
 		<property name="name" type="string">
-			<column name="name" not-null="true"/>
+			<column name="name" not-null="true" length="100"/>
 		</property>
 		<property name="cost" type="double">
 			<column name="cost" not-null="true"/>
@@ -15,10 +15,16 @@
 		<property name="num" type="int">
 			<column name="num" not-null="true"/>
 		</property>
+		<property name="dramId" type="int">
+			<column name="dramid" not-null="true"/>
+		</property>
+		<property name="catId" type="int">
+			<column name="catid" not-null="true"/>
+		</property>
 		<many-to-one name="cat" class="pojo.Category" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="catId"/>
 		<many-to-one name="dram" class="pojo.Dram" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="dramId"/>
 		<property name="img" type="string">
-			<column name="img"/>
+			<column name="img" length="128"/>
 		</property>
 	</class>
 </hibernate-mapping>

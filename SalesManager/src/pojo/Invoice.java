@@ -15,7 +15,7 @@ public class Invoice implements Serializable {
 	public int getInvoiceId() {
 		return invoiceId;
 	}
-	public void setInvoiceId(int id) {
+	protected void setInvoiceId(int id) {
 		this.invoiceId = id;
 	}
 	public Date getDate() {

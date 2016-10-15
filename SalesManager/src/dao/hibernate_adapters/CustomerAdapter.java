@@ -13,4 +13,12 @@ public class CustomerAdapter {
 	public static Customer get(int id){
 		return HibernateUtil.getSingle("from Customer where customerId = :p0", new Object[]{ id });
 	}
+	
+	public static boolean insert(Customer obj){
+		return obj.getCustomerId() == 0 && HibernateUtil.save(obj);
+	}
+	
+	public static boolean update(Customer obj){
+		return obj.getCustomerId() > 0 && HibernateUtil.update(obj);
+	}
 }

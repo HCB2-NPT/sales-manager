@@ -3,6 +3,7 @@ package dao.hibernate_adapters;
 import java.util.List;
 
 import dao.HibernateUtil;
+import helper.Security;
 import pojo.Account;
 
 public class AccountAdapter {
@@ -12,5 +13,42 @@ public class AccountAdapter {
 	
 	public static Account get(int id){
 		return HibernateUtil.getSingle("from Account where accountId = :p0", new Object[]{ id });
+	}
+	
+	public static Account signin(String username, String password){
+		return HibernateUtil.getSingle("from Account where username = :p0 and password = :p1", new Object[]{ username, Security.Encrypt(password) });
+	}
+	
+	public static boolean signup(Account obj){
+		if (obj.getAccountId() == 0){
+			obj.setPassword(Security.Encrypt(obj.getUsername()));
+			return HibernateUtil.save(obj);
+		}
+		return false;
+	}
+	
+	public static boolean update(Account obj){
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1 where accountId = :p2", new Object[]{ obj.getName(), obj.getUsername(), obj.getAccountId() }) >= 0;
+	}
+	
+	public static boolean changePassword(Account obj){
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set password = :p0 where accountId = :p1", new Object[]{ Security.Encrypt(obj.getPassword()), obj.getAccountId() }) >= 0;
+	}
+	
+	public static boolean resetPassword(Account obj){
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set password = :p0 where accountId = :p1", new Object[]{ obj.getUsername(), obj.getAccountId() }) >= 0;
+	}
+	
+	public static boolean changePermission(Account obj){
+		if (obj.getAccountId() > 0 && PermissionAdapter.get(obj.getPermission().getPermissionId()) != null
+				&& HibernateUtil.execute("update Account set permissionId = :p0 where accountId = :p1", new Object[]{ obj.getPermission().getPermissionId() }) >= 0){
+			HibernateUtil.refresh(obj.getPermission());
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean deleteOrRecover(Account obj){
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set isDeleted = :p0 where accountId = :p1", new Object[]{ obj.getIsDeleted(), obj.getAccountId() }) >= 0;
 	}
 }

@@ -32,15 +32,18 @@ public class HibernateUtil {
 		List<T> result = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
+			session.beginTransaction();
 			Query q = session.createQuery(hql);
 			if (params != null){
 				int i = 0;
 				for (Object p : params) {
-					q.setParameter("p" + i, p);
+					q.setParameter("p" + i++, p);
 				}
 			}
 			result = q.getResultList();
+			session.getTransaction().commit();
 		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
 			logger.debug(ex.getMessage());
 		} finally {
 			session.close();
@@ -52,19 +55,130 @@ public class HibernateUtil {
 		T result = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
+			session.beginTransaction();
 			Query q = session.createQuery(hql);
 			if (params != null){
 				int i = 0;
 				for (Object p : params) {
-					q.setParameter("p" + i, p);
+					q.setParameter("p" + i++, p);
 				}
 			}
 			result = (T) q.getSingleResult();
+			session.getTransaction().commit();
 		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
 			logger.debug(ex.getMessage());
 		} finally {
 			session.close();
 		}
 		return result;
+	}
+	
+	public static int execute(String hql, Object[] params){
+		int result = -1;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			Query q = session.createQuery(hql);
+			if (params != null){
+				int i = 0;
+				for (Object p : params) {
+					q.setParameter("p" + i++, p);
+				}
+			}
+			result = q.executeUpdate();
+			session.getTransaction().commit();
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+	
+	public static <T> boolean save(T obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.save(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
+	}
+	
+	public static <T> boolean saveOrUpdate(T obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
+	}
+	
+	public static <T> boolean delete(T obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.delete(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
+	}
+	
+	public static <T> boolean update(T obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.update(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
+	}
+	
+	public static <T> boolean refresh(T obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			session.refresh(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (HibernateException ex) {
+			session.getTransaction().rollback();
+			logger.debug(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
 	}
 }

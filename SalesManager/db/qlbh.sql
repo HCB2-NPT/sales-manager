@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 15, 2016 lúc 08:49 SA
+-- Thời gian đã tạo: Th10 15, 2016 lúc 06:03 CH
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -40,9 +40,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `isdeleted`) VALUES
-(1, 'Administrator', 'admin', 'admin', 1, b'0'),
-(2, 'Huỳnh Chí Phong', 'hcphong', 'hcphong', 2, b'0'),
-(3, 'Tô Chính Tín', 'tctin', 'tctin', 3, b'0');
+(1, 'Administrator', 'admin', 'gPTEvGnjg+U=', 1, b'0'),
+(2, 'Huỳnh Chí Phong', 'hcphong', 'G49yg7wnPzI=', 2, b'0'),
+(3, 'Tô Chính Tín', 'tctin', 'KdAXQkq9Sxo=', 3, b'0');
 
 -- --------------------------------------------------------
 
@@ -60,16 +60,16 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
+(9, 'Case'),
 (1, 'CPU'),
-(2, 'Mainboard'),
-(3, 'Storage'),
-(4, 'Ram'),
-(5, 'Monitor'),
 (6, 'Keyboard'),
+(10, 'Kit Keyboard & Mouse'),
+(2, 'Mainboard'),
+(5, 'Monitor'),
 (7, 'Mouse'),
 (8, 'PSU'),
-(9, 'Case'),
-(10, 'Kit Keyboard & Mouse');
+(4, 'Ram'),
+(3, 'Storage');
 
 -- --------------------------------------------------------
 
@@ -80,8 +80,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `personalid` varchar(45) NOT NULL,
-  `phonenumber` varchar(45) NOT NULL,
+  `personalid` varchar(10) NOT NULL,
+  `phonenumber` varchar(12) NOT NULL,
   `company` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -314,10 +314,10 @@ CREATE TABLE `provider` (
 --
 
 INSERT INTO `provider` (`id`, `name`) VALUES
+(4, 'Digiworld'),
 (1, 'FPT'),
 (2, 'Viễn Sơn'),
-(3, 'Vĩnh Xuân'),
-(4, 'Digiworld');
+(3, 'Vĩnh Xuân');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -328,13 +328,15 @@ INSERT INTO `provider` (`id`, `name`) VALUES
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username_UNIQUE` (`username`),
   ADD KEY `permission_idx` (`permissionid`);
 
 --
 -- Chỉ mục cho bảng `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 --
 -- Chỉ mục cho bảng `customer`
@@ -347,7 +349,8 @@ ALTER TABLE `customer`
 -- Chỉ mục cho bảng `dram`
 --
 ALTER TABLE `dram`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 --
 -- Chỉ mục cho bảng `import`
@@ -391,13 +394,15 @@ ALTER TABLE `item`
 -- Chỉ mục cho bảng `permission`
 --
 ALTER TABLE `permission`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 --
 -- Chỉ mục cho bảng `provider`
 --
 ALTER TABLE `provider`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ

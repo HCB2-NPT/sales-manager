@@ -11,7 +11,7 @@ public class Import implements Serializable {
 	public int getImportId() {
 		return importId;
 	}
-	public void setImportId(int id) {
+	protected void setImportId(int id) {
 		this.importId = id;
 	}
 	public Account getCreater() {

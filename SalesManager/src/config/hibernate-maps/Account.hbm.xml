@@ -7,13 +7,16 @@
 			<generator class="native"/>
 		</id>
 		<property name="name" type="string">
-			<column name="name" not-null="true"/>
+			<column name="name" not-null="true" length="45"/>
 		</property>
 		<property name="username" type="string">
-			<column name="username" not-null="true"/>
+			<column name="username" not-null="true" length="45"/>
 		</property>
 		<property name="password" type="string">
-			<column name="password" not-null="true"/>
+			<column name="password" not-null="true" length="45"/>
+		</property>
+		<property name="permissionId" type="int">
+			<column name="permissionid" not-null="true"/>
 		</property>
 		<many-to-one name="permission" class="pojo.Permission" fetch="join" lazy="false" insert="false" update="false" cascade="none" not-null="true" column="permissionId"/>
 		<property name="isDeleted" type="boolean">
