@@ -1,45 +1,52 @@
 package application;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import dao.hibernate_adapters.AccountAdapter;
+import config.AppConfig;
+import dao.HibernateUtil;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-
+import javafx.stage.Stage;
+import view.handler.Login;
 
 public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			primaryStage.setMaximized(true);
-			
-			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../view/Main.fxml"));
-			Scene scene = new Scene(root);
-			
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Sales Manager");
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				public void handle(WindowEvent event) {
-					Platform.exit();
-					System.exit(0);
-				}
-			});
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private static final Logger logger = Logger.getLogger(Main.class);
 	
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("log4j.properties");
-		AccountAdapter.getAll();
+		HibernateUtil.tryConnectDatabase();
 		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws InterruptedException {
+		logger.info("Start Application.");
+		primaryStage.close();
+		Login.callLogin(true);
+	}
+	
+	public static Stage callForm(String scenePath, String cssPath){
+		Stage s = null;
+		if (scenePath != null){
+			try {
+				BorderPane root = (BorderPane) FXMLLoader.load(AppSession._resourceProvider.getResource(scenePath));
+				Scene scene = new Scene(root);
+				if (cssPath != null)
+					scene.getStylesheets().add(AppSession._resourceProvider.getResource(cssPath).toExternalForm());
+				
+				s = new Stage();
+				s.getIcons().add(new Image(AppSession._resourceProvider.getResource(AppConfig.APP_ICON).toExternalForm()));
+				s.setScene(scene);
+				s.setTitle(AppConfig.APP_NAME);
+			} catch(Exception e) {
+				logger.error("Can not create form");
+				e.printStackTrace();
+			}
+		}
+		return s;
 	}
 }
