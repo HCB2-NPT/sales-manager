@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Main">
    <top>
-      <TabPane maxWidth="1.7976931348623157E308" prefHeight="200.0" style="-fx-background-color: #dddddd;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane maxWidth="1.7976931348623157E308" prefHeight="180.0" style="-fx-background-color: #dddddd;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab text="Hệ Thống">
                <content>
@@ -21,15 +21,15 @@
                      <children>
                         <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
                            <bottom>
-                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Hệ thống" textFill="WHITE" BorderPane.alignment="CENTER">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Hệ thống" textFill="WHITE" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
                            </bottom>
                            <center>
-                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <HBox BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thoát">
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thoát">
                                        <HBox.margin>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </HBox.margin>
@@ -40,7 +40,7 @@
                                              </image></ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Đăng Xuất">
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Đăng Xuất">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -63,50 +63,38 @@
                   </HBox>
                </content>
           </Tab>
-            <Tab text="Chức Năng">
+            <Tab text="Danh Mục">
                <content>
                   <HBox>
                      <children>
                         <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
                            <bottom>
-                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản lý bán hàng" textFill="WHITE" BorderPane.alignment="CENTER">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản Lý Tài Khoản" textFill="WHITE" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                            </bottom>
                            <center>
-                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <HBox BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXButton fx:id="btn_Buy" buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#Buy_Click" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Nhập hàng">
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thêm Mới">
                                        <HBox.margin>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </HBox.margin>
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@img/Buy%20Filled-48.png" />
+                                                <Image url="@img/Add%20User%20Group%20Man%20Man%20Filled-48.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Bán hàng">
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Tuỳ Chỉnh">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@img/Expensive%202%20Filled-48.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
-                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Nhập hàng">
-                                       <graphic>
-                                          <ImageView pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@img/Add%20Database%20Filled-48.png" />
+                                                <Image url="@img/Settings-48.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -123,16 +111,168 @@
                         </BorderPane>
                         <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
                            <bottom>
-                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản lý thu chi" textFill="WHITE" BorderPane.alignment="CENTER">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản Lý Kho" textFill="WHITE" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                            </bottom>
                            <center>
-                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <HBox BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXButton fx:id="btn_Buy1" buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#Buy_Click" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Hoá đơn">
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Tồn Kho">
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Barn%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton buttonType="RAISED" contentDisplay="TOP" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thống Kê">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Bar%20Chart%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <HBox.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </HBox.margin>
+                        </BorderPane>
+                        <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
+                           <bottom>
+                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản Lý Sản Phẩm - NPP" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                              </Label>
+                           </bottom>
+                           <center>
+                              <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton fx:id="btn_Buy2" buttonType="RAISED" contentDisplay="TOP" onAction="#Buy_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thêm NPP">
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Factory-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_AddItems" buttonType="RAISED" contentDisplay="TOP" onAction="#AddItems_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thêm SP">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Add%20Database%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_AddItems1" buttonType="RAISED" contentDisplay="TOP" onAction="#AddItems_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Đơn Vị">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/File%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <HBox.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </HBox.margin>
+                        </BorderPane>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="Chức Năng">
+               <content>
+                  <HBox>
+                     <children>
+                        <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
+                           <bottom>
+                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản Lý Bán Hàng" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </bottom>
+                           <center>
+                              <HBox BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton fx:id="btn_Buy" buttonType="RAISED" contentDisplay="TOP" onAction="#Buy_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Nhập Hàng">
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Add%20Database%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_Sell" buttonType="RAISED" contentDisplay="TOP" onAction="#Sell_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Bán Hàng">
+                                       <graphic>
+                                          <ImageView pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Expensive%202%20Filled-48.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <HBox.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </HBox.margin>
+                        </BorderPane>
+                        <BorderPane style="-fx-background-color: #68aaee; -fx-background-radius: 4;">
+                           <bottom>
+                              <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" text="Quản Lý Thu Chi" textFill="WHITE" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </bottom>
+                           <center>
+                              <HBox BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton fx:id="btn_Bill" buttonType="RAISED" contentDisplay="TOP" onAction="#Bill_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Hoá Đơn">
                                        <HBox.margin>
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </HBox.margin>
@@ -144,7 +284,7 @@
                                           </ImageView>
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="btn_Buy11" buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#Buy_Click" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Phiếu chi">
+                                    <JFXButton fx:id="btn_Payment" buttonType="RAISED" contentDisplay="TOP" onAction="#Payment_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Phiếu Chi">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -156,7 +296,7 @@
                                           <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton fx:id="btn_Buy12" buttonType="RAISED" contentDisplay="TOP" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#Buy_Click" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thống kê">
+                                    <JFXButton fx:id="btn_Buy12" buttonType="RAISED" contentDisplay="TOP" onAction="#Buy_Click" prefHeight="96.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="Thống Kê">
                                        <graphic>
                                           <ImageView pickOnBounds="true" preserveRatio="true">
                                              <image>
