@@ -1,37 +1,33 @@
 package view.handler;
 
 import java.io.IOException;
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
+
+import application.AppSession;
+import application.AppUtil;
+import config.AppConfig;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main {
 	private static final Logger logger = Logger.getLogger(Main.class);
-	
-    @FXML
-    private JFXButton btn_Buy;
-    
-    @FXML
-    private JFXButton btn_Sell;
-    
-    @FXML
-    private JFXTabPane tab_pane;
-    
-    @FXML
-    private JFXTabPane tab_process;
     
     static Stage _currentStage = null;
     public static void callMain(){
 		logger.info("Start MainForm creation.");
-		_currentStage = application.Main.callForm("../view/Main.fxml", null);
+		_currentStage = AppUtil.callForm("../view/Main.fxml", null);
 		_currentStage.setMaximized(true);
 		_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent event) {
@@ -51,54 +47,187 @@ public class Main {
     	}
     }
     
-    @FXML
-    private JFXButton btn_AddItems;
+    static Tab callTab(String name, String fxmlPath){
+    	Tab t = null;
+    	Pane p = null;
+    	if (name.equals("Home"))
+    		name = "Home_";
+    	if ((p = AppUtil.callPane(fxmlPath)) != null){
+    		t = new Tab();
+    		t.setText(name);
+    		t.setContent(p);
+    	}else{
+    		logger.error("Can not create a tab with " + fxmlPath);
+    	}
+    	return t;
+    }
     
     @FXML
-    private JFXButton btn_Bill;
+    private JFXTabPane _tabMain;
     
     @FXML
-    private JFXButton btn_Payment;
+    private JFXTabPane _tabpane;
     
     @FXML
-    void Buy_Click() throws IOException {
+    private Label _user;
+
+    @FXML
+    private Label _msg;
+    
+    @FXML
+    void initialize() {
+        assert _tabpane != null : "fx:id=\"_tabpane\" was not injected: check your FXML file 'Main.fxml'.";
+        assert _user != null : "fx:id=\"_user\" was not injected: check your FXML file 'Main.fxml'.";
+        assert _msg != null : "fx:id=\"_msg\" was not injected: check your FXML file 'Main.fxml'.";
+        _user.setText(String.format("Current User: %1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
+        _msg.setText("Welcome to our application and Thanks for using.");
+        
+        if (AppSession._currentUser.getPermission().getName().equals("Personel")){
+        	_tabMain.getTabs().remove(1); //remove 1
+        	_tabMain.getTabs().remove(1); //remove 2
+        	_tabMain.getTabs().remove(1); //remove 3
+        } else if (AppSession._currentUser.getPermission().getName().equals("Manager")) {
+        	_tabMain.getTabs().remove(3); //remove 3
+        } else if (AppSession._currentUser.getPermission().getName().equals("Administrator")) {
+        	_tabMain.getTabs().remove(0); //remove 0
+        	_tabMain.getTabs().remove(0); //remove 1
+        	_tabMain.getTabs().remove(0); //remove 2
+        }
+    }
+
+    @FXML
+    void about() {
     	
-    	BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../BuyItem.fxml"));
-		Scene sc = new Scene(root);
-		Tab t = new Tab("Buy Item",root);
-		tab_process.setTabClosingPolicy(TabClosingPolicy.SELECTED_TAB);
-		
-		tab_process.getTabs().add(t);
-		t.setClosable(true);
-		
+    }
+
+    @FXML
+    void acc() {
+
+    }
+
+    @FXML
+    void cat() {
+
+    }
+
+    @FXML
+    void changePass() {
+
+    }
+
+    @FXML
+    void clearTabs() {
+    	Tab temp[] = new Tab[_tabpane.getTabs().size()];
+    	temp = _tabpane.getTabs().toArray(temp);
+    	for (Tab t : temp) {
+    		if (!t.getText().equals("Home"))
+    			_tabpane.getTabs().remove(t);
+    	}
     }
     
     @FXML
-    void Sell_Click() throws IOException {
-    	//BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../SellItem.fxml"));
-		//Scene sc = new Scene(root,bp_xuly.getWidth(),bp_xuly.getHeight());
-    	//bp_xuly.getChildren().setAll(root);
+    void closeTab() {
+    	for (Tab t : _tabpane.getTabs()) {
+    		System.out.println(t.getText());
+			if (t.isSelected() && !t.getText().equals("Home")){
+				_tabpane.getTabs().remove(t);
+				break;
+			}
+		}
     }
-    
+
     @FXML
-    void AddItems_Click() throws IOException {
-    	//BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../.fxml"));
-		//Scene sc = new Scene(root,bp_xuly.getWidth(),bp_xuly.getHeight());
-    	//bp_xuly.getChildren().setAll(root);
+    void contact() {
+
     }
-    
+
     @FXML
-    void Bill_Click() throws IOException {
-    	//BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../Bills.fxml"));
-		//Scene sc = new Scene(root,bp_xuly.getWidth(),bp_xuly.getHeight());
-    	//bp_xuly.getChildren().setAll(root);
+    void createInvoice() {
+
     }
-    
+
     @FXML
-    void Payment_Click() throws IOException {
-    	//BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource( "../Payment.fxml"));
-		//Scene sc = new Scene(root,bp_xuly.getWidth(),bp_xuly.getHeight());
-    	//bp_xuly.getChildren().setAll(root);
+    void cus() {
+
     }
-    
+
+    @FXML
+    void dram() {
+
+    }
+
+    @FXML
+    void help() {
+
+    }
+
+    @FXML
+    void inWarehouse() {
+
+    }
+
+    @FXML
+    void item() {
+
+    }
+
+    @FXML
+    void logout() {
+    	callQuit();
+    }
+
+    @FXML
+    void myinfo() {
+
+    }
+
+    @FXML
+    void openLog() throws IOException {
+    	new ProcessBuilder("Notepad.exe", "log4j-application.log").start();
+    }
+
+    @FXML
+    void pay() {
+
+    }
+
+    @FXML
+    void perm() {
+
+    }
+
+    @FXML
+    void pro() {
+    	_tabpane.getTabs().add(callTab("Đối tác", "../view/Provider.fxml"));
+    }
+
+    @FXML
+    void rpIn() {
+
+    }
+
+    @FXML
+    void rpIncome() {
+
+    }
+
+    @FXML
+    void rpOut() {
+
+    }
+
+    @FXML
+    void viewImport() {
+
+    }
+
+    @FXML
+    void viewInvoice() {
+
+    }
+
+    @FXML
+    void viewWarehouse() {
+
+    }
 }

@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.jfoenix.controls.JFXTextField;
 import application.AppSession;
+import application.AppUtil;
 import config.AppConfig;
 import dao.hibernate_adapters.AccountAdapter;
 import helper.MessageBox;
@@ -34,7 +35,7 @@ public class Login {
 			callSignin(AppConfig.THROGH_LOGIN_USERNAME, AppConfig.THROGH_LOGIN_PASSWORD, false);
 		} else {
 			logger.info("Start LoginForm creation.");
-			_currentStage = application.Main.callForm("../view/Login.fxml", null);
+			_currentStage = AppUtil.callForm("../view/Login.fxml", null);
 			_currentStage.centerOnScreen();
 			_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent event) {
@@ -79,7 +80,7 @@ public class Login {
     
     int timesLoginFail = 0;
     static boolean callSignin(String username, String password, boolean errorCallback){
-    	if ((AppSession._current = AccountAdapter.signin(username, password)) != null){
+    	if ((AppSession._currentUser = AccountAdapter.signin(username, password)) != null){
     		Main.callMain();
     		if (_currentStage != null){
     			_currentStage.close();
