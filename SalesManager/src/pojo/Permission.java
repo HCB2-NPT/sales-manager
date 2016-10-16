@@ -9,7 +9,7 @@ public class Permission implements Serializable {
 	public int getPermissionId() {
 		return permissionId;
 	}
-	public void setPermissionId(int id) {
+	protected void setPermissionId(int id) {
 		this.permissionId = id;
 	}
 	public String getName() {

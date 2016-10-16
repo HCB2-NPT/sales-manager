@@ -9,7 +9,7 @@ public class Category implements Serializable {
 	public int getCatId() {
 		return catId;
 	}
-	public void setCatId(int id) {
+	protected void setCatId(int id) {
 		this.catId = id;
 	}
 	public String getName() {

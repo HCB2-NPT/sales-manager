@@ -7,6 +7,8 @@ public class Item implements Serializable {
 	private String name = null;
 	private double cost = 0d;
 	private int num = 0;
+	private int dramId = 0;
+	private int catId = 0;
 	private Dram dram = null;
 	private Category cat = null;
 	private String img = null;
@@ -14,7 +16,7 @@ public class Item implements Serializable {
 	public int getItemId() {
 		return itemId;
 	}
-	public void setItemId(int id) {
+	protected void setItemId(int id) {
 		this.itemId = id;
 	}
 	public String getName() {
@@ -52,5 +54,17 @@ public class Item implements Serializable {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	protected int getDramId() {
+		return dramId;
+	}
+	protected void setDramId(int dramId) {
+		this.dramId = dramId;
+	}
+	protected int getCatId() {
+		return catId;
+	}
+	protected void setCatId(int catId) {
+		this.catId = catId;
 	}
 }

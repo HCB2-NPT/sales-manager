@@ -7,7 +7,7 @@
 			<generator class="native"/>
 		</id>
 		<property name="name" type="string">
-			<column name="name" not-null="true"/>
+			<column name="name" not-null="true" length="45" unique="true"/>
 		</property>
 	</class>
 </hibernate-mapping>

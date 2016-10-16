@@ -7,13 +7,14 @@ public class Account implements Serializable {
 	private String name = null;
 	private String username = null;
 	private String password = null;
+	private int permissionId = 0;
 	private Permission permission = null;
 	private boolean isDeleted = false;
 	
 	public int getAccountId() {
 		return accountId;
 	}
-	public void setAccountId(int id) {
+	protected void setAccountId(int id) {
 		this.accountId = id;
 	}
 	public String getName() {
@@ -45,5 +46,11 @@ public class Account implements Serializable {
 	}
 	public void setPermission(Permission permission) {
 		this.permission = permission;
+	}
+	protected int getPermissionId() {
+		return permissionId;
+	}
+	protected void setPermissionId(int permissionId) {
+		this.permissionId = permissionId;
 	}
 }

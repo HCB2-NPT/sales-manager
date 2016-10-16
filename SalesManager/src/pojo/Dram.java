@@ -9,7 +9,7 @@ public class Dram implements Serializable {
 	public int getDramId() {
 		return dramId;
 	}
-	public void setDramId(int id) {
+	protected void setDramId(int id) {
 		this.dramId = id;
 	}
 	public String getName() {

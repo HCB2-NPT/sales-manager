@@ -9,7 +9,7 @@ public class Provider implements Serializable {
 	public int getProviderId() {
 		return providerId;
 	}
-	public void setProviderId(int id) {
+	protected void setProviderId(int id) {
 		this.providerId = id;
 	}
 	public String getName() {
