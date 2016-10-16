@@ -28,6 +28,11 @@ public class HibernateUtil {
 		return sessionFactory;
 	}
 	
+	public static void tryConnectDatabase(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.close();
+	}
+	
 	public static <T> List<T> getList(String hql, Object[] params){
 		List<T> result = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
