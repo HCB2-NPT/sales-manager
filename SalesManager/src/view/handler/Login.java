@@ -2,6 +2,7 @@ package view.handler;
 
 import org.apache.log4j.Logger;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import application.AppSession;
 import application.AppUtil;
@@ -24,7 +25,7 @@ public class Login {
     private JFXTextField tfusername;
 
     @FXML
-    private JFXTextField tfpassword;
+    private JFXPasswordField tfpassword;
     
     @FXML
     private GridPane container;
@@ -33,16 +34,18 @@ public class Login {
     public static void callLogin(boolean autoLogin){
 		if (autoLogin){
 			callSignin(AppConfig.THROGH_LOGIN_USERNAME, AppConfig.THROGH_LOGIN_PASSWORD, false);
-		} else {
+		} else if (_currentStage == null) {
 			logger.info("Start LoginForm creation.");
 			_currentStage = AppUtil.callForm("../view/Login.fxml", null);
-			_currentStage.centerOnScreen();
-			_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				public void handle(WindowEvent event) {
-					callQuit();
-				}
-			});
-			_currentStage.show();
+			if (_currentStage != null){
+				_currentStage.centerOnScreen();
+				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					public void handle(WindowEvent event) {
+						callQuit();
+					}
+				});
+				_currentStage.show();
+			}
 			logger.info("End LoginForm creation.");
 		}
     }

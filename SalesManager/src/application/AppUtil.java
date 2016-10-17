@@ -3,6 +3,7 @@ package application;
 import org.apache.log4j.Logger;
 import config.AppConfig;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -17,7 +18,7 @@ public class AppUtil {
 			try {
 				root = (T) FXMLLoader.load(AppSession._resourceProvider.getResource(panePath));
 			}catch(Exception e){
-				logger.error("Can not create scene. Path: " + panePath);
+				logger.error("Can not create pane. Path: " + panePath);
 				//e.printStackTrace();
 			}
 		}
@@ -27,14 +28,17 @@ public class AppUtil {
 	public static Stage callForm(String scenePath, String cssPath){
 		Stage s = null;
 		if (scenePath != null){
-			Scene scene = new Scene((Pane)callPane(scenePath));
-			if (cssPath != null)
-				scene.getStylesheets().add(AppSession._resourceProvider.getResource(cssPath).toExternalForm());
-			if (scene != null){
-				s = new Stage();
-				s.getIcons().add(new Image(AppSession._resourceProvider.getResource(AppConfig.APP_ICON).toExternalForm()));
-				s.setScene(scene);
-				s.setTitle(AppConfig.APP_NAME);
+			Parent pane = callPane(scenePath);
+			if (pane != null){
+				Scene scene = new Scene(pane);
+				if (cssPath != null)
+					scene.getStylesheets().add(AppSession._resourceProvider.getResource(cssPath).toExternalForm());
+				if (scene != null){
+					s = new Stage();
+					s.getIcons().add(new Image(AppSession._resourceProvider.getResource(AppConfig.APP_ICON).toExternalForm()));
+					s.setScene(scene);
+					s.setTitle(AppConfig.APP_NAME);
+				}
 			}
 		}
 		return s;

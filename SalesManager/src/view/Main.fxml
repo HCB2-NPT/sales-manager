@@ -390,6 +390,18 @@
                                                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                                              </HBox.margin>
                                           </JFXButton>
+                                          <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#acc_admin" prefHeight="88.0" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Tài Khoản">
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@img/User%20Filled-48.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
                                           <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#changePass" prefHeight="88.0" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Đổi MK" wrapText="true">
                                              <graphic>
                                                 <ImageView pickOnBounds="true" preserveRatio="true">

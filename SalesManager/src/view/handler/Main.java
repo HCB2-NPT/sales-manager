@@ -26,16 +26,20 @@ public class Main {
     
     static Stage _currentStage = null;
     public static void callMain(){
-		logger.info("Start MainForm creation.");
-		_currentStage = AppUtil.callForm("../view/Main.fxml", null);
-		_currentStage.setMaximized(true);
-		_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent event) {
-				callQuit();
-			}
-		});
-		_currentStage.show();
-		logger.info("End MainForm creation.");
+    	if (_currentStage == null){
+			logger.info("Start MainForm creation.");
+			_currentStage = AppUtil.callForm("../view/Main.fxml", null);
+			if (_currentStage != null){
+				_currentStage.setMaximized(true);
+				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+					public void handle(WindowEvent event) {
+						callQuit();
+					}
+				});
+				_currentStage.show();
+		    }
+			logger.info("End MainForm creation.");
+    	}
     }
     
     static void callQuit(){
@@ -105,6 +109,11 @@ public class Main {
 
     }
 
+    @FXML
+    void acc_admin() {
+
+    }
+    
     @FXML
     void cat() {
 
