@@ -47,7 +47,7 @@ public class HibernateUtil {
 			}
 			result = q.getResultList();
 			session.getTransaction().commit();
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -70,7 +70,7 @@ public class HibernateUtil {
 			}
 			result = (T) q.getSingleResult();
 			session.getTransaction().commit();
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -93,7 +93,7 @@ public class HibernateUtil {
 			}
 			result = q.executeUpdate();
 			session.getTransaction().commit();
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -110,7 +110,7 @@ public class HibernateUtil {
 			session.save(obj);
 			session.getTransaction().commit();
 			success = true;
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -127,7 +127,7 @@ public class HibernateUtil {
 			session.saveOrUpdate(obj);
 			session.getTransaction().commit();
 			success = true;
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -144,7 +144,7 @@ public class HibernateUtil {
 			session.delete(obj);
 			session.getTransaction().commit();
 			success = true;
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
@@ -161,8 +161,8 @@ public class HibernateUtil {
 			session.update(obj);
 			session.getTransaction().commit();
 			success = true;
-		} catch (HibernateException ex) {
-			session.getTransaction().rollback();
+		} catch (Exception ex) {
+			session.getTransaction().rollback();u
 			logger.error(ex.getMessage());
 		} finally {
 			session.close();
@@ -178,7 +178,7 @@ public class HibernateUtil {
 			session.refresh(obj);
 			session.getTransaction().commit();
 			success = true;
-		} catch (HibernateException ex) {
+		} catch (Exception ex) {
 			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
