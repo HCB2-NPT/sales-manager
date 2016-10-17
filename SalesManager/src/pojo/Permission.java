@@ -1,8 +1,6 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Permission implements Serializable {
+public class Permission extends _pojo_Initializer {
 	private int permissionId = 0;
 	private String name = null;
 	

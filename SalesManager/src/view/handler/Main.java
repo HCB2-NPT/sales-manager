@@ -26,8 +26,8 @@ public class Main {
 			logger.info("Start MainForm creation.");
 			_currentStage = AppUtil.callForm("../view/Main.fxml", null);
 			if (_currentStage != null){
-				_currentStage.setMinWidth(600);
-				_currentStage.setMinHeight(400);
+				_currentStage.setMinWidth(900);
+				_currentStage.setMinHeight(600);
 				_currentStage.setMaximized(true);
 				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent event) {
@@ -121,7 +121,9 @@ public class Main {
     
     @FXML
     void cat() {
-
+    	Tab t = callTab("Category", "../view/Category.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -211,7 +213,9 @@ public class Main {
 
     @FXML
     void perm() {
-
+    	Tab t = callTab("Permission", "../view/Permission.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -253,5 +257,15 @@ public class Main {
     	Tab t = callTab("WareHouse", "../view/WareHouse.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
+    }
+    
+    @FXML
+    void dbbackup() throws IOException {
+    	helper.DatabaseManager.Backupdbtosql();
+    }
+    
+    @FXML
+    void dbrecover() throws IOException {
+    	helper.DatabaseManager.Restoredbfromsql("backup.sql");
     }
 }

@@ -462,6 +462,30 @@
                                                 </ImageView>
                                              </graphic>
                                           </JFXButton>
+                                          <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#dbbackup" prefHeight="88.0" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Backup" wrapText="true">
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@img/Accept%20Database%20Filled-48.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                          <JFXButton buttonType="RAISED" contentDisplay="TOP" onAction="#dbrecover" prefHeight="88.0" prefWidth="72.0" style="-fx-background-color: #ffffff;" text="Recover" wrapText="true">
+                                             <graphic>
+                                                <ImageView pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@img/Data%20Backup%20Filled-48.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <HBox.margin>
+                                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
                                        </children>
                                     </HBox>
                                  </center>

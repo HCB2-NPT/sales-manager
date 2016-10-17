@@ -5,13 +5,10 @@ import com.jfoenix.controls.JFXTextField;
 
 import dao.hibernate_adapters.ProviderAdapter;
 import helper.List2ObList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 
 public class Provider {
 	private static final Logger logger = Logger.getLogger(Provider.class);
@@ -30,17 +27,34 @@ public class Provider {
 
     @FXML
     void add() {
-
+    	String name = tfnew.getText();
+    	tfnew.clear();
+    	pojo.Provider p = new pojo.Provider();
+    	p.setCreated(true);
+    	p.setName(name);
+    	table.getItems().add(p);
+    	logger.info("Add provider: " + name);
     }
 
     @FXML
     void refresh() {
-
+    	table.setItems(List2ObList.L2OL(ProviderAdapter.getAll()));
+    	logger.debug("Refresh");
     }
 
     @FXML
     void save() {
-
+    	boolean k = false;
+    	for (pojo.Provider p : table.getItems()) {
+			if (p.getCreated()){
+				k = k || ProviderAdapter.insert(p);
+				logger.info("Save provider: " + p.getName());
+			}
+		}
+    	logger.info("Save");
+    	if (k){
+    		refresh();
+    	}
     }
 
     @FXML

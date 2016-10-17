@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Dram">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Category">
    <center>
       <VBox>
          <children>
@@ -71,7 +71,7 @@
             <TableView fx:id="table" editable="true" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="table_cId" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Id" />
-                  <TableColumn fx:id="table_cName" maxWidth="1.7976931348623157E308" minWidth="400.0" prefWidth="-1.0" text="Dram's Name" />
+                  <TableColumn fx:id="table_cName" maxWidth="1.7976931348623157E308" minWidth="400.0" prefWidth="-1.0" text="Category's Name" />
                </columns>
                <VBox.margin>
                   <Insets />
