@@ -159,7 +159,9 @@ public class Main {
 
     @FXML
     void createInvoice() {
-
+    	Tab t = callTab("Sell Item", "../view/SellItem.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -207,7 +209,7 @@ public class Main {
     }
 
     @FXML
-    void pay() {
+    void debt() {
 
     }
 
@@ -242,7 +244,9 @@ public class Main {
 
     @FXML
     void viewImport() {
-
+    	Tab t = callTab("Payment", "../view/Payment.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML

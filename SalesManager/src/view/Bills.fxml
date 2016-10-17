@@ -16,13 +16,13 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <GridPane>
+      <GridPane maxHeight="1.7976931348623157E308" minHeight="-Infinity">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -54,14 +54,6 @@
                   </JFXButton>
                </children>
             </HBox>
-            <TableView GridPane.rowIndex="2">
-              <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="75.0" text="Customer" />
-                  <TableColumn prefWidth="100.0" text="Total Money" />
-                  <TableColumn prefWidth="75.0" text="Delete" />
-              </columns>
-            </TableView>
             <HBox alignment="BOTTOM_LEFT" GridPane.rowIndex="1">
                <children>
                   <Label text="Ngày : ">
@@ -84,6 +76,14 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
             </HBox>
+            <TableView minHeight="-Infinity" prefHeight="200.0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="75.0" text="Customer" />
+                  <TableColumn prefWidth="100.0" text="Total Money" />
+                  <TableColumn prefWidth="75.0" text="Delete" />
+              </columns>
+            </TableView>
          </children>
       </GridPane>
    </center>
