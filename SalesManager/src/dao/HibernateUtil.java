@@ -162,7 +162,7 @@ public class HibernateUtil {
 			session.getTransaction().commit();
 			success = true;
 		} catch (Exception ex) {
-			session.getTransaction().rollback();u
+			session.getTransaction().rollback();
 			logger.error(ex.getMessage());
 		} finally {
 			session.close();

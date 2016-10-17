@@ -68,9 +68,9 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <TableView fx:id="table" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <TableView fx:id="table" editable="true" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="table_cId" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Id" />
+                  <TableColumn fx:id="table_cId" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Id" />
                   <TableColumn fx:id="table_cName" maxWidth="1.7976931348623157E308" minWidth="400.0" prefWidth="-1.0" text="Provider's Name" />
                </columns>
                <VBox.margin>

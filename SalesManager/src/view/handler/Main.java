@@ -7,6 +7,7 @@ import application.AppSession;
 import application.AppUtil;
 import config.AppConfig;
 import helper.MessageBox;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class Main {
 				_currentStage.setMaximized(true);
 				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent event) {
-						callQuit();
+						callQuit(false);
 					}
 				});
 				_currentStage.show();
@@ -39,12 +40,18 @@ public class Main {
     	}
     }
     
-    static void callQuit(){
-    	logger.info("Exit from MainForm.");
-    	Login.callLogin(false);
-    	if (_currentStage != null){
-    		_currentStage.close();
-    		_currentStage = null;
+    static void callQuit(boolean logout){
+    	if (logout){
+    		logger.info("Logout from MainForm.");
+	    	Login.callLogin(false);
+	    	if (_currentStage != null){
+	    		_currentStage.close();
+	    		_currentStage = null;
+	    	}
+    	}else{
+    		logger.info("Exit from MainForm.");
+    		Platform.exit();
+    		System.exit(0);
     	}
     }
     
@@ -172,7 +179,9 @@ public class Main {
 
     @FXML
     void inWarehouse() {
-    	
+    	Tab t = callTab("Import Item", "../view/BuyItem.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -182,7 +191,7 @@ public class Main {
 
     @FXML
     void logout() {
-    	callQuit();
+    	callQuit(true);
     }
 
     @FXML

@@ -10,32 +10,33 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60">
+
+<GridPane alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-color: #2980b9; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="100.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="60.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2980b9;" text="Thêm Sản Phẩm Mới" textFill="WHITE" GridPane.columnSpan="2">
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #2980b9;" text="Thêm Sản Phẩm Mới" textFill="WHITE" GridPane.columnSpan="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label text="Tên sản phẩm" textFill="#2980b9" GridPane.rowIndex="1">
@@ -78,7 +79,7 @@
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Hình ảnh" textFill="#2980b9" GridPane.rowIndex="6">
+      <Label text="Hình ảnh" textFill="#2980b9" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -103,31 +104,24 @@
          </padding>
       </JFXComboBox>
       <JFXTextField maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Pane GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-         <children>
-            <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/Add%20Image-96.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
             <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="60.0" style="-fx-background-color: #2ecc71;" text="Add" textFill="WHITE">
                <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
                </HBox.margin>
             </JFXButton>
             <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="60.0" style="-fx-background-color: #e74c3c;" text="Cancel" textFill="WHITE">
                <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                  <Insets bottom="8.0" left="16.0" right="16.0" top="8.0" />
                </HBox.margin>
             </JFXButton>
          </children>
       </HBox>
+      <ImageView fitHeight="96.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3">
+         <image>
+            <Image url="@img/Add%20Image-96.png" />
+         </image>
+      </ImageView>
    </children>
 </GridPane>
