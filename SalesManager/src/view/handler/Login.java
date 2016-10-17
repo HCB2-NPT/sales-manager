@@ -38,6 +38,7 @@ public class Login {
 			logger.info("Start LoginForm creation.");
 			_currentStage = AppUtil.callForm("../view/Login.fxml", null);
 			if (_currentStage != null){
+				_currentStage.setResizable(false);
 				_currentStage.centerOnScreen();
 				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent event) {

@@ -1,22 +1,14 @@
 package view.handler;
 
 import java.io.IOException;
-import java.util.Iterator;
-
 import org.apache.log4j.Logger;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
-
 import application.AppSession;
 import application.AppUtil;
-import config.AppConfig;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -30,6 +22,8 @@ public class Main {
 			logger.info("Start MainForm creation.");
 			_currentStage = AppUtil.callForm("../view/Main.fxml", null);
 			if (_currentStage != null){
+				_currentStage.setMinWidth(600);
+				_currentStage.setMinHeight(400);
 				_currentStage.setMaximized(true);
 				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 					public void handle(WindowEvent event) {
@@ -60,6 +54,7 @@ public class Main {
     		t = new Tab();
     		t.setText(name);
     		t.setContent(p);
+    		logger.info("Create a tab " + name);
     	}else{
     		logger.error("Can not create a tab with " + fxmlPath);
     	}
@@ -162,7 +157,9 @@ public class Main {
 
     @FXML
     void dram() {
-
+    	Tab t = callTab("Dram", "../view/Dram.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -207,7 +204,9 @@ public class Main {
 
     @FXML
     void pro() {
-    	_tabpane.getTabs().add(callTab("Đối tác", "../view/Provider.fxml"));
+    	Tab t = callTab("Provider", "../view/Provider.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
