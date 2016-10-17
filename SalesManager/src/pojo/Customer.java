@@ -1,13 +1,15 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Customer implements Serializable {
+public class Customer extends _pojo_Initializer {
 	private int customerId = 0;
 	private String name = null;
 	private String personalId = null;
 	private String phoneNumber = null;
 	private String company = null;
+	
+	public Customer(){
+		super();
+	}
 	
 	public int getCustomerId() {
 		return customerId;

@@ -1,8 +1,6 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Item implements Serializable {
+public class Item extends _pojo_Initializer {
 	private int itemId = 0;
 	private String name = null;
 	private double cost = 0d;
@@ -12,6 +10,10 @@ public class Item implements Serializable {
 	private Dram dram = null;
 	private Category cat = null;
 	private String img = null;
+	
+	public Item(){
+		super();
+	}
 	
 	public int getItemId() {
 		return itemId;

@@ -1,9 +1,8 @@
 package pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Invoice implements Serializable {
+public class Invoice extends _pojo_Initializer {
 	private int invoiceId = 0;
 	private Date date = null;
 	private Account creater = null;
@@ -11,6 +10,10 @@ public class Invoice implements Serializable {
 	private Date paymentDate = null;
 	private Customer customer = null;
 	private boolean isDeleted = false;
+	
+	public Invoice(){
+		super();
+	}
 	
 	public int getInvoiceId() {
 		return invoiceId;

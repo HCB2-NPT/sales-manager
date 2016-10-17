@@ -1,12 +1,15 @@
 package pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Import implements Serializable {
+public class Import extends _pojo_Initializer {
 	private int importId = 0;
 	private Account creater = null;
 	private Date date = null;
+	
+	public Import(){
+		super();
+	}
 	
 	public int getImportId() {
 		return importId;

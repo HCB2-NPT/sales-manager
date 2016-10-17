@@ -1,8 +1,6 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Account implements Serializable {
+public class Account extends _pojo_Initializer {
 	private int accountId = 0;
 	private String name = null;
 	private String username = null;
@@ -10,6 +8,10 @@ public class Account implements Serializable {
 	private int permissionId = 0;
 	private Permission permission = null;
 	private boolean isDeleted = false;
+	
+	public Account(){
+		super();
+	}
 	
 	public int getAccountId() {
 		return accountId;

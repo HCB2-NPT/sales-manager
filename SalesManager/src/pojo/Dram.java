@@ -1,10 +1,12 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Dram implements Serializable {
+public class Dram extends _pojo_Initializer {
 	private int dramId = 0;
 	private String name = null;
+	
+	public Dram(){
+		super();
+	}
 	
 	public int getDramId() {
 		return dramId;

@@ -1,12 +1,14 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class InvoiceExt implements Serializable {
+public class InvoiceExt extends _pojo_Initializer {
 	private int invoiceId = 0;
 	private int itemId = 0;
 	private double cost = 0d;
 	private int num = 0;
+	
+	public InvoiceExt(){
+		super();
+	}
 	
 	public int getInvoiceId() {
 		return invoiceId;

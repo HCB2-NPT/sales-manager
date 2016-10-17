@@ -1,10 +1,12 @@
 package pojo;
 
-import java.io.Serializable;
-
-public class Category implements Serializable {
+public class Category extends _pojo_Initializer {
 	private int catId = 0;
 	private String name = null;
+	
+	public Category(){
+		super();
+	}
 	
 	public int getCatId() {
 		return catId;
