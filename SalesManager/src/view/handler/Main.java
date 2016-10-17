@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
 import application.AppUtil;
 import config.AppConfig;
+import helper.MessageBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -172,7 +173,7 @@ public class Main {
 
     @FXML
     void inWarehouse() {
-
+    	
     }
 
     @FXML
@@ -212,17 +213,17 @@ public class Main {
 
     @FXML
     void rpIn() {
-
+    	MessageBox.Show("Coming Soon!", "Alert");
     }
 
     @FXML
     void rpIncome() {
-
+    	MessageBox.Show("Coming Soon!", "Alert");
     }
 
     @FXML
     void rpOut() {
-
+    	MessageBox.Show("Coming Soon!", "Alert");
     }
 
     @FXML
@@ -232,11 +233,15 @@ public class Main {
 
     @FXML
     void viewInvoice() {
-
+    	Tab t = callTab("WareHouse", "../view/Bills.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
     void viewWarehouse() {
-
+    	Tab t = callTab("WareHouse", "../view/WareHouse.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 }

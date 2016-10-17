@@ -45,18 +45,6 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff;" text="Exit">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/Delete-48.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </JFXButton>
          </children>
       </HBox>
    </top>
