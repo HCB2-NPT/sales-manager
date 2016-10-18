@@ -228,7 +228,9 @@ public class Main {
 
     @FXML
     void debt() {
-
+    	Tab t = callTab("Debt", "../view/Debt.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
