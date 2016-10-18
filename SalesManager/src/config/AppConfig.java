@@ -11,4 +11,10 @@ public class AppConfig {
 	public static final String				THROGH_LOGIN_PASSWORD				=	"admin";
 	
 	public static final int					MAX_TIMES_LOGIN_FAIL				=	3;
+	
+	public static final String				MYSQLDUMP							=	"C:\\wamp64\\bin\\mysql\\mysql5.7.14\\bin\\mysqldump";
+	public static final String				MYSQL								=	"C:\\wamp64\\bin\\mysql\\mysql5.7.14\\bin\\mysql";
+	public static final String				DATABASE_NAME						=	"qlbh";
+	public static final String				DATABASE_USERNAME					=	"root";
+	public static final String				DATABASE_PASSWORD					=	"";	
 }

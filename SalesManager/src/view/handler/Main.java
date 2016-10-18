@@ -1,25 +1,30 @@
 package view.handler;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
 import application.AppUtil;
-import config.AppConfig;
 import helper.MessageBox;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class Main {
 	private static final Logger logger = Logger.getLogger(Main.class);
     
+	static Main _currentMainForm = null;
     static Stage _currentStage = null;
     public static void callMain(){
     	if (_currentStage == null){
@@ -264,12 +269,48 @@ public class Main {
     }
     
     @FXML
-    void dbbackup() throws IOException {
-    	helper.DatabaseManager.Backupdbtosql();
+    void dbbackup() {
+    	logger.info("Start backup database!");
+    	_msg.setText("Backup database...");
+    	Process p = helper.DatabaseManager.Backupdbtosql();
+    	try {
+			p.waitFor();
+			_msg.setText("Backup success!");
+			logger.warn("Backup success!");
+		} catch (InterruptedException e) {
+			_msg.setText("Backup interrupted.");
+			logger.warn("Backup interrupted.");
+		}
+    	logger.info("End backup database!");
     }
     
     @FXML
-    void dbrecover() throws IOException {
-    	helper.DatabaseManager.Restoredbfromsql("backup.sql");
+    void dbrestore() throws URISyntaxException {
+    	logger.info("Start restore database!");
+    	_msg.setText("Select a backup for restoring!");
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Select Database");
+    	CodeSource codeSource = application.Main.class.getProtectionDomain().getCodeSource();
+        File jarFile = new File(codeSource.getLocation().toURI().getPath());
+        String jarDir = jarFile.getParentFile().getPath();
+    	fileChooser.setInitialDirectory(new File(jarDir));
+    	fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SQL Files", "*.sql"));
+    	File selectedFile = fileChooser.showOpenDialog(_currentStage);
+    	if (selectedFile != null) {
+    		_msg.setText("Start restore...");
+    		logger.info("Start restore by " + selectedFile.getPath());
+    		Process p = helper.DatabaseManager.Restoredbfromsql(selectedFile.getPath());
+    		try {
+				p.waitFor();
+				_msg.setText("Restore success!");
+	    		logger.info("End restore database!");
+			} catch (InterruptedException e) {
+				_msg.setText("Restore interrupted!");
+	    		logger.info("Restore interrupted!");
+			}
+    	}else{
+    		_msg.setText("Cancel restore.");
+    		logger.info("Cancel restore database!");
+    	}
     }
 }

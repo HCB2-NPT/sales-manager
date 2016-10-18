@@ -18,7 +18,7 @@ public class _pojo_Initializer implements Serializable {
 	public void setEdited(boolean value){
 		edited = value;
 	}
-	public String getState(){
-		return edited ? "Edited" : "";
+	public String getObjectState(){
+		return created ? "Created" : edited ? "Edited" : "";
 	}
 }
