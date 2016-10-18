@@ -7,7 +7,7 @@ import java.security.CodeSource;
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
-import application.AppUtil;
+import helper.AppUtil;
 import helper.MessageBox;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -24,23 +24,26 @@ import javafx.stage.WindowEvent;
 public class Main {
 	private static final Logger logger = Logger.getLogger(Main.class);
     
-	static Main _currentMainForm = null;
+	static FXMLLoader _formLoader = null;
     static Stage _currentStage = null;
     public static void callMain(){
     	if (_currentStage == null){
 			logger.info("Start MainForm creation.");
-			_currentStage = AppUtil.callForm("../view/Main.fxml", null);
-			if (_currentStage != null){
-				_currentStage.setMinWidth(900);
-				_currentStage.setMinHeight(600);
-				_currentStage.setMaximized(true);
-				_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-					public void handle(WindowEvent event) {
-						callQuit(false);
-					}
-				});
-				_currentStage.show();
-		    }
+			_formLoader = AppUtil.callFXMLLoader("../view/Main.fxml");
+			if (_formLoader != null){
+				_currentStage = AppUtil.callForm(_formLoader, null);
+				if (_currentStage != null){
+					_currentStage.setMinWidth(900);
+					_currentStage.setMinHeight(600);
+					_currentStage.setMaximized(true);
+					_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						public void handle(WindowEvent event) {
+							callQuit(false);
+						}
+					});
+					_currentStage.show();
+			    }
+			}
 			logger.info("End MainForm creation.");
     	}
     }
@@ -76,6 +79,12 @@ public class Main {
     	return t;
     }
     
+    public static void callMsg(String msg){
+    	if (_formLoader != null){
+    		((Main)_formLoader.getController()).notifyMsg(msg);
+    	}
+    }
+    
     @FXML
     private JFXTabPane _tabMain;
     
@@ -94,7 +103,7 @@ public class Main {
         assert _user != null : "fx:id=\"_user\" was not injected: check your FXML file 'Main.fxml'.";
         assert _msg != null : "fx:id=\"_msg\" was not injected: check your FXML file 'Main.fxml'.";
         _user.setText(String.format("Current User: %1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
-        _msg.setText("Welcome to our application and Thanks for using.");
+        notifyMsg("Welcome to our application and Thanks for using.");
         
         if (AppSession._currentUser.getPermission().getName().equals("Personel")){
         	_tabMain.getTabs().remove(1); //remove 1
@@ -108,10 +117,14 @@ public class Main {
         	_tabMain.getTabs().remove(0); //remove 2
         }
     }
+    
+    public void notifyMsg(String msg){
+    	_msg.setText(msg);
+    }
 
     @FXML
     void about() {
-    	
+    	About.callAbout();
     }
 
     @FXML
@@ -159,7 +172,7 @@ public class Main {
 
     @FXML
     void contact() {
-
+    	Contact.callContact();
     }
 
     @FXML
@@ -205,7 +218,7 @@ public class Main {
 
     @FXML
     void myinfo() {
-
+    	Guide.callGuide();
     }
 
     @FXML
@@ -271,14 +284,14 @@ public class Main {
     @FXML
     void dbbackup() {
     	logger.info("Start backup database!");
-    	_msg.setText("Backup database...");
+    	notifyMsg("Backup database...");
     	Process p = helper.DatabaseManager.Backupdbtosql();
     	try {
 			p.waitFor();
-			_msg.setText("Backup success!");
+			notifyMsg("Backup success!");
 			logger.warn("Backup success!");
 		} catch (InterruptedException e) {
-			_msg.setText("Backup interrupted.");
+			notifyMsg("Backup interrupted.");
 			logger.warn("Backup interrupted.");
 		}
     	logger.info("End backup database!");
@@ -287,7 +300,7 @@ public class Main {
     @FXML
     void dbrestore() throws URISyntaxException {
     	logger.info("Start restore database!");
-    	_msg.setText("Select a backup for restoring!");
+    	notifyMsg("Select a backup for restoring!");
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Select Database");
     	CodeSource codeSource = application.Main.class.getProtectionDomain().getCodeSource();
@@ -297,19 +310,19 @@ public class Main {
     	fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SQL Files", "*.sql"));
     	File selectedFile = fileChooser.showOpenDialog(_currentStage);
     	if (selectedFile != null) {
-    		_msg.setText("Start restore...");
+    		notifyMsg("Start restore...");
     		logger.info("Start restore by " + selectedFile.getPath());
     		Process p = helper.DatabaseManager.Restoredbfromsql(selectedFile.getPath());
     		try {
 				p.waitFor();
-				_msg.setText("Restore success!");
+				notifyMsg("Restore success!");
 	    		logger.info("End restore database!");
 			} catch (InterruptedException e) {
-				_msg.setText("Restore interrupted!");
+				notifyMsg("Restore interrupted!");
 	    		logger.info("Restore interrupted!");
 			}
     	}else{
-    		_msg.setText("Cancel restore.");
+    		notifyMsg("Cancel restore.");
     		logger.info("Cancel restore database!");
     	}
     }
