@@ -127,12 +127,14 @@ public class Main {
 
     @FXML
     void acc() {
-
+    	Tab t = callTab("Account Osin", "../view/AccountOsin.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
     void acc_admin() {
-
+    	
     }
     
     @FXML
@@ -182,7 +184,9 @@ public class Main {
 
     @FXML
     void cus() {
-
+    	Tab t = callTab("Customer", "../view/Customer.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -206,7 +210,9 @@ public class Main {
 
     @FXML
     void item() {
-
+    	Tab t = callTab("Item Manager", "../view/ItemManager.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
@@ -226,7 +232,9 @@ public class Main {
 
     @FXML
     void debt() {
-
+    	Tab t = callTab("Debt", "../view/Debt.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
