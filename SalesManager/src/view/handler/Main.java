@@ -112,7 +112,7 @@ public class Main {
         	_tabMain.getTabs().remove(1); //remove 2
         	_tabMain.getTabs().remove(1); //remove 3
         } else if (AppSession._currentUser.getPermission().getName().equals("Manager")) {
-        	_tabMain.getTabs().remove(3); //remove 3
+        	_tabMain.getTabs().remove(0); //remove 0
         }
     }
     
@@ -275,7 +275,7 @@ public class Main {
 
     @FXML
     void viewInvoice() {
-    	Tab t = callTab("WareHouse", "../view/Bills.fxml");
+    	Tab t = callTab("Bill", "../view/Bills.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
