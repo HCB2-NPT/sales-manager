@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 16, 2016 lúc 07:12 SA
+-- Thời gian đã tạo: Th10 19, 2016 lúc 09:52 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -249,8 +249,8 @@ CREATE TABLE `item` (
   `name` varchar(100) NOT NULL,
   `cost` double NOT NULL,
   `num` int(11) NOT NULL,
-  `dram` int(11) NOT NULL,
-  `cat` int(11) NOT NULL,
+  `dramid` int(11) NOT NULL,
+  `catid` int(11) NOT NULL,
   `img` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -258,7 +258,7 @@ CREATE TABLE `item` (
 -- Đang đổ dữ liệu cho bảng `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dram`, `cat`, `img`) VALUES
+INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dramid`, `catid`, `img`) VALUES
 (1, 'Intel Core i7-5960X Extreme 3.0GHz - Haswell-E LGA 2011-V3', 24999920, 4, 2, 1, NULL),
 (2, 'AMD Vishera FX 9590 4.7GHz ( 5.0GHz Turbo ) ', 5199986, 6, 2, 1, NULL),
 (3, 'Intel Xeon E5-2630 V4 2.1GHz - 8 cores LGA 2011-V3', 16599990, 7, 2, 1, NULL),
@@ -387,8 +387,8 @@ ALTER TABLE `invoiceext`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `item->cat_idx` (`cat`),
-  ADD KEY `item->dram_idx` (`dram`);
+  ADD KEY `item->cat_idx` (`catid`),
+  ADD KEY `item->dram_idx` (`dramid`);
 
 --
 -- Chỉ mục cho bảng `permission`
@@ -495,8 +495,8 @@ ALTER TABLE `invoiceext`
 -- Các ràng buộc cho bảng `item`
 --
 ALTER TABLE `item`
-  ADD CONSTRAINT `item->cat` FOREIGN KEY (`cat`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `item->dram` FOREIGN KEY (`dram`) REFERENCES `dram` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `item->cat` FOREIGN KEY (`catid`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `item->dram` FOREIGN KEY (`dramid`) REFERENCES `dram` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

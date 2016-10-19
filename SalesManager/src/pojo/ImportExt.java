@@ -4,6 +4,7 @@ public class ImportExt extends _pojo_Initializer {
 	private int importId = 0;
 	private int itemId = 0;
 	private int providerId = 0;
+	private Provider provider = null;
 	private double cost = 0d;
 	private int num = 0;
 	
@@ -40,5 +41,11 @@ public class ImportExt extends _pojo_Initializer {
 	}
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+	public Provider getProvider() {
+		return provider;
+	}
+	public void setProvider(Provider provider) {
+		this.provider = provider;
 	}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="view.handler.Details">
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <JFXTextField fx:id="_name" maxWidth="400.0" promptText="Shop's Name" BorderPane.alignment="TOP_LEFT" />
+         </top>
+         <center>
+            <JFXTextArea fx:id="_des" promptText="Description..." style="-fx-border-color: #eeeeee;" wrapText="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </BorderPane.margin>
+            </JFXTextArea>
+         </center>
+         <bottom>
+            <JFXTextField fx:id="_address" promptText="Address of your shop" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>

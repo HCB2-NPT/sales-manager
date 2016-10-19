@@ -44,6 +44,7 @@ public class Login {
         assert cbRemPass != null : "fx:id=\"cbRemPass\" was not injected: check your FXML file 'Login.fxml'.";
         
         if (FileIniCreater.load()){
+        	cbRemPass.setSelected(Boolean.valueOf(FileIniCreater.getValue("RememberLogin")));
         	tfusername.setText(FileIniCreater.getValue("Username"));
         	tfpassword.setText(Security.Decrypt(FileIniCreater.getValue("Password")));
         }
@@ -96,6 +97,7 @@ public class Login {
     public void signin() {
     	boolean rememberPass = cbRemPass.isSelected();
     	if (callSignin(tfusername.getText(), tfpassword.getText(), true)){
+    		FileIniCreater.setValue("RememberLogin", String.valueOf(rememberPass));
     		if (rememberPass){
     			FileIniCreater.setValue("Username", AppSession._currentUser.getUsername());
     			FileIniCreater.setValue("Password", AppSession._currentUser.getPassword());
