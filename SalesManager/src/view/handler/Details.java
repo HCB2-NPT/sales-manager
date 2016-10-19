@@ -1,9 +1,13 @@
 package view.handler;
 
+import org.apache.log4j.Logger;
+
 import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 
 public class Details {
+	private static final Logger logger = Logger.getLogger(Details.class);
+	
 	@FXML
     private JFXTextField _name;
 
