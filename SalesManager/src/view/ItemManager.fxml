@@ -11,9 +11,21 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
+   <bottom>
+      <TableView maxHeight="1.7976931348623157E308" prefHeight="300.0" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn text="Name" />
+            <TableColumn prefWidth="75.0" text="Number" />
+            <TableColumn prefWidth="75.0" text="Sell Price" />
+            <TableColumn prefWidth="75.0" text="Warranty" />
+            <TableColumn prefWidth="75.0" text="Delete" />
+         </columns>
+      </TableView>
+   </bottom>
+   <center>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
@@ -41,13 +53,22 @@
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </BorderPane.margin>
       </GridPane>
-   </top>
-   <center>
-      <TableView maxHeight="1.7976931348623157E308" prefHeight="300.0">
-        <columns>
-          <TableColumn text="Name" />
-          <TableColumn prefWidth="75.0" text="Number" />
-        </columns>
-      </TableView>
    </center>
+   <top>
+      <JFXButton buttonType="RAISED" prefHeight="40.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 45;" text="New Item" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Plus%20Math-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+      </JFXButton>
+   </top>
 </BorderPane>
