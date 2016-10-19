@@ -10,6 +10,7 @@ import helper.List2ObList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import pojo.Item;
 
 public class WareHouse {
@@ -29,6 +30,12 @@ public class WareHouse {
     private TableColumn<Item, Integer> tb_cNum;
 
     @FXML
+    private TableColumn<Item, Integer> tb_cID;
+
+    @FXML
+    private TableColumn<Item, String> tb_cSellPrice;
+    
+    @FXML
     void Search_Click() {
 
     }
@@ -41,8 +48,17 @@ public class WareHouse {
         assert tb_cName != null : "fx:id=\"tb_cName\" was not injected: check your FXML file 'WareHouse.fxml'.";
         assert tb_cNum != null : "fx:id=\"tb_cNum\" was not injected: check your FXML file 'WareHouse.fxml'.";
         
+        Callback<TableColumn, TableCell> cellFactory =
+        new Callback<TableColumn, TableCell>() {
+            public TableCell call(TableColumn p) {
+               return new EditingCell();
+            }
+        };
+        
+        tb_cID.setCellValueFactory(new PropertyValueFactory<Item,Integer>("itemId"));
         tb_cName.setCellValueFactory(new PropertyValueFactory<pojo.Item,String>("name"));
         tb_cNum.setCellValueFactory(new PropertyValueFactory<pojo.Item,Integer>("num"));
+        tb_cSellPrice.setCellValueFactory(new PropertyValueFactory<Item,String>("costFormat"));
         tb_ListItem.setItems(List2ObList.L2OL(ItemAdapter.getAll()));
     }
 }
