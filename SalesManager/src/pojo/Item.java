@@ -1,9 +1,12 @@
 package pojo;
 
+import java.text.DecimalFormat;
+
 public class Item extends _pojo_Initializer {
 	private int itemId = 0;
 	private String name = null;
-	private double cost = 0d;
+	private double cost = 0;
+	//private String costFormat = null;
 	private int num = 0;
 	private int dramId = 0;
 	private int catId = 0;
@@ -68,5 +71,13 @@ public class Item extends _pojo_Initializer {
 	}
 	protected void setCatId(int catId) {
 		this.catId = catId;
+	}
+
+	public String getCostFormat() {
+		return new DecimalFormat("#,###.00").format(cost);
+	}
+
+	public void setCostFormat(String costF) {
+		this.cost = Double.valueOf(costF);
 	}
 }

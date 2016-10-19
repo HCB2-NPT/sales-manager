@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.WareHouse">
    <top>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -45,8 +45,10 @@
    <center>
       <TableView fx:id="tb_ListItem" maxHeight="1.7976931348623157E308" prefHeight="300.0">
         <columns>
-          <TableColumn text="Name" />
-          <TableColumn prefWidth="75.0" text="Number" />
+            <TableColumn fx:id="tb_cID" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="tb_cName" text="Name" />
+          <TableColumn fx:id="tb_cNum" text="Number" />
+            <TableColumn fx:id="tb_cSellPrice" prefWidth="300.0" text="Sell Price" />
         </columns>
       </TableView>
    </center>
