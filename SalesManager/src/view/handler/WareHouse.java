@@ -1,17 +1,15 @@
 package view.handler;
 
-import org.hibernate.mapping.Property;
-
 import com.jfoenix.controls.*;
-
-import dao.hibernate_adapters.DramAdapter;
 import dao.hibernate_adapters.ItemAdapter;
 import helper.List2ObList;
+import helper.TableViewHelper;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-import pojo.Item;
+import pojo.*;
 
 public class WareHouse {
 	@FXML
@@ -48,17 +46,26 @@ public class WareHouse {
         assert tb_cName != null : "fx:id=\"tb_cName\" was not injected: check your FXML file 'WareHouse.fxml'.";
         assert tb_cNum != null : "fx:id=\"tb_cNum\" was not injected: check your FXML file 'WareHouse.fxml'.";
         
-        Callback<TableColumn, TableCell> cellFactory =
-        new Callback<TableColumn, TableCell>() {
-            public TableCell call(TableColumn p) {
-               return new EditingCell();
-            }
-        };
-        
         tb_cID.setCellValueFactory(new PropertyValueFactory<Item,Integer>("itemId"));
-        tb_cName.setCellValueFactory(new PropertyValueFactory<pojo.Item,String>("name"));
-        tb_cNum.setCellValueFactory(new PropertyValueFactory<pojo.Item,Integer>("num"));
+        
+        tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
+        tb_cName.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cName.setOnEditCommit(
+            new EventHandler<CellEditEvent<Item, String>>() {
+                @Override
+                public void handle(CellEditEvent<Item, String> t) {
+                	Item i = (Item)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                    i.setName(t.getNewValue());
+                    i.setEdited(true);
+                }
+             }
+        );
+        
+        tb_cNum.setCellValueFactory(new PropertyValueFactory<Item,Integer>("num"));
+        
         tb_cSellPrice.setCellValueFactory(new PropertyValueFactory<Item,String>("costFormat"));
+        
         tb_ListItem.setItems(List2ObList.L2OL(ItemAdapter.getAll()));
+        tb_ListItem.setEditable(true);
     }
 }
