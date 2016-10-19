@@ -33,6 +33,7 @@ public class Permission {
     	p.setCreated(true);
     	p.setName(name);
     	table.getItems().add(p);
+    	Main.callMsg("Added a new Permission, but not saved yet...");
     	logger.info("Add Permission: " + name);
     }
 
@@ -51,6 +52,7 @@ public class Permission {
 				logger.info("Save Permission: " + p.getName());
 			}
 		}
+    	Main.callMsg("Save success!");
     	logger.info("Save");
     	if (k){
     		refresh();

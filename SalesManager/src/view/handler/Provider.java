@@ -33,7 +33,8 @@ public class Provider {
     	p.setCreated(true);
     	p.setName(name);
     	table.getItems().add(p);
-    	logger.info("Add provider: " + name);
+    	Main.callMsg("Added a new Provider, but not saved yet...");
+    	logger.info("Add Provider: " + name);
     }
 
     @FXML
@@ -51,6 +52,7 @@ public class Provider {
 				logger.info("Save provider: " + p.getName());
 			}
 		}
+    	Main.callMsg("Save success!");
     	logger.info("Save");
     	if (k){
     		refresh();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -16,7 +17,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Login">
    <center>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="350.0">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0">
          <top>
             <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="48.0" style="-fx-background-color: #3498db;" text="LOGIN" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
@@ -33,6 +34,7 @@
               <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints prefHeight="32.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
@@ -62,7 +64,7 @@
                         <Insets bottom="8.0" left="8.0" right="40.0" top="8.0" />
                      </GridPane.margin>
                   </JFXPasswordField>
-                  <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <HBox alignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <children>
                         <JFXButton buttonType="RAISED" onAction="#signin" prefHeight="40.0" prefWidth="72.0" style="-fx-background-color: #3498db;" text="Login" textFill="WHITE">
                            <HBox.margin>
@@ -82,6 +84,7 @@
                         <Insets />
                      </GridPane.margin>
                   </HBox>
+                  <JFXCheckBox fx:id="cbRemPass" text="Remember password." GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </center>

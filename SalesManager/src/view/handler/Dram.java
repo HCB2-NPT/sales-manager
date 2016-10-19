@@ -33,6 +33,7 @@ public class Dram {
     	p.setCreated(true);
     	p.setName(name);
     	table.getItems().add(p);
+    	Main.callMsg("Added a new Dram, but not saved yet...");
     	logger.info("Add Dram: " + name);
     }
 
@@ -51,6 +52,7 @@ public class Dram {
 				logger.info("Save Dram: " + p.getName());
 			}
 		}
+    	Main.callMsg("Save success!");
     	logger.info("Save");
     	if (k){
     		refresh();

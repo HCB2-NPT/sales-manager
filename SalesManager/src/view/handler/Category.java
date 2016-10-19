@@ -33,6 +33,7 @@ public class Category {
     	p.setCreated(true);
     	p.setName(name);
     	table.getItems().add(p);
+    	Main.callMsg("Added a new Category, but not saved yet...");
     	logger.info("Add Category: " + name);
     }
 
@@ -51,6 +52,7 @@ public class Category {
 				logger.info("Save Category: " + p.getName());
 			}
 		}
+    	Main.callMsg("Save success!");
     	logger.info("Save");
     	if (k){
     		refresh();

@@ -80,7 +80,7 @@ public class Main {
     }
     
     public static void callMsg(String msg){
-    	if (_formLoader != null){
+    	if (_currentStage != null){
     		((Main)_formLoader.getController()).notifyMsg(msg);
     	}
     }
@@ -102,6 +102,8 @@ public class Main {
         assert _tabpane != null : "fx:id=\"_tabpane\" was not injected: check your FXML file 'Main.fxml'.";
         assert _user != null : "fx:id=\"_user\" was not injected: check your FXML file 'Main.fxml'.";
         assert _msg != null : "fx:id=\"_msg\" was not injected: check your FXML file 'Main.fxml'.";
+        
+        logger.info(String.format("%1$s (%2$s - %3$s)", AppSession._currentUser.getName(), AppSession._currentUser.getUsername(), AppSession._currentUser.getAccountId()));
         _user.setText(String.format("Current User: %1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
         notifyMsg("Welcome to our application and Thanks for using.");
         
@@ -111,10 +113,6 @@ public class Main {
         	_tabMain.getTabs().remove(1); //remove 3
         } else if (AppSession._currentUser.getPermission().getName().equals("Manager")) {
         	_tabMain.getTabs().remove(3); //remove 3
-        } else if (AppSession._currentUser.getPermission().getName().equals("Administrator")) {
-        	_tabMain.getTabs().remove(0); //remove 0
-        	_tabMain.getTabs().remove(0); //remove 1
-        	_tabMain.getTabs().remove(0); //remove 2
         }
     }
     
@@ -196,7 +194,7 @@ public class Main {
 
     @FXML
     void help() {
-
+    	MessageBox.Show("Coming Soon!", "Message");
     }
 
     @FXML
@@ -218,7 +216,7 @@ public class Main {
 
     @FXML
     void myinfo() {
-    	Guide.callGuide();
+    	MessageBox.Show("Coming Soon!", "Message");
     }
 
     @FXML
@@ -247,17 +245,17 @@ public class Main {
 
     @FXML
     void rpIn() {
-    	MessageBox.Show("Coming Soon!", "Alert");
+    	MessageBox.Show("Coming Soon!", "Message");
     }
 
     @FXML
     void rpIncome() {
-    	MessageBox.Show("Coming Soon!", "Alert");
+    	MessageBox.Show("Coming Soon!", "Message");
     }
 
     @FXML
     void rpOut() {
-    	MessageBox.Show("Coming Soon!", "Alert");
+    	MessageBox.Show("Coming Soon!", "Message");
     }
 
     @FXML
