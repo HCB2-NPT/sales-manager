@@ -1,9 +1,18 @@
 package view.handler;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Observable;
+
+import org.apache.log4j.Logger;
+
 import com.jfoenix.controls.*;
 import dao.hibernate_adapters.ItemAdapter;
 import helper.List2ObList;
+import helper.MessageBox;
 import helper.TableViewHelper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +23,7 @@ import javafx.scene.input.KeyEvent;
 import pojo.*;
 
 public class WareHouse {
+	private static final Logger logger = Logger.getLogger(Main.class);
 	@FXML
     private JFXTextField txt_name;
 
@@ -37,7 +47,9 @@ public class WareHouse {
     
     @FXML
     void Search_Click() {
-    	FocusItem(txt_name.getText());
+    	if (!txt_name.getText().equals("") && txt_name.getText()!=null) {
+    		FocusItem(txt_name.getText());
+		}
     }
 
     @FXML
@@ -67,9 +79,8 @@ public class WareHouse {
         tb_cNum.setCellValueFactory(TableViewHelper.getPropertyValueFactory("num"));
         
         tb_cSellPrice.setCellValueFactory(TableViewHelper.getPropertyValueFactory("costFormat"));
-        
         tb_ListItem.setItems(List2ObList.L2OL(ItemAdapter.getAll()));
-        tb_ListItem.setEditable(true);
+        //tb_ListItem.setEditable(true);
     }
     
     @FXML
@@ -81,14 +92,26 @@ public class WareHouse {
 		}
     }
     
+    @FXML
+    public void Refresh_Click(){
+    	txt_name.setText("");
+    	tb_ListItem.getItems().clear();
+    	tb_ListItem.setItems(List2ObList.L2OL(ItemAdapter.getAll()));
+    }
+    
     public void FocusItem(String s){
-    	int index = -1;
+    	
+    	ObservableList<Item> list = FXCollections.observableArrayList();
     	for (Item i : tb_ListItem.getItems()) {
-    		index++;
 			if (i.getName().contains(s)) {
-				tb_ListItem.getSelectionModel().select(i);
-				tb_ListItem.getFocusModel().focus(index);
+				list.add(i);
 			}
 		}
+    	if (list.size()<=0) {
+    		MessageBox.Show("Can't find item have name ''" + s +"''!", "Alert");
+    		return;
+		}
+    	tb_ListItem.getItems().clear();
+    	tb_ListItem.setItems(list);
     }
 }

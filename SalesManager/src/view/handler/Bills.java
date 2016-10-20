@@ -32,5 +32,6 @@ public class Bills {
         assert datepicker_field != null : "fx:id=\"datepicker_field\" was not injected: check your FXML file 'Bills.fxml'.";
         assert tb_ListBill != null : "fx:id=\"tb_ListBill\" was not injected: check your FXML file 'Bills.fxml'.";
 
+        
     }
 }
