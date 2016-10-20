@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.SellItem">
    <top>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
@@ -63,7 +63,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXComboBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                  <JFXComboBox fx:id="cb_nameitem" maxWidth="1.7976931348623157E308" onMouseClicked="#cbMouse_Click" promptText="Name Item" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
@@ -73,7 +73,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXTextField GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  <JFXTextField fx:id="txt_namecustomer" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
@@ -83,12 +83,12 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXDatePicker maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  <JFXDatePicker fx:id="datepicker_create" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXDatePicker>
-                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btnAdd_Click" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -149,22 +149,22 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXTextField GridPane.columnIndex="2">
+                  <JFXTextField fx:id="txt_totalmoney" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets bottom="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="txt_paymoney" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXTextField GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <JFXTextField fx:id="txt_returnmoney" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 45;" text="Finish" textFill="WHITE" GridPane.rowSpan="3">
+                  <JFXButton buttonType="RAISED" onAction="#btnFinish_Click" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 45;" text="Finish" textFill="WHITE" GridPane.rowSpan="3">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
