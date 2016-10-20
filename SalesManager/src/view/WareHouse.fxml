@@ -23,7 +23,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <JFXTextField fx:id="txt_name" maxWidth="1.7976931348623157E308" promptText="Name Item" />
+            <JFXTextField fx:id="txt_name" maxWidth="1.7976931348623157E308" onKeyPressed="#KeyPress_txtName" promptText="Name Item" />
             <JFXButton fx:id="btn_search" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#Search_Click" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #3498db; -fx-background-radius: 45;" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

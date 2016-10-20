@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Bills">
    <center>
       <GridPane maxHeight="1.7976931348623157E308" minHeight="-Infinity">
         <columnConstraints>
@@ -28,7 +28,7 @@
          <children>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
-                  <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh">
+                  <JFXButton buttonType="RAISED" onAction="#Refresh_Click" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -40,7 +40,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Save">
+                  <JFXButton buttonType="RAISED" onAction="#Save_Click" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Save">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -56,17 +56,17 @@
             </HBox>
             <HBox alignment="BOTTOM_LEFT" GridPane.rowIndex="1">
                <children>
-                  <Label text="Ngày : ">
+                  <Label text="Date">
                      <HBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </HBox.margin>
                   </Label>
-                  <JFXDatePicker>
+                  <JFXDatePicker fx:id="datepicker_field">
                      <HBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </HBox.margin>
                   </JFXDatePicker>
-                  <JFXButton buttonType="RAISED" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: #2ecc71;" text="All" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" onAction="#All_Click" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: #2ecc71;" text="All" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </HBox.margin>
@@ -76,7 +76,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </GridPane.margin>
             </HBox>
-            <TableView minHeight="-Infinity" prefHeight="200.0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tb_ListBill" minHeight="-Infinity" prefHeight="200.0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
               <columns>
                 <TableColumn prefWidth="75.0" text="ID" />
                 <TableColumn prefWidth="75.0" text="Customer" />
