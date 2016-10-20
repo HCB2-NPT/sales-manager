@@ -3,6 +3,7 @@ package pojo;
 public class Permission extends _pojo_Initializer {
 	private int permissionId = 0;
 	private String name = null;
+	private String desc = null;
 	
 	public int getPermissionId() {
 		return permissionId;
@@ -15,5 +16,11 @@ public class Permission extends _pojo_Initializer {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

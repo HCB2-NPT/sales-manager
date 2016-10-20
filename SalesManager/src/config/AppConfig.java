@@ -18,6 +18,13 @@ public class AppConfig {
 	public static final String				DATABASE_USERNAME					=	"root";
 	public static final String				DATABASE_PASSWORD					=	"";
 	
-	public static final String				FILE_INI							=	"application.ini";
-	public static final String				FILE_INI_FORMAT						=	"RememberLogin=\r\nUsername=\r\nPassword=\r\n";
+	public static final String				LOGIN_INI							=	"login.ini";
+	public static final String				LOGIN_INI_FORMAT					=	"Remember=#\r\n" + 
+																					"Username=#\r\n" + 
+																					"Password=#\r\n";
+	
+	public static final String				DETAILS_INI							=	"details.ini";
+	public static final String				DETAILS_INI_FORMAT					=	"Name=#\r\n" + 
+																					"Addr=#\r\n" + 
+																					"Desc=#\r\n";
 }

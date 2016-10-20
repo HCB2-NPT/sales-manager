@@ -19,10 +19,14 @@ public class TableViewHelper {
 				return new TextFieldTableCell<A,B>(new StringConverter<B>() {
                     @Override
                     public String toString(B t) {
+                    	if (t == null)
+                    		return "";
                         return t.toString();
                     }
                     @Override
                     public B fromString(String string) {
+                    	if (string == null)
+                    		return null;
                         return (B)string;
                     }                                    
                 });

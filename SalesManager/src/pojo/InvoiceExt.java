@@ -3,7 +3,7 @@ package pojo;
 public class InvoiceExt extends _pojo_Initializer {
 	private int invoiceId = 0;
 	private int itemId = 0;
-	private double cost = 0d;
+	private double cost = 0;
 	private int num = 0;
 	
 	public InvoiceExt(){

@@ -3,6 +3,7 @@ package pojo;
 public class Category extends _pojo_Initializer {
 	private int catId = 0;
 	private String name = null;
+	private String desc = null;
 	
 	public Category(){
 		super();
@@ -19,5 +20,13 @@ public class Category extends _pojo_Initializer {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

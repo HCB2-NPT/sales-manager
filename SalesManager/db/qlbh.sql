@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 19, 2016 lúc 09:52 SA
+-- Thời gian đã tạo: Th10 20, 2016 lúc 10:00 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -40,9 +40,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `isdeleted`) VALUES
-(1, 'Administrator', 'admin', 'gPTEvGnjg+U=', 1, b'0'),
-(2, 'Huỳnh Chí Phong', 'hcphong', 'G49yg7wnPzI=', 2, b'0'),
-(3, 'Tô Chính Tín', 'tctin', 'KdAXQkq9Sxo=', 3, b'0');
+(0, 'Administrator', 'admin', 'gPTEvGnjg+U=', 0, b'0'),
+(1, 'Huỳnh Chí Phong', 'hcphong', 'G49yg7wnPzI=', 1, b'0'),
+(2, 'Tô Chính Tín', 'tctin', 'KdAXQkq9Sxo=', 2, b'0');
 
 -- --------------------------------------------------------
 
@@ -52,24 +52,25 @@ INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `is
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(9, 'Case'),
-(1, 'CPU'),
-(6, 'Keyboard'),
-(10, 'Kit Keyboard & Mouse'),
-(2, 'Mainboard'),
-(5, 'Monitor'),
-(7, 'Mouse'),
-(8, 'PSU'),
-(4, 'Ram'),
-(3, 'Storage');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES
+(1, 'CPU', NULL),
+(2, 'Mainboard', NULL),
+(3, 'Storage', NULL),
+(4, 'Ram', NULL),
+(5, 'Monitor', NULL),
+(6, 'Keyboard', NULL),
+(7, 'Mouse', NULL),
+(8, 'PSU', NULL),
+(9, 'Case', NULL),
+(10, 'Kit Keyboard & Mouse', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,17 +105,17 @@ INSERT INTO `customer` (`id`, `name`, `personalid`, `phonenumber`, `company`) VA
 
 CREATE TABLE `dram` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `dram`
 --
 
-INSERT INTO `dram` (`id`, `name`) VALUES
-(1, 'Bộ'),
-(2, 'Cái'),
-(3, 'Món');
+INSERT INTO `dram` (`id`, `name`, `description`) VALUES
+(1, 'Bộ', 'Một nhóm hàng đi cùng nhau.'),
+(2, 'Cái', 'Đơn lẽ một món.');
 
 -- --------------------------------------------------------
 
@@ -133,12 +134,12 @@ CREATE TABLE `import` (
 --
 
 INSERT INTO `import` (`id`, `createrid`, `date`) VALUES
-(1, 2, '2016-10-01'),
-(2, 2, '2016-10-01'),
-(3, 2, '2016-10-02'),
-(4, 2, '2016-10-03'),
-(5, 2, '2016-10-04'),
-(6, 2, '2016-10-05');
+(1, 1, '2016-10-01'),
+(2, 1, '2016-10-01'),
+(3, 1, '2016-10-02'),
+(4, 1, '2016-10-03'),
+(5, 1, '2016-10-04'),
+(6, 1, '2016-10-05');
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,7 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `date`, `createrid`, `ispayment`, `paymentdate`, `customerid`, `isdeleted`) VALUES
 (1, '2016-10-10', 2, b'0', NULL, 1, b'0'),
-(2, '2016-10-11', 3, b'0', NULL, 2, b'0'),
+(2, '2016-10-11', 2, b'0', NULL, 2, b'0'),
 (3, '2016-10-11', 2, b'0', NULL, 3, b'0'),
 (4, '2016-10-12', 2, b'0', NULL, 4, b'0'),
 (5, '2016-10-12', 2, b'0', NULL, 5, b'0');
@@ -286,17 +287,18 @@ INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dramid`, `catid`, `img`) VALUE
 
 CREATE TABLE `permission` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `permission`
 --
 
-INSERT INTO `permission` (`id`, `name`) VALUES
-(1, 'Administrator'),
-(2, 'Manager'),
-(3, 'Personel');
+INSERT INTO `permission` (`id`, `name`, `description`) VALUES
+(0, 'Administrator', NULL),
+(1, 'Quản lý', 'Có đầy đủ các quyền điều hành phần mềm.'),
+(2, 'Personel', 'Chỉ có thể xử dụng các chức năng bán hàng của phần mềm.');
 
 -- --------------------------------------------------------
 
@@ -306,18 +308,19 @@ INSERT INTO `permission` (`id`, `name`) VALUES
 
 CREATE TABLE `provider` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `provider`
 --
 
-INSERT INTO `provider` (`id`, `name`) VALUES
-(4, 'Digiworld'),
-(1, 'FPT'),
-(2, 'Viễn Sơn'),
-(3, 'Vĩnh Xuân');
+INSERT INTO `provider` (`id`, `name`, `description`) VALUES
+(1, 'FPT', NULL),
+(2, 'Viễn Sơn', NULL),
+(3, 'Vĩnh Xuân', NULL),
+(4, 'Digiworld', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -427,7 +430,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT cho bảng `dram`
 --
 ALTER TABLE `dram`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT cho bảng `import`
 --

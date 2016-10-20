@@ -7,7 +7,9 @@ import java.security.CodeSource;
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
+import config.AppConfig;
 import helper.AppUtil;
+import helper.FileIniCreater;
 import helper.MessageBox;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -98,6 +101,9 @@ public class Main {
     private Label _msg;
     
     @FXML
+    private BorderPane _homeContent;
+    
+    @FXML
     void initialize() {
         assert _tabpane != null : "fx:id=\"_tabpane\" was not injected: check your FXML file 'Main.fxml'.";
         assert _user != null : "fx:id=\"_user\" was not injected: check your FXML file 'Main.fxml'.";
@@ -114,6 +120,17 @@ public class Main {
         } else if (AppSession._currentUser.getPermission().getName().equals("Manager")) {
         	_tabMain.getTabs().remove(0); //remove 0
         }
+        
+        if (FileIniCreater.load(AppConfig.DETAILS_INI, AppConfig.DETAILS_INI_FORMAT)){
+        	String name = FileIniCreater.getValue(AppConfig.DETAILS_INI, "Name");
+        	if (!name.equals("")){
+        		FXMLLoader loader = AppUtil.callFXMLLoader("../view/HomeDetails.fxml");
+        		_tabpane.getTabs().get(0).setContent(AppUtil.callPane(loader));
+        		((HomeDetails)loader.getController()).setName(name);
+        		((HomeDetails)loader.getController()).setDesc(FileIniCreater.getValue(AppConfig.DETAILS_INI, "Desc"));
+        		((HomeDetails)loader.getController()).setAddr(FileIniCreater.getValue(AppConfig.DETAILS_INI, "Addr"));
+        	}
+        }
     }
     
     public void notifyMsg(String msg){
@@ -127,7 +144,7 @@ public class Main {
 
     @FXML
     void acc() {
-    	Tab t = callTab("Account Osin", "../view/AccountOsin.fxml");
+    	Tab t = callTab("Account", "../view/AccountOsin.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -146,7 +163,7 @@ public class Main {
 
     @FXML
     void changePass() {
-
+    	ChangePass.callChangePass();
     }
 
     @FXML
@@ -222,7 +239,7 @@ public class Main {
 
     @FXML
     void myinfo() {
-    	MessageBox.Show("Coming Soon!", "Message");
+    	Details.callDetails();
     }
 
     @FXML

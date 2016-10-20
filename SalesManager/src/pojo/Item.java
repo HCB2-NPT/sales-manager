@@ -6,7 +6,6 @@ public class Item extends _pojo_Initializer {
 	private int itemId = 0;
 	private String name = null;
 	private double cost = 0;
-	//private String costFormat = null;
 	private int num = 0;
 	private int dramId = 0;
 	private int catId = 0;

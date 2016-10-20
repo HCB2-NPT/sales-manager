@@ -2,13 +2,14 @@ package view.handler;
 
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTextField;
-
 import dao.hibernate_adapters.CategoryAdapter;
 import helper.List2ObList;
 import helper.TableViewHelper;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellEditEvent;
 
 public class Category {
 	private static final Logger logger = Logger.getLogger(Category.class);
@@ -24,6 +25,12 @@ public class Category {
 
     @FXML
     private TableColumn<pojo.Category, String> table_cName;
+    
+    @FXML
+    private TableColumn<pojo.Category, String> table_cDesc;
+    
+    @FXML
+    private TableColumn<pojo.Category, String> cState;
 
     @FXML
     void add() {
@@ -33,6 +40,7 @@ public class Category {
     	p.setCreated(true);
     	p.setName(name);
     	table.getItems().add(p);
+    	table.refresh();
     	Main.callMsg("Added a new Category, but not saved yet...");
     	logger.info("Add Category: " + name);
     }
@@ -50,6 +58,9 @@ public class Category {
 			if (p.getCreated()){
 				k = k || CategoryAdapter.insert(p);
 				logger.info("Save Category: " + p.getName());
+			}else if (p.getEdited()){
+				k = k || CategoryAdapter.update(p);
+				logger.info("Update Category: " + p.getName());
 			}
 		}
     	Main.callMsg("Save success!");
@@ -61,11 +72,29 @@ public class Category {
 
     @FXML
     void initialize() {
-        assert tfnew != null : "fx:id=\"tfnew\" was not injected: check your FXML file 'Category.fxml'.";
+    	assert tfnew != null : "fx:id=\"tfnew\" was not injected: check your FXML file 'Category.fxml'.";
         assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'Category.fxml'.";
+        assert table_cId != null : "fx:id=\"table_cId\" was not injected: check your FXML file 'Category.fxml'.";
+        assert table_cName != null : "fx:id=\"table_cName\" was not injected: check your FXML file 'Category.fxml'.";
+        assert table_cDesc != null : "fx:id=\"table_cDesc\" was not injected: check your FXML file 'Category.fxml'.";
+        assert cState != null : "fx:id=\"cState\" was not injected: check your FXML file 'Category.fxml'.";
         
         table_cId.setCellValueFactory(TableViewHelper.getPropertyValueFactory("catId"));
         table_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
+        table_cDesc.setCellValueFactory(TableViewHelper.getPropertyValueFactory("desc"));
+        table_cDesc.setCellFactory(TableViewHelper.getCellFactory());
+        table_cDesc.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Category, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Category, String> t) {
+                	pojo.Category i = (pojo.Category)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                    i.setDesc(t.getNewValue());
+                    i.setEdited(true);
+                    table.refresh();
+                }
+             }
+        );
+        cState.setCellValueFactory(TableViewHelper.getPropertyValueFactory("objectState"));
         table.setItems(List2ObList.L2OL(CategoryAdapter.getAll()));
     }
 }

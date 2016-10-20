@@ -13,7 +13,7 @@ public class AccountAdapter {
 	
 	public static List<Account> getAll() {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		return HibernateUtil.getList("from Account", null);
+		return HibernateUtil.getList("from Account where permissionId > 0", null);
 	}
 	
 	public static Account get(int id){
@@ -40,9 +40,9 @@ public class AccountAdapter {
 		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1 where accountId = :p2", new Object[]{ obj.getName(), obj.getUsername(), obj.getAccountId() }) >= 0;
 	}
 	
-	public static boolean changePassword(Account obj){
+	public static boolean changePassword(String newpass, int id){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set password = :p0 where accountId = :p1", new Object[]{ Security.Encrypt(obj.getPassword()), obj.getAccountId() }) >= 0;
+		return HibernateUtil.execute("update Account set password = :p0 where accountId = :p1", new Object[]{ Security.Encrypt(newpass), id }) >= 0;
 	}
 	
 	public static boolean resetPassword(Account obj){
