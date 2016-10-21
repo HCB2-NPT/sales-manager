@@ -88,6 +88,8 @@ public class Dram {
                 @Override
                 public void handle(CellEditEvent<pojo.Dram, String> t) {
                 	pojo.Dram i = (pojo.Dram)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                	if (t.getNewValue().equals(i.getDesc()))
+                		return;
                     i.setDesc(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();

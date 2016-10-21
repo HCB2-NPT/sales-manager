@@ -1,11 +1,6 @@
 package view.handler;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Observable;
-
 import org.apache.log4j.Logger;
-
 import com.jfoenix.controls.*;
 import dao.hibernate_adapters.ItemAdapter;
 import helper.List2ObList;
@@ -13,11 +8,8 @@ import helper.MessageBox;
 import helper.TableViewHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pojo.*;

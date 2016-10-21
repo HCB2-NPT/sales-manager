@@ -1,13 +1,12 @@
 package view.handler;
 
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
+import org.apache.log4j.Logger;
 import com.jfoenix.controls.*;
-
 import application.AppSession;
 import dao.hibernate_adapters.AccountAdapter;
+import dao.hibernate_adapters.PermissionAdapter;
+import helper.FXUtil_Autocomplete;
+import helper.ITableCellEvent;
 import helper.List2ObList;
 import helper.TableViewHelper;
 import javafx.event.EventHandler;
@@ -16,6 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 public class AccountOsin {
+	private static final Logger logger = Logger.getLogger(AccountOsin.class);
+	
 	@FXML
     private JFXTextField _name;
 
@@ -23,7 +24,7 @@ public class AccountOsin {
     private JFXTextField _username;
 
     @FXML
-    private JFXComboBox<String> _perm;
+    private JFXComboBox<pojo.Permission> _perm;
 
     @FXML
     private TableView<pojo.Account> table;
@@ -38,7 +39,7 @@ public class AccountOsin {
     private TableColumn<pojo.Account, String> cUsername;
 
     @FXML
-    private TableColumn<pojo.Account, String> cPerm;
+    private TableColumn<pojo.Account, pojo.Permission> cPerm;
 
     @FXML
     private TableColumn<pojo.Account, Boolean> cIsDeleted;
@@ -50,21 +51,48 @@ public class AccountOsin {
     private Label __currentUser;
 
     @FXML
-    private Label __DateNow;
-
-    @FXML
     void refresh() {
-
+    	table.setItems(List2ObList.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
+    	logger.debug("Refresh");
     }
 
     @FXML
     void save() {
-
+    	boolean k = false;
+    	for (pojo.Account p : table.getItems()) {
+			if (p.getCreated()){
+				k = k || AccountAdapter.signup(p);
+				logger.info("Save Account: " + p.getName());
+			}else if (p.getEdited()){
+				p.setPermissionId(p.getPermission().getPermissionId());
+				k = k || AccountAdapter.update(p);
+				logger.info("Update Account: " + p.getName());
+			}
+		}
+    	Main.callMsg("Save success!");
+    	logger.info("Save");
+    	if (k){
+    		refresh();
+    	}
     }
     
     @FXML
     void add() {
-
+    	String name = _name.getText();
+    	String user = _username.getText();
+    	pojo.Permission perm = _perm.getSelectionModel().getSelectedItem();
+    	_name.clear();
+    	_username.clear();
+    	_perm.getSelectionModel().clearSelection();
+    	pojo.Account p = new pojo.Account();
+    	p.setCreated(true);
+    	p.setName(name);
+    	p.setUsername(user);
+    	p.setPermission(perm);
+    	table.getItems().add(p);
+    	table.refresh();
+    	Main.callMsg("Added a new Account, but not saved yet...");
+    	logger.info("Add Account: " + name);
     }
 
     @FXML
@@ -81,13 +109,6 @@ public class AccountOsin {
         assert cState != null : "fx:id=\"cState\" was not injected: check your FXML file 'AccountOsin.fxml'.";
         
         __currentUser.setText(String.format("Current User: %1$s", AppSession._currentUser.getName()));
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				__DateNow.setText(new Date().toString());
-			}
-		}, 0, 3000);
         
         cId.setCellValueFactory(TableViewHelper.getPropertyValueFactory("accountId"));
         cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
@@ -96,7 +117,9 @@ public class AccountOsin {
             new EventHandler<CellEditEvent<pojo.Account, String>>() {
                 @Override
                 public void handle(CellEditEvent<pojo.Account, String> t) {
-                	pojo.Account i = (pojo.Account)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                	pojo.Account i = (pojo.Account)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getName()))
+                		return;
                     i.setName(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();
@@ -104,9 +127,47 @@ public class AccountOsin {
              }
         );
         cUsername.setCellValueFactory(TableViewHelper.getPropertyValueFactory("username"));
+        cUsername.setCellFactory(TableViewHelper.getCellFactory());
+        cUsername.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Account, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Account, String> t) {
+                	pojo.Account i = (pojo.Account)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getUsername()))
+                		return;
+                    i.setUsername(t.getNewValue());
+                    i.setEdited(true);
+                    table.refresh();
+                }
+             }
+        );
         cPerm.setCellValueFactory(TableViewHelper.getPropertyValueFactory("permFormat"));
+        cPerm.setCellFactory(TableViewHelper.getComboBoxCellFactory(List2ObList.L2OL(PermissionAdapter.getByPermission(AppSession._currentUser.getPermissionId())), new ITableCellEvent() {
+			@Override
+			public void commit(Object item, Object newValue) {
+				if (newValue instanceof pojo.Permission){
+					pojo.Account i = (pojo.Account)item;
+					//i.setPermission((pojo.Permission)newValue);
+					//i.setEdited(true);
+					//table.refresh();
+					AccountAdapter.changePermission(((pojo.Permission)newValue).getPermissionId(), i.getAccountId());
+				}
+			}
+		}));
         cIsDeleted.setCellValueFactory(TableViewHelper.getPropertyValueFactory("isDeleted"));
+        cIsDeleted.setCellFactory(TableViewHelper.getCheckBoxCellFactory(new ITableCellEvent() {
+			@Override
+			public void commit(Object item, Object newValue) {
+				pojo.Account i = (pojo.Account)item;
+				i.setIsDeleted((boolean)newValue);
+				i.setEdited(true);
+				table.refresh();
+			}
+		}));
         cState.setCellValueFactory(TableViewHelper.getPropertyValueFactory("objectState"));
-        table.setItems(List2ObList.L2OL(AccountAdapter.getAll()));
+        table.setItems(List2ObList.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
+        
+        _perm.setItems(List2ObList.L2OL(PermissionAdapter.getAll()));
+        new FXUtil_Autocomplete<>(_perm);
     }
 }

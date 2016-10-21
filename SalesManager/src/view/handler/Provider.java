@@ -88,6 +88,8 @@ public class Provider {
                 @Override
                 public void handle(CellEditEvent<pojo.Provider, String> t) {
                 	pojo.Provider i = (pojo.Provider)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                	if (t.getNewValue().equals(i.getDesc()))
+                		return;
                     i.setDesc(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();

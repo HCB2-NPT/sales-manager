@@ -144,6 +144,10 @@ public class Main {
 
     @FXML
     void acc() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Account", "../view/AccountOsin.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -156,6 +160,10 @@ public class Main {
     
     @FXML
     void cat() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Category", "../view/Category.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -194,6 +202,10 @@ public class Main {
 
     @FXML
     void createInvoice() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Sell Item", "../view/SellItem.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -201,6 +213,10 @@ public class Main {
 
     @FXML
     void cus() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Customer", "../view/Customer.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -208,6 +224,10 @@ public class Main {
 
     @FXML
     void dram() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Dram", "../view/Dram.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -220,6 +240,10 @@ public class Main {
 
     @FXML
     void inWarehouse() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Import Item", "../view/BuyItem.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -227,6 +251,10 @@ public class Main {
 
     @FXML
     void item() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Item Manager", "../view/ItemManager.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -249,6 +277,10 @@ public class Main {
 
     @FXML
     void debt() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Debt", "../view/Debt.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -256,6 +288,10 @@ public class Main {
 
     @FXML
     void perm() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Permission", "../view/Permission.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -285,6 +321,10 @@ public class Main {
 
     @FXML
     void viewImport() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Payment", "../view/Payment.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -292,6 +332,10 @@ public class Main {
 
     @FXML
     void viewInvoice() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Bill", "../view/Bills.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -299,6 +343,10 @@ public class Main {
 
     @FXML
     void viewWarehouse() {
+    	if (_tabpane.getTabs().size() > 8){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("WareHouse", "../view/WareHouse.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);

@@ -1,9 +1,15 @@
 package helper;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -12,11 +18,11 @@ public class TableViewHelper {
 		return new PropertyValueFactory<A,B>(propertyName);
 	}
 	
-    public static <A, B> Callback<TableColumn<A,B>, TableCell<A,B>> getCellFactory(){
+	public static <A, B> Callback<TableColumn<A,B>, TableCell<A,B>> getCellFactory(){
     	return new Callback<TableColumn<A,B>, TableCell<A,B>>() {
 			@Override
 			public TableCell<A,B> call(TableColumn<A,B> param) {
-				return new TextFieldTableCell<A,B>(new StringConverter<B>() {
+				return new javafx.scene.control.cell.TextFieldTableCell<A,B>(new StringConverter<B>() {
                     @Override
                     public String toString(B t) {
                     	if (t == null)
@@ -33,4 +39,82 @@ public class TableViewHelper {
 			}
 		};
     }
+	
+	public static <A> Callback<TableColumn<A,String>, TableCell<A,String>> _getCellFactory(){
+		return javafx.scene.control.cell.TextFieldTableCell.forTableColumn();
+	}
+	
+	public static <A> Callback<TableColumn<A,Boolean>, TableCell<A,Boolean>> getCheckBoxCellFactory(ITableCellEvent cellEvent){
+		return new Callback<TableColumn<A,Boolean>, TableCell<A,Boolean>>() {
+			@Override
+			public TableCell<A,Boolean> call(TableColumn<A,Boolean> param) {
+				CheckBox checkBox = new CheckBox();
+			    TableCell<A, Boolean> cell = new TableCell<A, Boolean>() {
+			        @Override
+			        public void updateItem(Boolean item, boolean empty) {
+			        	super.updateItem(item, empty);
+			        	checkBox.setVisible(!empty);
+			        	if (item != null){
+			        		this.setItem(item);
+			        		checkBox.setSelected(item);
+			        	}
+			        }
+			    };
+			    checkBox.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						Object item = cell.getTableRow().getItem();
+						if (item != null)
+							cellEvent.commit(item, checkBox.isSelected());
+					}
+				});
+			    cell.setGraphic(checkBox);
+			    cell.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			    cell.setAlignment(Pos.CENTER);
+			    return cell;
+			}
+		};
+    }
+	
+	public static <A> Callback<TableColumn<A,Boolean>, TableCell<A,Boolean>> _getCheckBoxCellFactory(TableColumn<A,Boolean> column){
+		return javafx.scene.control.cell.CheckBoxTableCell.forTableColumn(column);
+	}
+	
+	public static <A,B> Callback<TableColumn<A,B>, TableCell<A,B>> getComboBoxCellFactory(ObservableList<B> OL, ITableCellEvent cellEvent){
+		return new Callback<TableColumn<A,B>, TableCell<A,B>>() {
+			@Override
+			public TableCell<A,B> call(TableColumn<A,B> param) {
+				ComboBox<B> comboBox = new ComboBox<B>();
+				comboBox.setItems(OL);
+				comboBox.setMaxWidth(Integer.MAX_VALUE);
+			    TableCell<A, B> cell = new TableCell<A, B>() {
+			        @Override
+			        public void updateItem(B item, boolean empty) {
+			        	super.updateItem(item, empty);
+			        	comboBox.setVisible(!empty);
+			        	if (item != null){
+			        		this.setItem(item);
+			        		comboBox.getSelectionModel().select(item);
+			        	}
+			        }
+			    };
+			    comboBox.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						Object item = cell.getTableRow().getItem();
+						if (item != null)
+							cellEvent.commit(item, comboBox.getSelectionModel().getSelectedItem());
+					}
+				});
+			    cell.setGraphic(comboBox);
+			    cell.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			    cell.setAlignment(Pos.CENTER);
+			    return cell;
+			}
+		};
+    }
+	
+	public static <A,B> Callback<TableColumn<A,B>, TableCell<A,B>> _getComboBoxCellFactory(ObservableList<B> OL){
+		return javafx.scene.control.cell.ComboBoxTableCell.forTableColumn(OL);
+	}
 }

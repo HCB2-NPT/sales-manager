@@ -88,6 +88,8 @@ public class Permission {
                 @Override
                 public void handle(CellEditEvent<pojo.Permission, String> t) {
                 	pojo.Permission i = (pojo.Permission)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                	if (t.getNewValue().equals(i.getDesc()))
+                		return;
                     i.setDesc(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();

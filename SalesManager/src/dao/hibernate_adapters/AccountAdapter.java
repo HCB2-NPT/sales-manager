@@ -16,6 +16,11 @@ public class AccountAdapter {
 		return HibernateUtil.getList("from Account where permissionId > 0", null);
 	}
 	
+	public static List<Account> getByPermission(int permissionId) {
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.getList("from Account where permissionId > :p0", new Object[] { permissionId });
+	}
+	
 	public static Account get(int id){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from Account where accountId = :p0", new Object[]{ id });
@@ -37,7 +42,7 @@ public class AccountAdapter {
 	
 	public static boolean update(Account obj){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1 where accountId = :p2", new Object[]{ obj.getName(), obj.getUsername(), obj.getAccountId() }) >= 0;
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1, permissionId = :p2 where accountId = :p3", new Object[]{ obj.getName(), obj.getUsername(), obj.getPermissionId(), obj.getAccountId() }) >= 0;
 	}
 	
 	public static boolean changePassword(String newpass, int id){
@@ -58,6 +63,11 @@ public class AccountAdapter {
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean changePermission(int permId, int accId){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.execute("update Account set permissionId = :p0 where accountId = :p1", new Object[]{ permId, accId }) >= 0;
 	}
 	
 	public static boolean deleteOrRecover(Account obj){

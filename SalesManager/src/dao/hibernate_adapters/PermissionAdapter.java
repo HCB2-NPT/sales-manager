@@ -15,6 +15,11 @@ public class PermissionAdapter {
 		return HibernateUtil.getList("from Permission where permissionId > 0", null);
 	}
 	
+	public static List<Permission> getByPermission(int id) {
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.getList("from Permission where permissionId > :p0", new Object[] { id });
+	}
+	
 	public static Permission get(int id){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from Permission where permissionId = :p0", new Object[]{ id });

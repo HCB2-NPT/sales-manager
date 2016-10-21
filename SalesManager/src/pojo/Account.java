@@ -49,10 +49,10 @@ public class Account extends _pojo_Initializer {
 	public void setPermission(Permission permission) {
 		this.permission = permission;
 	}
-	protected int getPermissionId() {
+	public int getPermissionId() {
 		return permissionId;
 	}
-	protected void setPermissionId(int permissionId) {
+	public void setPermissionId(int permissionId) {
 		this.permissionId = permissionId;
 	}
 	public String getPermFormat(){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2016 lúc 10:00 SA
+-- Thời gian đã tạo: Th10 21, 2016 lúc 04:09 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -298,7 +298,7 @@ CREATE TABLE `permission` (
 INSERT INTO `permission` (`id`, `name`, `description`) VALUES
 (0, 'Administrator', NULL),
 (1, 'Quản lý', 'Có đầy đủ các quyền điều hành phần mềm.'),
-(2, 'Personel', 'Chỉ có thể xử dụng các chức năng bán hàng của phần mềm.');
+(2, 'Nhân viên', 'Chỉ có thể xử dụng các chức năng bán hàng của phần mềm.');
 
 -- --------------------------------------------------------
 

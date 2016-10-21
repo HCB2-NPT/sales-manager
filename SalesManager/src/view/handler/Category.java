@@ -88,6 +88,8 @@ public class Category {
                 @Override
                 public void handle(CellEditEvent<pojo.Category, String> t) {
                 	pojo.Category i = (pojo.Category)t.getTableView().getItems().get(t.getTablePosition().getRow()); 
+                	if (t.getNewValue().equals(i.getDesc()))
+                		return;
                     i.setDesc(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();
