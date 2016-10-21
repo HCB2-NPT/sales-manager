@@ -128,12 +128,13 @@
    <center>
       <TableView fx:id="table" editable="true" prefHeight="300.0" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn fx:id="cId" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Id" />
-            <TableColumn fx:id="cName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="240.0" text="Name" />
-            <TableColumn fx:id="cUsername" prefWidth="200.0" text="Username" />
-            <TableColumn fx:id="cPerm" prefWidth="160.0" text="Permission" />
-            <TableColumn fx:id="cIsDeleted" minWidth="0.0" prefWidth="100.0" text="Is Deleted" />
-            <TableColumn fx:id="cState" minWidth="80.0" />
+            <TableColumn fx:id="cId" maxWidth="1.7976931348623157E308" minWidth="-Infinity" style="-fx-alignment: center;" text="Id" />
+            <TableColumn fx:id="cName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="240.0" style="-fx-alignment: center;" text="Name" />
+            <TableColumn fx:id="cUsername" prefWidth="200.0" style="-fx-alignment: center-left;" text="Username" />
+            <TableColumn fx:id="cPerm" prefWidth="160.0" style="-fx-alignment: center;" text="Permission" />
+            <TableColumn fx:id="cIsDeleted" minWidth="0.0" prefWidth="100.0" style="-fx-alignment: center;" text="Is Deleted" />
+            <TableColumn fx:id="cState" minWidth="80.0" style="-fx-alignment: center;" />
+            <TableColumn fx:id="cButtonRemove" minWidth="80.0" style="-fx-alignment: center;" />
          </columns>
       </TableView>
    </center>

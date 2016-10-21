@@ -48,6 +48,9 @@ public class AccountOsin {
     private TableColumn<pojo.Account, String> cState;
     
     @FXML
+    private TableColumn<pojo.Account, Boolean> cButtonRemove;
+    
+    @FXML
     private Label __currentUser;
 
     @FXML
@@ -165,6 +168,13 @@ public class AccountOsin {
 			}
 		}));
         cState.setCellValueFactory(TableViewHelper.getPropertyValueFactory("objectState"));
+        cButtonRemove.setCellValueFactory(TableViewHelper.getPropertyValueFactory("created"));
+        cButtonRemove.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
+			@Override
+			public void commit(Object item, Object newValue) {
+				table.getItems().remove((int)newValue);
+			}
+		}));
         table.setItems(List2ObList.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
         
         _perm.setItems(List2ObList.L2OL(PermissionAdapter.getAll()));

@@ -21,7 +21,6 @@ import dao.hibernate_adapters.AccountAdapter;
 import dao.hibernate_adapters.CustomerAdapter;
 import dao.hibernate_adapters.InvoiceAdapter;
 import dao.hibernate_adapters.ItemAdapter;
-import helper.CustomCell;
 import helper.FXUtil_Autocomplete;
 import helper.List2ObList;
 import helper.MessageBox;
@@ -191,7 +190,8 @@ public class SellItem {
 			
 			@Override
 			public TableCell<Item, Boolean> call(TableColumn<Item, Boolean> param) {
-				return new CustomCell(table_insertitem);
+				//return new CustomCell(table_insertitem);
+				return null;
 			}
 			
 		});

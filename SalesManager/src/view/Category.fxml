@@ -70,10 +70,11 @@
             </AnchorPane>
             <TableView fx:id="table" editable="true" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="table_cId" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Id" />
-                  <TableColumn fx:id="table_cName" maxWidth="1.7976931348623157E308" minWidth="400.0" prefWidth="-1.0" text="Category's Name" />
-                  <TableColumn fx:id="table_cDesc" maxWidth="1.7976931348623157E308" minWidth="600.0" prefWidth="-1.0" text="Description (Editable)" />
-                  <TableColumn fx:id="cState" minWidth="80.0" />
+                  <TableColumn fx:id="table_cId" editable="false" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" style="-fx-alignment: center;" text="Id" />
+                  <TableColumn fx:id="table_cName" maxWidth="1.7976931348623157E308" minWidth="400.0" prefWidth="-1.0" style="-fx-alignment: center-left;" text="Category's Name" />
+                  <TableColumn fx:id="table_cDesc" maxWidth="1.7976931348623157E308" minWidth="600.0" prefWidth="-1.0" style="-fx-alignment: center-left;" text="Description (Editable)" />
+                  <TableColumn fx:id="cState" minWidth="80.0" style="-fx-alignment: center;" />
+                  <TableColumn fx:id="cButtonRemove" minWidth="80.0" style="-fx-alignment: center;" />
                </columns>
                <VBox.margin>
                   <Insets />

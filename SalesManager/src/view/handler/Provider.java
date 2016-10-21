@@ -3,6 +3,7 @@ package view.handler;
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTextField;
 import dao.hibernate_adapters.ProviderAdapter;
+import helper.ITableCellEvent;
 import helper.List2ObList;
 import helper.TableViewHelper;
 import javafx.event.EventHandler;
@@ -31,6 +32,9 @@ public class Provider {
     
     @FXML
     private TableColumn<pojo.Provider, String> cState;
+    
+    @FXML
+    private TableColumn<pojo.Account, Boolean> cButtonRemove;
 
     @FXML
     void add() {
@@ -97,6 +101,13 @@ public class Provider {
              }
         );
         cState.setCellValueFactory(TableViewHelper.getPropertyValueFactory("objectState"));
+        cButtonRemove.setCellValueFactory(TableViewHelper.getPropertyValueFactory("created"));
+        cButtonRemove.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
+			@Override
+			public void commit(Object item, Object newValue) {
+				table.getItems().remove((int)newValue);
+			}
+		}));
         table.setItems(List2ObList.L2OL(ProviderAdapter.getAll()));
     }
 }
