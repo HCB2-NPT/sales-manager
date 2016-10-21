@@ -75,8 +75,16 @@ public class Item extends _pojo_Initializer {
 	public String getCostFormat() {
 		return new DecimalFormat("#,###.00").format(cost);
 	}
+	
+	public String getTotalFormat() {
+		return new DecimalFormat("#,###.00").format(cost*num);
+	}
 
 	public void setCostFormat(String costF) {
 		this.cost = Double.valueOf(costF);
+	}
+	
+	public String getCategoryFormat(){
+		return cat.getName();
 	}
 }
