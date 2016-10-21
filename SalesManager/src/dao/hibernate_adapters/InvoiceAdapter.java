@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import dao.HibernateUtil;
+import pojo.Dram;
 import pojo.Invoice;
 
 public class InvoiceAdapter {
@@ -19,4 +20,10 @@ public class InvoiceAdapter {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from Invoice where invoiceId = :p0", new Object[]{ id });
 	}
+	
+	public static boolean insert(Invoice obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return obj.getInvoiceId() == 0 && HibernateUtil.save(obj);
+	}
+	
 }

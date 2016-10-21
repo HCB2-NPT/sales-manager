@@ -11,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import javafx.collections.ObservableList;
+
 public class HibernateUtil {
 	private static final Logger logger = Logger.getLogger(HibernateUtil.class);
 	
@@ -108,6 +110,25 @@ public class HibernateUtil {
 		try {
 			session.beginTransaction();
 			session.save(obj);
+			session.getTransaction().commit();
+			success = true;
+		} catch (Exception ex) {
+			session.getTransaction().rollback();
+			logger.error(ex.getMessage());
+		} finally {
+			session.close();
+		}
+		return success;
+	}
+	
+	public static <T> boolean saveList(ObservableList<T> obj){
+		boolean success = false;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			for (T t : obj) {
+				session.save(t);
+			}
 			session.getTransaction().commit();
 			success = true;
 		} catch (Exception ex) {

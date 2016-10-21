@@ -54,8 +54,8 @@ public class FXUtil_Autocomplete<T> extends JFXComboBox<T>{
 			
 			Bounds boundsInScene = cmb.localToScene(cmb.getBoundsInLocal());
 			Window stage = cmb.getScene().getWindow();
-			double posX = boundsInScene.getMinX() + 8;//stage.getX() + cmb.getBoundsInParent().getMinX();
-			double posY = boundsInScene.getMinY() + 8;//stage.getY() + cmb.getBoundsInParent().getMinY();
+			double posX = stage.getX() + boundsInScene.getMinX() + 16;
+			double posY = stage.getY() + boundsInScene.getMinY() + 16;
 			Font f = new Font("System", 13);
 
 			cmb.getTooltip().show(stage, posX, posY);
