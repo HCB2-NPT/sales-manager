@@ -9,14 +9,20 @@
 		<property name="date" type="date">
 			<column name="date" not-null="true"/>
 		</property>
-		<many-to-one name="creater" class="pojo.Account" insert="false" update="false" cascade="none" not-null="true" column="accountId"/>
+		<!-- <many-to-one name="creater" class="pojo.Account" insert="false" update="false" cascade="all" not-null="true" column="accountId"/> -->
+		<property name="createrId" type="int">
+			<column name="createrid" not-null="true" default="False"/>
+		</property>
 		<property name="isPayment" type="boolean">
 			<column name="ispayment" not-null="true" default="False"/>
 		</property>
 		<property name="paymentDate" type="date">
 			<column name="paymentdate"/>
 		</property>
-		<many-to-one name="customer" class="pojo.Customer" insert="false" update="false" cascade="none" not-null="true" column="customerId"/>
+		<!-- <many-to-one name="customer" class="pojo.Customer" insert="false" update="false" cascade="all" not-null="true" column="customerId"/> -->
+		<property name="customerId" type="int">
+			<column name="customerid" not-null="true" default="False"/>
+		</property>
 		<property name="isDeleted" type="boolean">
 			<column name="isdeleted" not-null="true" default="False"/>
 		</property>

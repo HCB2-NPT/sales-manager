@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -32,6 +33,7 @@
                   <ColumnConstraints hgrow="NEVER" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" percentWidth="10.0" />
                   <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" prefWidth="60.0" />
                   <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" />
                   <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" />
                </columnConstraints>
@@ -50,32 +52,32 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXComboBox fx:id="cb_nameitem" maxWidth="1.7976931348623157E308" onMouseClicked="#cbMouse_Click" promptText="Name Item" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                  <JFXComboBox fx:id="cb_nameitem" maxWidth="1.7976931348623157E308" onAction="#cb_Action" promptText="Name Item" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXComboBox>
-                  <Label text="Customer">
+                  <Label text="PersonalID Customer">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXTextField fx:id="txt_personalcustomer" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  <JFXTextField fx:id="txt_personalcustomer" text="Chung" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <Label text="Date" GridPane.columnIndex="3">
+                  <JFXCheckBox fx:id="chk_Debt" onAction="#chk_Action" text="Debt ?" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
-                  </Label>
-                  <JFXDatePicker fx:id="datepicker_create" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  </JFXCheckBox>
+                  <JFXDatePicker fx:id="datepicker_create" maxWidth="1.7976931348623157E308" promptText="Pay Day" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <GridPane.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXDatePicker>
-                  <JFXButton buttonType="RAISED" onAction="#btnAdd_Click" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Add Item" textFill="#2ecc71" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                  <JFXButton buttonType="RAISED" onAction="#btnAdd_Click" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Add Item" textFill="#2ecc71" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -90,14 +92,14 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <Label text="Number" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Label text="Number" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
-                        <JFXTextField fx:id="txt_number" onKeyPressed="#number_KeyPress" promptText="Number" text="1" />
+                        <JFXTextField fx:id="txt_number" maxWidth="1.7976931348623157E308" onKeyPressed="#number_KeyPress" promptText="Number" text="1" />
                         <JFXButton fx:id="btn_inc" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btninc_Click">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -118,7 +120,7 @@
                         </JFXButton>
                      </children>
                   </HBox>
-                  <JFXButton buttonType="RAISED" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh" GridPane.columnIndex="5">
+                  <JFXButton buttonType="RAISED" onAction="#btnRefresh_Click" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh" GridPane.columnIndex="6">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -165,27 +167,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Thanh toán" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Còn" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <JFXTextField fx:id="txt_totalmoney" GridPane.columnIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="8.0" top="8.0" />
-                     </GridPane.margin>
-                  </JFXTextField>
-                  <JFXTextField fx:id="txt_paymoney" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="8.0" top="8.0" />
-                     </GridPane.margin>
-                  </JFXTextField>
-                  <JFXTextField fx:id="txt_returnmoney" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <JFXTextField fx:id="txt_totalmoney" editable="false" GridPane.columnIndex="2">
                      <GridPane.margin>
                         <Insets bottom="8.0" top="8.0" />
                      </GridPane.margin>

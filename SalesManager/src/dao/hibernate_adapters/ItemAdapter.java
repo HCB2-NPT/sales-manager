@@ -29,4 +29,9 @@ public class ItemAdapter {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return obj.getItemId() > 0 && HibernateUtil.execute("update Item set name = :p0, img = :p1, cost = :p2, catId = :p3, dramId = :p4 where itemId = :p5", new Object[]{ obj.getName(), obj.getImg(), obj.getCost(), obj.getCat().getCatId(), obj.getDram().getDramId(), obj.getItemId() }) >= 0;
 	}
+	
+	public static boolean updateNum(Item obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return obj.getItemId() > 0 && HibernateUtil.execute("update Item set name = :p0, img = :p1, cost = :p2, catId = :p3, dramId = :p4,num = :p6 where itemId = :p5", new Object[]{ obj.getName(), obj.getImg(), obj.getCost(), obj.getCat().getCatId(), obj.getDram().getDramId(), obj.getItemId(),obj.getNum() }) >= 0;
+	}
 }

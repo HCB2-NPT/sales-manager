@@ -1,5 +1,7 @@
 package pojo;
 
+import java.text.DecimalFormat;
+
 public class InvoiceExt extends _pojo_Initializer {
 	private int invoiceId = 0;
 	private int itemId = 0;
@@ -41,4 +43,23 @@ public class InvoiceExt extends _pojo_Initializer {
 	public void setItem(Item item) {
 		this.item = item;
 	}
+	
+	//Format//
+	public String getNameFormat(){
+		return item.getName();
+	}
+	
+	public String getCategoryFormat(){
+		return item.getCat().getName();
+	}
+	
+	public String getCostFormat(){
+		return new DecimalFormat("#,###.00").format(cost);
+	}
+	
+	public String getTotalFormat(){
+		return new DecimalFormat("#,###.00").format(cost*num);
+	}
+	
+	
 }

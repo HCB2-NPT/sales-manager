@@ -6,6 +6,8 @@ public class Invoice extends _pojo_Initializer {
 	private int invoiceId = 0;
 	private Date date = null;
 	private Account creater = null;
+	private int createrId = 0;
+	private int customerId = 0;
 	private boolean isPayment = false;
 	private Date paymentDate = null;
 	private Customer customer = null;
@@ -56,5 +58,21 @@ public class Invoice extends _pojo_Initializer {
 	}
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public int getCreaterId() {
+		return createrId;
+	}
+
+	public void setCreaterId(int createrId) {
+		this.createrId = createrId;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 }
