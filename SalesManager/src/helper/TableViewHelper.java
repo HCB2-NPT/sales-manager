@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -228,6 +229,15 @@ public class TableViewHelper {
 						}catch (Exception e){
 						}
 					}
+				});
+			    tf.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+			    		try{
+							cellEvent.commit(cell.getIndex(), tf.getText());
+						}catch (Exception e){
+						}
+			    	};
 				});
 			    cell.setGraphic(out);
 			    cell.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

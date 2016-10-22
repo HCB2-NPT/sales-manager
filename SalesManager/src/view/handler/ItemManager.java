@@ -194,16 +194,22 @@ public class ItemManager {
 			@Override
 			public void commit(Integer index, Object newValue) {
 				pojo.Item i = table.getItems().get(index);
-				FileChooser fileChooser = new FileChooser();
-		    	fileChooser.setTitle("Select Image");
-		    	fileChooser.setInitialDirectory(new File(JavaAppProjectURL.FOLDER_TARGET));
-		    	fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files (*.png/jpg/jpeg)", "*.png", "*.jpg", "*.jpeg"));
-		    	File selectedFile = fileChooser.showOpenDialog(Main._currentStage);
-		    	if (selectedFile != null) {
-		    		i.setImg(selectedFile.getName());
-		    		i.setEdited(true);
+				if (newValue == null){
+					FileChooser fileChooser = new FileChooser();
+			    	fileChooser.setTitle("Select Image");
+			    	fileChooser.setInitialDirectory(new File(JavaAppProjectURL.FOLDER_TARGET));
+			    	fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image Files (*.png/jpg/jpeg)", "*.png", "*.jpg", "*.jpeg"));
+			    	File selectedFile = fileChooser.showOpenDialog(Main._currentStage);
+			    	if (selectedFile != null) {
+			    		i.setImg(selectedFile.getName());
+			    		i.setEdited(true);
+			    		table.refresh();
+			    	}
+				}else{
+					i.setImg((String)newValue);
+					i.setEdited(true);
 		    		table.refresh();
-		    	}
+				}
 			}
 		}));
         cShowImg.setCellValueFactory(TableViewHelper.getPropertyValueFactory("canShowImg"));

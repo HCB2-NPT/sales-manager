@@ -71,32 +71,27 @@ public class Item extends _pojo_Initializer {
 	protected void setCatId(int catId) {
 		this.catId = catId;
 	}*/
-
 	public String getCostFormat() {
 		return new DecimalFormat("#,###.00").format(cost);
 	}
-	
-	public String getTotalFormat() {
-		return new DecimalFormat("#,###.00").format(cost*num);
-	}
-
 	public void setCostFormat(String costF) {
 		this.cost = Double.valueOf(costF);
 	}
-	
 	public String getCategoryFormat(){
 		if (cat == null)
 			return null;
 		return cat.getName();
 	}
-	
 	public String getDramFormat(){
 		if (dram == null)
 			return null;
 		return dram.getName();
 	}
-	
 	public Boolean getCanShowImg(){
 		return this.img != null && !this.img.equals("");
+	}
+	@Override
+	public String toString() {
+		return String.format("%1$4s - %2$s", itemId, name);
 	}
 }

@@ -1,10 +1,13 @@
 package pojo;
 
+import java.text.DecimalFormat;
+
 public class ImportExt extends _pojo_Initializer {
 	private int importId = 0;
 	private int itemId = 0;
 	private int providerId = 0;
 	private Provider provider = null;
+	private Item item = null;
 	private double cost = 0d;
 	private int num = 0;
 	
@@ -47,5 +50,22 @@ public class ImportExt extends _pojo_Initializer {
 	}
 	public void setProvider(Provider provider) {
 		this.provider = provider;
+	}
+	public Item getItem() {
+		return item;
+	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	public String getCostFormat() {
+		return new DecimalFormat("#,###.00").format(cost);
+	}
+	public String getTotalPrice() {
+		return new DecimalFormat("#,###.00").format(cost * num);
+	}
+	public String getItemName(){
+		if (item == null)
+			return null;
+		return item.getName();
 	}
 }

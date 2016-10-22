@@ -19,6 +19,6 @@
 		<property name="num" type="int">
 			<column name="num" not-null="true"/>
 		</property>
-		<many-to-one name="provider" class="pojo.Provider" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="providerId"/>
+		<!-- <many-to-one name="provider" class="pojo.Provider" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="providerId"/> -->
 	</class>
 </hibernate-mapping>
