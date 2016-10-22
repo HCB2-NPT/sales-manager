@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2016 lúc 04:09 SA
+-- Thời gian đã tạo: Th10 22, 2016 lúc 04:49 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -115,7 +115,7 @@ CREATE TABLE `dram` (
 
 INSERT INTO `dram` (`id`, `name`, `description`) VALUES
 (1, 'Bộ', 'Một nhóm hàng đi cùng nhau.'),
-(2, 'Cái', 'Đơn lẽ một món.');
+(2, 'Món', 'Đơn lẽ một món hàng.');
 
 -- --------------------------------------------------------
 
@@ -260,24 +260,24 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dramid`, `catid`, `img`) VALUES
-(1, 'Intel Core i7-5960X Extreme 3.0GHz - Haswell-E LGA 2011-V3', 24999920, 4, 2, 1, NULL),
-(2, 'AMD Vishera FX 9590 4.7GHz ( 5.0GHz Turbo ) ', 5199986, 6, 2, 1, NULL),
-(3, 'Intel Xeon E5-2630 V4 2.1GHz - 8 cores LGA 2011-V3', 16599990, 7, 2, 1, NULL),
-(4, 'Intel Core i5-6400 2.7GHz (3.3GHz Turbo Boost ) ', 4439996, 9, 2, 1, NULL),
-(5, 'Intel Pentium G3450 3.4GHz Haswell LGA 1150', 1519980, 0, 2, 1, NULL),
-(6, 'Asus X99-Pro - LGA 2011-V3 Intel X99', 7099994, 0, 2, 2, NULL),
-(7, 'Asus X99-A - LGA 2011-V3 Intel X99', 6299986, 5, 2, 2, NULL),
-(8, 'Toshiba 1TB 7200rpm - Desktop HDD', 1049994, 4, 2, 3, NULL),
-(9, 'Western Digital Caviar Black 2TB -64MB cache Sata 3', 3199988, 28, 2, 3, NULL),
-(10, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866 - DDR3 Notebook Ram', 550000, 18, 2, 4, NULL),
-(11, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866 - DDR3 Notebook Ram', 1900000, 10, 1, 4, NULL),
-(12, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133 cas 15 - DDR4 Quad Channel', 1900000, 5, 1, 4, NULL),
-(13, 'Philips 273G3 27', 5000000, 7, 2, 5, NULL),
-(14, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD', 4000000, 12, 2, 5, NULL),
-(15, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD', 42000000, 0, 2, 5, NULL),
-(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 4, 2, 6, NULL),
-(17, 'infinity Side 108 Black - Side RGB + Rainbow led Mechanical Blue Keyboard', 2000000, 0, 2, 6, NULL),
-(18, 'CM Storm Devastator - Gaming keyboard & Mouse combo', 750000, 0, 1, 10, NULL);
+(1, 'Intel Core i7-5960X Extreme 3.0GHz - Haswell-E LGA 2011-V3', 24999920, 4, 2, 1, 'Intel Core i7-5960X Extreme 3.0GHz.jpg'),
+(2, 'AMD Vishera FX 9590 4.7GHz ( 5.0GHz Turbo ) ', 5199986, 6, 2, 1, 'AMD Vishera FX 9590.jpg'),
+(3, 'Intel Xeon E5-2630 V4 2.1GHz - 8 cores LGA 2011-V3', 16599990, 7, 2, 1, 'Intel Xeon E5-2630.jpg'),
+(4, 'Intel Core i5-6400 2.7GHz (3.3GHz Turbo Boost ) ', 4439996, 9, 2, 1, 'Intel Core i5-6400 2.7GHz.jpg'),
+(5, 'Intel Pentium G3450 3.4GHz Haswell LGA 1150', 1519980, 0, 2, 1, 'Intel Pentium G3450 3.4GHz.jpg'),
+(6, 'Asus X99-Pro - LGA 2011-V3 Intel X99', 7099994, 0, 2, 2, 'Asus X99-Pro - LGA 2011-V3 Intel X99.jpg'),
+(7, 'Asus X99-A - LGA 2011-V3 Intel X99', 6299986, 5, 2, 2, 'Asus X99-A - LGA 2011-V3.jpg'),
+(8, 'Toshiba 1TB 7200rpm - Desktop HDD', 1049994, 4, 2, 3, 'Toshiba 1TB 7200rpm - Desktop HDD.jpg'),
+(9, 'Western Digital Caviar Black 2TB -64MB cache Sata 3', 3199988, 28, 2, 3, 'Western Digital Caviar Black.jpg'),
+(10, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866 - DDR3 Notebook Ram', 550000, 18, 2, 4, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866.jpg'),
+(11, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866 - DDR3 Notebook Ram', 1900000, 10, 1, 4, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866.jpg'),
+(12, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133 cas 15 - DDR4 Quad Channel', 1900000, 5, 1, 4, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133.jpg'),
+(13, 'Philips 273G3 27', 5000000, 7, 2, 5, 'Philips 273G3 27.jpg'),
+(14, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD', 4000000, 12, 2, 5, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD.jpg'),
+(15, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD', 42000000, 0, 2, 5, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD.jpg'),
+(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 4, 2, 6, 'infinity Champions - Rainbow.jpg'),
+(17, 'infinity Side 108 Black - Side RGB + Rainbow led Mechanical Blue Keyboard', 2000000, 0, 2, 6, 'infinity Side 108 Black.jpg'),
+(18, 'CM Storm Devastator - Gaming keyboard & Mouse combo', 750000, 0, 1, 10, 'CM Storm Devastator.jpg');
 
 -- --------------------------------------------------------
 
@@ -415,7 +415,7 @@ ALTER TABLE `provider`
 -- AUTO_INCREMENT cho bảng `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `category`
 --
@@ -430,7 +430,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT cho bảng `dram`
 --
 ALTER TABLE `dram`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `import`
 --
@@ -450,7 +450,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT cho bảng `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `provider`
 --

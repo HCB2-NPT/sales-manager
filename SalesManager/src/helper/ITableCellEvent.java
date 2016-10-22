@@ -1,5 +1,5 @@
 package helper;
 
 public interface ITableCellEvent {
-	public void commit(Object item, Object newValue);
+	public void commit(Integer index, Object newValue);
 }

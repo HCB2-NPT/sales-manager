@@ -42,7 +42,7 @@ public class AccountAdapter {
 	
 	public static boolean update(Account obj){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1, permissionId = :p2 where accountId = :p3", new Object[]{ obj.getName(), obj.getUsername(), obj.getPermissionId(), obj.getAccountId() }) >= 0;
+		return obj.getAccountId() > 0 && HibernateUtil.execute("update Account set name = :p0, username = :p1, permissionId = :p2 where accountId = :p3", new Object[]{ obj.getName(), obj.getUsername(), obj.getPermission().getPermissionId(), obj.getAccountId() }) >= 0;
 	}
 	
 	public static boolean changePassword(String newpass, int id){

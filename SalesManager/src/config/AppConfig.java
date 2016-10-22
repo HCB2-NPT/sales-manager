@@ -3,6 +3,7 @@ package config;
 public class AppConfig {
 	public static final String				APP_NAME							=	"Sales Manager";
 	public static final String				APP_ICON							=	"appicon.png";
+	public static final int					LIMIT_NUMBER_TABS					=	8;
 	
 	public static final String				SECURITY_SECRET_KEY					=	"SM-SK-v0.0.3|15-10-2016|5:18PM";
 	

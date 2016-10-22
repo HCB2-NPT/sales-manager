@@ -3,36 +3,24 @@ package view.handler;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Observable;
 
-import org.hibernate.Hibernate;
-import org.hibernate.sql.Update;
-import org.jboss.logging.Message;
+import org.apache.log4j.Logger;
 
 import com.jfoenix.controls.*;
-
 import application.AppSession;
-import dao.hibernate_adapters.AccountAdapter;
 import dao.hibernate_adapters.CustomerAdapter;
-import dao.hibernate_adapters.InvoiceAdapter;
 import dao.hibernate_adapters.ItemAdapter;
 import helper.FXUtil_Autocomplete;
-import helper.List2ObList;
 import helper.MessageBox;
+import helper.ObservableListConverter;
 import helper.TableViewHelper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 import pojo.Customer;
@@ -41,7 +29,7 @@ import pojo.InvoiceExt;
 import pojo.Item;
 
 public class SellItem {
-	
+	private static final Logger logger = Logger.getLogger(SellItem.class);
 	ObservableList<Item> list = FXCollections.observableArrayList();
 	@FXML
     private JFXComboBox<String> cb_nameitem;
@@ -173,12 +161,12 @@ public class SellItem {
 
         datepicker_create.setValue(LocalDate.now());
         ObservableList<String> listitem = FXCollections.observableArrayList();
-        for (Item item : List2ObList.L2OL(ItemAdapter.getAll())) {
+        for (Item item : ObservableListConverter.L2OL(ItemAdapter.getAll())) {
 			listitem.add(item.getName());
 			list.add(item);
 		}
 		cb_nameitem.getItems().addAll(listitem);
-		new FXUtil_Autocomplete(cb_nameitem);
+		new FXUtil_Autocomplete<String>(cb_nameitem);
 		
 		tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
 		tb_cCat.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CategoryFormat"));

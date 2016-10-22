@@ -1,7 +1,6 @@
 package helper;
 
 import java.io.File;
-import java.security.CodeSource;
 
 import config.AppConfig;
 
@@ -15,10 +14,7 @@ public class DatabaseManager {
 	public static Process Backupdbtosql() {
 		Process p = null;
 	    try{
-	    	CodeSource codeSource = application.Main.class.getProtectionDomain().getCodeSource();
-	        File jarFile = new File(codeSource.getLocation().toURI().getPath());
-	        String jarDir = jarFile.getParentFile().getPath();
-	        String folderPath = jarDir + "\\db_backup\\";
+	        String folderPath = JavaAppProjectURL.FOLDER_TARGET + "\\db_backup\\";
 	    	String file = folderPath + String.valueOf(System.currentTimeMillis()) + ".sql";
 	    	
 	    	File f = new File(folderPath);

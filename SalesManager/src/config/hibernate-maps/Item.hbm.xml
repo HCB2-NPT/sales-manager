@@ -15,12 +15,12 @@
 		<property name="num" type="int">
 			<column name="num" not-null="true"/>
 		</property>
-		<property name="dramId" type="int">
+		<!-- <property name="dramId" type="int">
 			<column name="dramid" not-null="true"/>
 		</property>
 		<property name="catId" type="int">
 			<column name="catid" not-null="true"/>
-		</property>
+		</property> -->
 		<many-to-one name="cat" class="pojo.Category" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="catId"/>
 		<many-to-one name="dram" class="pojo.Dram" fetch="join" lazy="false" insert="true" update="false" cascade="save-update" not-null="true" column="dramId"/>
 		<property name="img" type="string">

@@ -13,15 +13,20 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.ItemManager">
    <bottom>
-      <TableView maxHeight="1.7976931348623157E308" prefHeight="300.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" editable="true" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn text="Name" />
-            <TableColumn prefWidth="75.0" text="Number" />
-            <TableColumn prefWidth="75.0" text="Sell Price" />
-            <TableColumn prefWidth="75.0" text="Warranty" />
-            <TableColumn prefWidth="75.0" text="Delete" />
+            <TableColumn fx:id="cId" prefWidth="60.0" style="-fx-alignment: center;" text="Id" />
+            <TableColumn fx:id="cName" prefWidth="360.0" style="-fx-alignment: center-left;" text="Name" />
+            <TableColumn fx:id="cPrice" prefWidth="100.0" style="-fx-alignment: center-right;" text="Price" />
+            <TableColumn fx:id="cNumber" prefWidth="60.0" style="-fx-alignment: center; -fx-background-color: #bbbbbb;" text="Number" />
+            <TableColumn fx:id="cCat" style="-fx-alignment: center;" text="Category" />
+            <TableColumn fx:id="cDram" style="-fx-alignment: center;" text="Dram" />
+            <TableColumn fx:id="cImg" prefWidth="240.0" style="-fx-alignment: center-left;" text="Image URL" />
+            <TableColumn fx:id="cShowImg" prefWidth="100.0" style="-fx-alignment: center;" />
+            <TableColumn fx:id="cState" minWidth="80.0" style="-fx-alignment: center;" />
+            <TableColumn fx:id="cButtonRemove" minWidth="60.0" prefWidth="60.0" style="-fx-alignment: center;" />
          </columns>
       </TableView>
    </bottom>
@@ -29,14 +34,18 @@
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <JFXTextField maxWidth="1.7976931348623157E308" promptText="Name Item" />
-            <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #3498db; -fx-background-radius: 45;" GridPane.columnIndex="1">
+            <JFXTextField fx:id="_searchBox" maxWidth="1.7976931348623157E308" onKeyPressed="#searchEnter" promptText="Item's Name" />
+            <JFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#search" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #3498db; -fx-background-radius: 45;" text="Button" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,8 +54,50 @@
                   </ImageView>
                </graphic>
                <GridPane.margin>
-                  <Insets top="8.0" />
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </GridPane.margin>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#refresh" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh" GridPane.columnIndex="2">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Restart-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <GridPane.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#save" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Save All" textFill="#52c356" GridPane.columnIndex="5">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Save%20Filled-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" contentDisplay="RIGHT" onAction="#addNew" prefHeight="40.0" prefWidth="108.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 45;" text="New Item" textFill="WHITE" GridPane.columnIndex="4">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Plus%20Math-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </JFXButton>
          </children>
          <BorderPane.margin>
@@ -54,21 +105,4 @@
          </BorderPane.margin>
       </GridPane>
    </center>
-   <top>
-      <JFXButton buttonType="RAISED" prefHeight="40.0" style="-fx-background-color: #2ecc71; -fx-background-radius: 45;" text="New Item" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
-         <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/Plus%20Math-48.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </BorderPane.margin>
-      </JFXButton>
-   </top>
 </BorderPane>

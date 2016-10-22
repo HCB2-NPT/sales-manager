@@ -2,14 +2,13 @@ package view.handler;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.CodeSource;
 import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
 import config.AppConfig;
 import helper.AppUtil;
 import helper.FileIniCreater;
+import helper.JavaAppProjectURL;
 import helper.MessageBox;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -144,11 +143,11 @@ public class Main {
 
     @FXML
     void acc() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Account", "../view/AccountOsin.fxml");
+    	Tab t = callTab("Personel", "../view/AccountOsin.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -160,7 +159,7 @@ public class Main {
     
     @FXML
     void cat() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -202,7 +201,7 @@ public class Main {
 
     @FXML
     void createInvoice() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -213,18 +212,18 @@ public class Main {
 
     @FXML
     void cus() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Customer", "../view/Customer.fxml");
+    	Tab t = callTab("Guest", "../view/Customer.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
     void dram() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -240,22 +239,22 @@ public class Main {
 
     @FXML
     void inWarehouse() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Import Item", "../view/BuyItem.fxml");
+    	Tab t = callTab("Import", "../view/BuyItem.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
     void item() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Item Manager", "../view/ItemManager.fxml");
+    	Tab t = callTab("Items", "../view/ItemManager.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -277,7 +276,7 @@ public class Main {
 
     @FXML
     void debt() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -288,18 +287,18 @@ public class Main {
 
     @FXML
     void perm() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Permission", "../view/Permission.fxml");
+    	Tab t = callTab("Parts", "../view/Permission.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML
     void pro() {
-    	Tab t = callTab("Provider", "../view/Provider.fxml");
+    	Tab t = callTab("Partner", "../view/Provider.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -321,7 +320,7 @@ public class Main {
 
     @FXML
     void viewImport() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -332,7 +331,7 @@ public class Main {
 
     @FXML
     void viewInvoice() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
@@ -343,11 +342,11 @@ public class Main {
 
     @FXML
     void viewWarehouse() {
-    	if (_tabpane.getTabs().size() > 8){
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("WareHouse", "../view/WareHouse.fxml");
+    	Tab t = callTab("Warehouse", "../view/WareHouse.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -369,15 +368,12 @@ public class Main {
     }
     
     @FXML
-    void dbrestore() throws URISyntaxException {
+    void dbrestore() {
     	logger.info("Start restore database!");
     	notifyMsg("Select a backup for restoring!");
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Select Database");
-    	CodeSource codeSource = application.Main.class.getProtectionDomain().getCodeSource();
-        File jarFile = new File(codeSource.getLocation().toURI().getPath());
-        String jarDir = jarFile.getParentFile().getPath();
-    	fileChooser.setInitialDirectory(new File(jarDir));
+    	fileChooser.setInitialDirectory(new File(JavaAppProjectURL.FOLDER_TARGET));
     	fileChooser.getExtensionFilters().addAll(new ExtensionFilter("SQL Files", "*.sql"));
     	File selectedFile = fileChooser.showOpenDialog(_currentStage);
     	if (selectedFile != null) {

@@ -7,8 +7,8 @@ public class Item extends _pojo_Initializer {
 	private String name = null;
 	private double cost = 0;
 	private int num = 0;
-	private int dramId = 0;
-	private int catId = 0;
+	//private int dramId = 0;
+	//private int catId = 0;
 	private Dram dram = null;
 	private Category cat = null;
 	private String img = null;
@@ -59,7 +59,7 @@ public class Item extends _pojo_Initializer {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	protected int getDramId() {
+	/*protected int getDramId() {
 		return dramId;
 	}
 	protected void setDramId(int dramId) {
@@ -70,7 +70,7 @@ public class Item extends _pojo_Initializer {
 	}
 	protected void setCatId(int catId) {
 		this.catId = catId;
-	}
+	}*/
 
 	public String getCostFormat() {
 		return new DecimalFormat("#,###.00").format(cost);
@@ -85,6 +85,18 @@ public class Item extends _pojo_Initializer {
 	}
 	
 	public String getCategoryFormat(){
+		if (cat == null)
+			return null;
 		return cat.getName();
+	}
+	
+	public String getDramFormat(){
+		if (dram == null)
+			return null;
+		return dram.getName();
+	}
+	
+	public Boolean getCanShowImg(){
+		return this.img != null && !this.img.equals("");
 	}
 }

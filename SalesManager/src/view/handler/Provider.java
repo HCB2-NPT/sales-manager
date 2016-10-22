@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTextField;
 import dao.hibernate_adapters.ProviderAdapter;
 import helper.ITableCellEvent;
-import helper.List2ObList;
+import helper.ObservableListConverter;
 import helper.TableViewHelper;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,27 +51,24 @@ public class Provider {
 
     @FXML
     void refresh() {
-    	table.setItems(List2ObList.L2OL(ProviderAdapter.getAll()));
+    	table.setItems(ObservableListConverter.L2OL(ProviderAdapter.getAll()));
     	logger.debug("Refresh");
     }
 
     @FXML
     void save() {
-    	boolean k = false;
     	for (pojo.Provider p : table.getItems()) {
 			if (p.getCreated()){
-				k = k || ProviderAdapter.insert(p);
+				ProviderAdapter.insert(p);
 				logger.info("Save Provider: " + p.getName());
 			}else if (p.getEdited()){
-				k = k || ProviderAdapter.update(p);
+				ProviderAdapter.update(p);
 				logger.info("Update Provider: " + p.getName());
 			}
 		}
     	Main.callMsg("Save success!");
     	logger.info("Save");
-    	if (k){
-    		refresh();
-    	}
+    	refresh();
     }
 
     @FXML
@@ -104,10 +101,10 @@ public class Provider {
         cButtonRemove.setCellValueFactory(TableViewHelper.getPropertyValueFactory("created"));
         cButtonRemove.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
 			@Override
-			public void commit(Object item, Object newValue) {
-				table.getItems().remove((int)newValue);
+			public void commit(Integer index, Object newValue) {
+				table.getItems().remove(table.getItems().get(index));
 			}
 		}));
-        table.setItems(List2ObList.L2OL(ProviderAdapter.getAll()));
+        table.setItems(ObservableListConverter.L2OL(ProviderAdapter.getAll()));
     }
 }

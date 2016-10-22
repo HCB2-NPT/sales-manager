@@ -29,4 +29,9 @@ public class Dram extends _pojo_Initializer {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }

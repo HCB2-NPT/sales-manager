@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import com.jfoenix.controls.JFXTextField;
 import dao.hibernate_adapters.DramAdapter;
 import helper.ITableCellEvent;
-import helper.List2ObList;
+import helper.ObservableListConverter;
 import helper.TableViewHelper;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,27 +51,24 @@ public class Dram {
 
     @FXML
     void refresh() {
-    	table.setItems(List2ObList.L2OL(DramAdapter.getAll()));
+    	table.setItems(ObservableListConverter.L2OL(DramAdapter.getAll()));
     	logger.debug("Refresh");
     }
 
     @FXML
     void save() {
-    	boolean k = false;
     	for (pojo.Dram p : table.getItems()) {
 			if (p.getCreated()){
-				k = k || DramAdapter.insert(p);
+				DramAdapter.insert(p);
 				logger.info("Save Dram: " + p.getName());
 			}else if (p.getEdited()){
-				k = k || DramAdapter.update(p);
+				DramAdapter.update(p);
 				logger.info("Update Dram: " + p.getName());
 			}
 		}
     	Main.callMsg("Save success!");
     	logger.info("Save");
-    	if (k){
-    		refresh();
-    	}
+    	refresh();
     }
 
     @FXML
@@ -104,10 +101,10 @@ public class Dram {
         cButtonRemove.setCellValueFactory(TableViewHelper.getPropertyValueFactory("created"));
         cButtonRemove.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
 			@Override
-			public void commit(Object item, Object newValue) {
-				table.getItems().remove((int)newValue);
+			public void commit(Integer index, Object newValue) {
+				table.getItems().remove(table.getItems().get(index));
 			}
 		}));
-        table.setItems(List2ObList.L2OL(DramAdapter.getAll()));
+        table.setItems(ObservableListConverter.L2OL(DramAdapter.getAll()));
     }
 }

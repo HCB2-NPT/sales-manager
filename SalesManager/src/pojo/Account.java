@@ -56,6 +56,8 @@ public class Account extends _pojo_Initializer {
 		this.permissionId = permissionId;
 	}
 	public String getPermFormat(){
+		if (permission == null)
+			return null;
 		return permission.getName();
 	}
 }

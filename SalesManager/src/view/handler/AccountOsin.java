@@ -7,7 +7,7 @@ import dao.hibernate_adapters.AccountAdapter;
 import dao.hibernate_adapters.PermissionAdapter;
 import helper.FXUtil_Autocomplete;
 import helper.ITableCellEvent;
-import helper.List2ObList;
+import helper.ObservableListConverter;
 import helper.TableViewHelper;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -55,28 +55,24 @@ public class AccountOsin {
 
     @FXML
     void refresh() {
-    	table.setItems(List2ObList.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
+    	table.setItems(ObservableListConverter.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
     	logger.debug("Refresh");
     }
 
     @FXML
     void save() {
-    	boolean k = false;
     	for (pojo.Account p : table.getItems()) {
 			if (p.getCreated()){
-				k = k || AccountAdapter.signup(p);
+				AccountAdapter.signup(p);
 				logger.info("Save Account: " + p.getName());
 			}else if (p.getEdited()){
-				p.setPermissionId(p.getPermission().getPermissionId());
-				k = k || AccountAdapter.update(p);
+				AccountAdapter.update(p);
 				logger.info("Update Account: " + p.getName());
 			}
 		}
     	Main.callMsg("Save success!");
     	logger.info("Save");
-    	if (k){
-    		refresh();
-    	}
+		refresh();
     }
     
     @FXML
@@ -145,23 +141,20 @@ public class AccountOsin {
              }
         );
         cPerm.setCellValueFactory(TableViewHelper.getPropertyValueFactory("permFormat"));
-        cPerm.setCellFactory(TableViewHelper.getComboBoxCellFactory(List2ObList.L2OL(PermissionAdapter.getByPermission(AppSession._currentUser.getPermissionId())), new ITableCellEvent() {
+        cPerm.setCellFactory(TableViewHelper.getComboBoxCellFactory(ObservableListConverter.L2OL(PermissionAdapter.getByPermission(AppSession._currentUser.getPermissionId())), new ITableCellEvent() {
 			@Override
-			public void commit(Object item, Object newValue) {
-				if (newValue instanceof pojo.Permission){
-					pojo.Account i = (pojo.Account)item;
-					//i.setPermission((pojo.Permission)newValue);
-					//i.setEdited(true);
-					//table.refresh();
-					AccountAdapter.changePermission(((pojo.Permission)newValue).getPermissionId(), i.getAccountId());
-				}
+			public void commit(Integer index, Object newValue) {
+				pojo.Account i = table.getItems().get(index);
+				i.setPermission((pojo.Permission)newValue);
+				i.setEdited(true);
+				table.refresh();
 			}
 		}));
         cIsDeleted.setCellValueFactory(TableViewHelper.getPropertyValueFactory("isDeleted"));
         cIsDeleted.setCellFactory(TableViewHelper.getCheckBoxCellFactory(new ITableCellEvent() {
 			@Override
-			public void commit(Object item, Object newValue) {
-				pojo.Account i = (pojo.Account)item;
+			public void commit(Integer index, Object newValue) {
+				pojo.Account i = table.getItems().get(index);
 				i.setIsDeleted((boolean)newValue);
 				i.setEdited(true);
 				table.refresh();
@@ -171,13 +164,13 @@ public class AccountOsin {
         cButtonRemove.setCellValueFactory(TableViewHelper.getPropertyValueFactory("created"));
         cButtonRemove.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
 			@Override
-			public void commit(Object item, Object newValue) {
-				table.getItems().remove((int)newValue);
+			public void commit(Integer index, Object newValue) {
+				table.getItems().remove(table.getItems().get(index));
 			}
 		}));
-        table.setItems(List2ObList.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
+        table.setItems(ObservableListConverter.L2OL(AccountAdapter.getByPermission(AppSession._currentUser.getPermissionId())));
         
-        _perm.setItems(List2ObList.L2OL(PermissionAdapter.getAll()));
+        _perm.setItems(ObservableListConverter.L2OL(PermissionAdapter.getAll()));
         new FXUtil_Autocomplete<>(_perm);
     }
 }
