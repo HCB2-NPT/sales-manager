@@ -44,4 +44,22 @@ public class InvoiceExtAdapter {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.saveList(obj);
 	}
+	
+	public static boolean deleteList(List<InvoiceExt> obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		try {
+			for (InvoiceExt invoiceExt : obj) {
+				logger.info("Restore Number of itemid" + invoiceExt.getItemId() + " " + invoiceExt.getNum());
+				Item item = ItemAdapter.get(invoiceExt.getItemId());
+				item.setNum(item.getNum()+invoiceExt.getNum());
+				ItemAdapter.updateNum(item);
+				logger.info("Restored");
+				logger.info("Delete InvoiceID " + invoiceExt.getInvoiceId() + ", ItemID " + invoiceExt.getItemId());
+				HibernateUtil.delete(invoiceExt);
+			}
+		} catch (Exception e) {
+			return false;
+		} 
+		return true;
+	}
 }

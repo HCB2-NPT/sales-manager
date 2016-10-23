@@ -1,58 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label text="Năm">
+            <Label text="Date">
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
             </Label>
-            <Spinner>
+            <JFXDatePicker fx:id="datepicker" onAction="#date_SelectedChange">
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
-            </Spinner>
-            <Label text="Tháng">
+            </JFXDatePicker>
+            <JFXButton buttonType="RAISED" onAction="#Refresh_Click" prefHeight="40.0" prefWidth="96.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Restart-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
-            </Label>
-            <Spinner>
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </Spinner>
-            <Label text="Ngày">
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </Label>
-            <Spinner>
-               <HBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </HBox.margin>
-            </Spinner>
+            </JFXButton>
          </children>
       </HBox>
    </top>
    <center>
       <TableView BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn text="Mã Phiếu Nhập" />
-          <TableColumn text="Người Lập" />
-            <TableColumn text="Thời Gian" />
-            <TableColumn text="Tổng Tiền Đơn Hàng" />
-            <TableColumn text="Xoá" />
+          <TableColumn text="ID" />
+          <TableColumn prefWidth="120.0" text="Creater" />
+            <TableColumn prefWidth="200.0" text="Date" />
+            <TableColumn fx:id="table_Debt" prefWidth="200.0" text="TotalMoney" />
         </columns>
          <BorderPane.margin>
             <Insets />

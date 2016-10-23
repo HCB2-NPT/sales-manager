@@ -62,4 +62,5 @@ public class InvoiceExt extends _pojo_Initializer {
 	}
 	
 	
+	
 }

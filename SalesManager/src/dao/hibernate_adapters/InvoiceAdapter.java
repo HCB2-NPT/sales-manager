@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import dao.HibernateUtil;
+import dao.hibernate_adapters.InvoiceExtAdapter.OneColumn;
 import pojo.Dram;
 import pojo.Invoice;
 
@@ -26,4 +27,9 @@ public class InvoiceAdapter {
 		return obj.getInvoiceId() == 0 && HibernateUtil.save(obj);
 	}
 	
+	public static boolean delete(Invoice obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		InvoiceExtAdapter.deleteList(InvoiceExtAdapter.where(InvoiceExtAdapter.OneColumn.Invoice, obj.getInvoiceId()));
+		return obj.getInvoiceId() != 0 && HibernateUtil.delete(obj);
+	}
 }

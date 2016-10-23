@@ -1,6 +1,14 @@
 package pojo;
 
+import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.List;
+
+import dao.hibernate_adapters.CustomerAdapter;
+import dao.hibernate_adapters.InvoiceExtAdapter;
+import dao.hibernate_adapters.InvoiceExtAdapter.OneColumn;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Invoice extends _pojo_Initializer {
 	private int invoiceId = 0;
@@ -12,6 +20,7 @@ public class Invoice extends _pojo_Initializer {
 	private Date paymentDate = null;
 	private Customer customer = null;
 	private boolean isDeleted = false;
+	private boolean inDB = true;
 	
 	public Invoice(){
 		super();
@@ -75,4 +84,34 @@ public class Invoice extends _pojo_Initializer {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
+	
+	public String getCustomerFormat(){
+		return CustomerAdapter.get(customerId).getName();
+	}
+	
+	public String getTotalMoney(){
+		return new DecimalFormat("#,###.00").format(Calc_TotalMoney());
+	}
+	
+	public List<InvoiceExt> getListInvoiceExt(){
+		return InvoiceExtAdapter.where(InvoiceExtAdapter.OneColumn.Invoice, invoiceId);
+	}
+	
+	public double Calc_TotalMoney(){
+		double a = 0;
+		for (InvoiceExt item : InvoiceExtAdapter.where(InvoiceExtAdapter.OneColumn.Invoice, invoiceId)) {
+			a += item.getCost()*item.getNum();
+		}
+		return a;
+	}
+
+	public boolean isInDB() {
+		return inDB;
+	}
+
+	public void setInDB(boolean inDB) {
+		this.inDB = inDB;
+	}
 }
+
+
