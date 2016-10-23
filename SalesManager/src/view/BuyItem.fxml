@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.BuyItem">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" />
@@ -127,7 +126,7 @@
             </JFXButton>
          </children>
       </GridPane>
-      <TableView fx:id="table" editable="true" GridPane.rowIndex="1">
+      <TableView fx:id="table" editable="true" minHeight="-Infinity" prefHeight="250.0" GridPane.rowIndex="1">
          <columns>
             <TableColumn fx:id="cName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="400.0" style="-fx-alignment: center-left;" text="Item's Name" />
             <TableColumn fx:id="cPrice" prefWidth="120.0" style="-fx-alignment: center;" text="Price (Editable)" />
