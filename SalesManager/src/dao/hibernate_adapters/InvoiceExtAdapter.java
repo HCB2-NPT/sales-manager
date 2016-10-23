@@ -1,13 +1,10 @@
 package dao.hibernate_adapters;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import dao.HibernateUtil;
 import javafx.collections.ObservableList;
 import pojo.InvoiceExt;
-import pojo.Item;
 
 public class InvoiceExtAdapter {
 	private static final Logger logger = Logger.getLogger(InvoiceExtAdapter.class);
@@ -50,9 +47,7 @@ public class InvoiceExtAdapter {
 		try {
 			for (InvoiceExt invoiceExt : obj) {
 				logger.info("Restore Number of itemid" + invoiceExt.getItemId() + " " + invoiceExt.getNum());
-				Item item = ItemAdapter.get(invoiceExt.getItemId());
-				item.setNum(item.getNum()+invoiceExt.getNum());
-				ItemAdapter.updateNum(item);
+				ItemAdapter.addNumber(-invoiceExt.getNum(), invoiceExt.getItemId());
 				logger.info("Restored");
 				logger.info("Delete InvoiceID " + invoiceExt.getInvoiceId() + ", ItemID " + invoiceExt.getItemId());
 				HibernateUtil.delete(invoiceExt);

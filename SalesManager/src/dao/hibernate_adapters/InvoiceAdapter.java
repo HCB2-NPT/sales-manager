@@ -1,12 +1,8 @@
 package dao.hibernate_adapters;
 
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import dao.HibernateUtil;
-import dao.hibernate_adapters.InvoiceExtAdapter.OneColumn;
-import pojo.Dram;
 import pojo.Invoice;
 
 public class InvoiceAdapter {
