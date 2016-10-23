@@ -19,4 +19,14 @@ public class ImportAdapter {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from Import where importId = :p0", new Object[]{ id });
 	}
+	
+	public static boolean insert(pojo.Import obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.save(obj);
+	}
+	
+	public static pojo.Import getCreatedLast(){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.getSingle("from Import a where a.date in (select max(b.date) from Import b)", null);
+	}
 }

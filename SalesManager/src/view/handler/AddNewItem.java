@@ -91,8 +91,10 @@ public class AddNewItem {
     	i.setDram(d);
     	i.setCost(cost);
     	i.setImg(_imgURL);
-    	ItemAdapter.insert(i);
-    	logger.info("Save a New Item into Database: " + n);
+    	if (ItemAdapter.insert(i))
+    		logger.info("Save a New Item into Database: " + n);
+    	else
+    		logger.warn("Save fail!");
     }
 
     @FXML

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Import extends _pojo_Initializer {
 	private int importId = 0;
+	private int createrId = 0;
 	private Account creater = null;
 	private Date date = null;
 	
@@ -28,5 +29,13 @@ public class Import extends _pojo_Initializer {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public int getCreaterId() {
+		return createrId;
+	}
+
+	public void setCreaterId(int createrId) {
+		this.createrId = createrId;
 	}
 }

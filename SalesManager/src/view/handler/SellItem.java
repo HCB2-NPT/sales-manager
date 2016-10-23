@@ -210,9 +210,7 @@ public class SellItem {
 					//decrease number item in warehouse
 					for (InvoiceExt invoiceExt : list_ix) {
 						Item item = invoiceExt.getItem();
-						int a= item.getNum()-invoiceExt.getNum();
-						item.setNum(a);
-						ItemAdapter.updateNum(item);
+						ItemAdapter.addNumber(-invoiceExt.getNum(), item.getItemId());
 
 						
 						logger.info("Number of " + item.getName() +"________ -" + invoiceExt.getNum());
