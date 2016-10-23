@@ -61,4 +61,8 @@ public class ImportExtAdapter {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from ImportExt where importId = :p0 and itemId = :p1 and providerId = :p2", new Object[]{ importid, itemid, providerid });
 	}
+	
+	public static boolean insert(pojo.ImportExt obj){
+		return HibernateUtil.save(obj);
+	}
 }

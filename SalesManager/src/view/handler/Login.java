@@ -108,7 +108,7 @@ public class Login {
     	}else{
     		timesLoginFail++;
     		if (timesLoginFail <= AppConfig.MAX_TIMES_LOGIN_FAIL)
-    			MessageBox.Show("Username/Password is wrong!", String.format("Warning (%1$s)", timesLoginFail));
+    			MessageBox.Show("Username/Password is wrong! Or cant connect to server.", String.format("Warning (%1$s)", timesLoginFail));
     		else{
     			MessageBox.Show("You cant login fail over three times!", "Warning");
     			callQuit();

@@ -160,8 +160,6 @@ public class ItemManager {
                 @Override
                 public void handle(CellEditEvent<pojo.Item, String> t) {
                 	pojo.Item i = (pojo.Item)t.getTableView().getItems().get(t.getTablePosition().getRow());
-                	if (t.getNewValue().equals(i.getName()))
-                		return;
                     i.setCostFormat(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();

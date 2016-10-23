@@ -1,6 +1,9 @@
 package pojo;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public class Item extends _pojo_Initializer {
 	private int itemId = 0;
@@ -75,7 +78,11 @@ public class Item extends _pojo_Initializer {
 		return new DecimalFormat("#,###.00").format(cost);
 	}
 	public void setCostFormat(String costF) {
-		this.cost = Double.valueOf(costF);
+		try{
+			NumberFormat format = NumberFormat.getInstance(Locale.US);
+	        Number number = format.parse(costF);
+	        this.cost = number.doubleValue();
+		}catch(Exception e){}
 	}
 	public String getCategoryFormat(){
 		if (cat == null)
