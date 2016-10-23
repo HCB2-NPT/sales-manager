@@ -13,9 +13,19 @@ public class InvoiceAdapter {
 		return HibernateUtil.getList("from Invoice", null);
 	}
 	
+	public static List<Invoice> getAllDebtor() {
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.getList("from Invoice where ispayment=1 and paymentdate!=NULL", null);
+	}
+	
 	public static Invoice get(int id){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from Invoice where invoiceId = :p0", new Object[]{ id });
+	}
+	
+	public static int updatePaid(Invoice obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.execute("update Invoice set isPayment = false where invoiceId = :p0", new Object[]{ obj.getInvoiceId() });
 	}
 	
 	public static boolean insert(Invoice obj){

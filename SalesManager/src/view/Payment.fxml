@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Payment">
    <top>
       <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -41,12 +41,12 @@
       </HBox>
    </top>
    <center>
-      <TableView BorderPane.alignment="CENTER">
+      <TableView fx:id="tb_ListPayment" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn text="ID" />
-          <TableColumn prefWidth="120.0" text="Creater" />
-            <TableColumn prefWidth="200.0" text="Date" />
-            <TableColumn fx:id="table_Debt" prefWidth="200.0" text="TotalMoney" />
+          <TableColumn fx:id="tb_cID" text="ID" />
+          <TableColumn fx:id="tb_cCreater" prefWidth="200.0" style="-fx-alignment: Center;" text="Creater" />
+            <TableColumn fx:id="tb_cDate" prefWidth="200.0" style="-fx-alignment: Center;" text="Date" />
+            <TableColumn fx:id="tb_cTotalMoney" prefWidth="300.0" style="-fx-alignment: Center-right;" text="TotalMoney" />
         </columns>
          <BorderPane.margin>
             <Insets />
