@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 16, 2016 lúc 07:12 SA
+-- Thời gian đã tạo: Th10 22, 2016 lúc 04:49 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -40,9 +40,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `isdeleted`) VALUES
-(1, 'Administrator', 'admin', 'gPTEvGnjg+U=', 1, b'0'),
-(2, 'Huỳnh Chí Phong', 'hcphong', 'G49yg7wnPzI=', 2, b'0'),
-(3, 'Tô Chính Tín', 'tctin', 'KdAXQkq9Sxo=', 3, b'0');
+(0, 'Administrator', 'admin', 'gPTEvGnjg+U=', 0, b'0'),
+(1, 'Huỳnh Chí Phong', 'hcphong', 'G49yg7wnPzI=', 1, b'0'),
+(2, 'Tô Chính Tín', 'tctin', 'KdAXQkq9Sxo=', 2, b'0');
 
 -- --------------------------------------------------------
 
@@ -52,24 +52,25 @@ INSERT INTO `account` (`id`, `name`, `username`, `password`, `permissionid`, `is
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `category`
 --
 
-INSERT INTO `category` (`id`, `name`) VALUES
-(9, 'Case'),
-(1, 'CPU'),
-(6, 'Keyboard'),
-(10, 'Kit Keyboard & Mouse'),
-(2, 'Mainboard'),
-(5, 'Monitor'),
-(7, 'Mouse'),
-(8, 'PSU'),
-(4, 'Ram'),
-(3, 'Storage');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES
+(1, 'CPU', NULL),
+(2, 'Mainboard', NULL),
+(3, 'Storage', NULL),
+(4, 'Ram', NULL),
+(5, 'Monitor', NULL),
+(6, 'Keyboard', NULL),
+(7, 'Mouse', NULL),
+(8, 'PSU', NULL),
+(9, 'Case', NULL),
+(10, 'Kit Keyboard & Mouse', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,17 +105,17 @@ INSERT INTO `customer` (`id`, `name`, `personalid`, `phonenumber`, `company`) VA
 
 CREATE TABLE `dram` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `dram`
 --
 
-INSERT INTO `dram` (`id`, `name`) VALUES
-(1, 'Bộ'),
-(2, 'Cái'),
-(3, 'Món');
+INSERT INTO `dram` (`id`, `name`, `description`) VALUES
+(1, 'Bộ', 'Một nhóm hàng đi cùng nhau.'),
+(2, 'Món', 'Đơn lẽ một món hàng.');
 
 -- --------------------------------------------------------
 
@@ -133,12 +134,12 @@ CREATE TABLE `import` (
 --
 
 INSERT INTO `import` (`id`, `createrid`, `date`) VALUES
-(1, 2, '2016-10-01'),
-(2, 2, '2016-10-01'),
-(3, 2, '2016-10-02'),
-(4, 2, '2016-10-03'),
-(5, 2, '2016-10-04'),
-(6, 2, '2016-10-05');
+(1, 1, '2016-10-01'),
+(2, 1, '2016-10-01'),
+(3, 1, '2016-10-02'),
+(4, 1, '2016-10-03'),
+(5, 1, '2016-10-04'),
+(6, 1, '2016-10-05');
 
 -- --------------------------------------------------------
 
@@ -198,7 +199,7 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `date`, `createrid`, `ispayment`, `paymentdate`, `customerid`, `isdeleted`) VALUES
 (1, '2016-10-10', 2, b'0', NULL, 1, b'0'),
-(2, '2016-10-11', 3, b'0', NULL, 2, b'0'),
+(2, '2016-10-11', 2, b'0', NULL, 2, b'0'),
 (3, '2016-10-11', 2, b'0', NULL, 3, b'0'),
 (4, '2016-10-12', 2, b'0', NULL, 4, b'0'),
 (5, '2016-10-12', 2, b'0', NULL, 5, b'0');
@@ -249,8 +250,8 @@ CREATE TABLE `item` (
   `name` varchar(100) NOT NULL,
   `cost` double NOT NULL,
   `num` int(11) NOT NULL,
-  `dram` int(11) NOT NULL,
-  `cat` int(11) NOT NULL,
+  `dramid` int(11) NOT NULL,
+  `catid` int(11) NOT NULL,
   `img` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -258,25 +259,25 @@ CREATE TABLE `item` (
 -- Đang đổ dữ liệu cho bảng `item`
 --
 
-INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dram`, `cat`, `img`) VALUES
-(1, 'Intel Core i7-5960X Extreme 3.0GHz - Haswell-E LGA 2011-V3', 24999920, 4, 2, 1, NULL),
-(2, 'AMD Vishera FX 9590 4.7GHz ( 5.0GHz Turbo ) ', 5199986, 6, 2, 1, NULL),
-(3, 'Intel Xeon E5-2630 V4 2.1GHz - 8 cores LGA 2011-V3', 16599990, 7, 2, 1, NULL),
-(4, 'Intel Core i5-6400 2.7GHz (3.3GHz Turbo Boost ) ', 4439996, 9, 2, 1, NULL),
-(5, 'Intel Pentium G3450 3.4GHz Haswell LGA 1150', 1519980, 0, 2, 1, NULL),
-(6, 'Asus X99-Pro - LGA 2011-V3 Intel X99', 7099994, 0, 2, 2, NULL),
-(7, 'Asus X99-A - LGA 2011-V3 Intel X99', 6299986, 5, 2, 2, NULL),
-(8, 'Toshiba 1TB 7200rpm - Desktop HDD', 1049994, 4, 2, 3, NULL),
-(9, 'Western Digital Caviar Black 2TB -64MB cache Sata 3', 3199988, 28, 2, 3, NULL),
-(10, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866 - DDR3 Notebook Ram', 550000, 18, 2, 4, NULL),
-(11, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866 - DDR3 Notebook Ram', 1900000, 10, 1, 4, NULL),
-(12, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133 cas 15 - DDR4 Quad Channel', 1900000, 5, 1, 4, NULL),
-(13, 'Philips 273G3 27', 5000000, 7, 2, 5, NULL),
-(14, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD', 4000000, 12, 2, 5, NULL),
-(15, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD', 42000000, 0, 2, 5, NULL),
-(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 4, 2, 6, NULL),
-(17, 'infinity Side 108 Black - Side RGB + Rainbow led Mechanical Blue Keyboard', 2000000, 0, 2, 6, NULL),
-(18, 'CM Storm Devastator - Gaming keyboard & Mouse combo', 750000, 0, 1, 10, NULL);
+INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dramid`, `catid`, `img`) VALUES
+(1, 'Intel Core i7-5960X Extreme 3.0GHz - Haswell-E LGA 2011-V3', 24999920, 4, 2, 1, 'Intel Core i7-5960X Extreme 3.0GHz.jpg'),
+(2, 'AMD Vishera FX 9590 4.7GHz ( 5.0GHz Turbo ) ', 5199986, 6, 2, 1, 'AMD Vishera FX 9590.jpg'),
+(3, 'Intel Xeon E5-2630 V4 2.1GHz - 8 cores LGA 2011-V3', 16599990, 7, 2, 1, 'Intel Xeon E5-2630.jpg'),
+(4, 'Intel Core i5-6400 2.7GHz (3.3GHz Turbo Boost ) ', 4439996, 9, 2, 1, 'Intel Core i5-6400 2.7GHz.jpg'),
+(5, 'Intel Pentium G3450 3.4GHz Haswell LGA 1150', 1519980, 0, 2, 1, 'Intel Pentium G3450 3.4GHz.jpg'),
+(6, 'Asus X99-Pro - LGA 2011-V3 Intel X99', 7099994, 0, 2, 2, 'Asus X99-Pro - LGA 2011-V3 Intel X99.jpg'),
+(7, 'Asus X99-A - LGA 2011-V3 Intel X99', 6299986, 5, 2, 2, 'Asus X99-A - LGA 2011-V3.jpg'),
+(8, 'Toshiba 1TB 7200rpm - Desktop HDD', 1049994, 4, 2, 3, 'Toshiba 1TB 7200rpm - Desktop HDD.jpg'),
+(9, 'Western Digital Caviar Black 2TB -64MB cache Sata 3', 3199988, 28, 2, 3, 'Western Digital Caviar Black.jpg'),
+(10, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866 - DDR3 Notebook Ram', 550000, 18, 2, 4, 'Mushkin Enhanced Sodim 4GB ( 1x4GB ) bus 1866.jpg'),
+(11, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866 - DDR3 Notebook Ram', 1900000, 10, 1, 4, 'Mushkin Enhanced Sodim 16GB ( 2x8GB ) bus 1866.jpg'),
+(12, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133 cas 15 - DDR4 Quad Channel', 1900000, 5, 1, 4, 'Gskill Ripjaws V 16GB ( 2x8GB ) Bus 2133.jpg'),
+(13, 'Philips 273G3 27', 5000000, 7, 2, 5, 'Philips 273G3 27.jpg'),
+(14, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD', 4000000, 12, 2, 5, 'LG 24MP68VQ Full HD - AH-IPS + LED LCD.jpg'),
+(15, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD', 42000000, 0, 2, 5, 'Dell UltraSharp UP2715K - 5K 10Bit IPS LCD.jpg'),
+(16, 'infinity Champions - Rainbow Led RGB side Mechanical Blue Gaming Keyboard', 1800000, 4, 2, 6, 'infinity Champions - Rainbow.jpg'),
+(17, 'infinity Side 108 Black - Side RGB + Rainbow led Mechanical Blue Keyboard', 2000000, 0, 2, 6, 'infinity Side 108 Black.jpg'),
+(18, 'CM Storm Devastator - Gaming keyboard & Mouse combo', 750000, 0, 1, 10, 'CM Storm Devastator.jpg');
 
 -- --------------------------------------------------------
 
@@ -286,17 +287,18 @@ INSERT INTO `item` (`id`, `name`, `cost`, `num`, `dram`, `cat`, `img`) VALUES
 
 CREATE TABLE `permission` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL
+  `name` varchar(45) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `permission`
 --
 
-INSERT INTO `permission` (`id`, `name`) VALUES
-(1, 'Administrator'),
-(2, 'Manager'),
-(3, 'Personel');
+INSERT INTO `permission` (`id`, `name`, `description`) VALUES
+(0, 'Administrator', NULL),
+(1, 'Quản lý', 'Có đầy đủ các quyền điều hành phần mềm.'),
+(2, 'Nhân viên', 'Chỉ có thể xử dụng các chức năng bán hàng của phần mềm.');
 
 -- --------------------------------------------------------
 
@@ -306,18 +308,19 @@ INSERT INTO `permission` (`id`, `name`) VALUES
 
 CREATE TABLE `provider` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `provider`
 --
 
-INSERT INTO `provider` (`id`, `name`) VALUES
-(4, 'Digiworld'),
-(1, 'FPT'),
-(2, 'Viễn Sơn'),
-(3, 'Vĩnh Xuân');
+INSERT INTO `provider` (`id`, `name`, `description`) VALUES
+(1, 'FPT', NULL),
+(2, 'Viễn Sơn', NULL),
+(3, 'Vĩnh Xuân', NULL),
+(4, 'Digiworld', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -387,8 +390,8 @@ ALTER TABLE `invoiceext`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `item->cat_idx` (`cat`),
-  ADD KEY `item->dram_idx` (`dram`);
+  ADD KEY `item->cat_idx` (`catid`),
+  ADD KEY `item->dram_idx` (`dramid`);
 
 --
 -- Chỉ mục cho bảng `permission`
@@ -412,7 +415,7 @@ ALTER TABLE `provider`
 -- AUTO_INCREMENT cho bảng `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `category`
 --
@@ -427,7 +430,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT cho bảng `dram`
 --
 ALTER TABLE `dram`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `import`
 --
@@ -447,7 +450,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT cho bảng `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT cho bảng `provider`
 --
@@ -495,8 +498,8 @@ ALTER TABLE `invoiceext`
 -- Các ràng buộc cho bảng `item`
 --
 ALTER TABLE `item`
-  ADD CONSTRAINT `item->cat` FOREIGN KEY (`cat`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `item->dram` FOREIGN KEY (`dram`) REFERENCES `dram` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `item->cat` FOREIGN KEY (`catid`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `item->dram` FOREIGN KEY (`dramid`) REFERENCES `dram` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

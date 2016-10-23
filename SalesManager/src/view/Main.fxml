@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Main">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Main">
    <top>
       <GridPane>
          <columnConstraints>
@@ -587,7 +587,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <JFXTabPane fx:id="_tabpane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <JFXTabPane fx:id="_tabpane">
                      <tabs>
                         <Tab text="Home">
                            <content>

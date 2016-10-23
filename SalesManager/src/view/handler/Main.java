@@ -219,7 +219,7 @@ public class Main {
     	Tab temp[] = new Tab[_tabpane.getTabs().size()];
     	temp = _tabpane.getTabs().toArray(temp);
     	for (Tab t : temp) {
-    		if (!t.getText().equals("Home"))
+    		if (t != null && !t.getText().equals("Home"))
     			_tabpane.getTabs().remove(t);
     	}
     }
@@ -227,8 +227,7 @@ public class Main {
     @FXML
     void closeTab() {
     	for (Tab t : _tabpane.getTabs()) {
-    		System.out.println(t.getText());
-			if (t.isSelected() && !t.getText().equals("Home")){
+			if (t != null && t.isSelected() && !t.getText().equals("Home")){
 				_tabpane.getTabs().remove(t);
 				break;
 			}
