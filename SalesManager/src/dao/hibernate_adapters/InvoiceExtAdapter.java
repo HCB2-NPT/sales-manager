@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import dao.HibernateUtil;
+import javafx.collections.ObservableList;
 import pojo.InvoiceExt;
+import pojo.Item;
 
 public class InvoiceExtAdapter {
 	private static final Logger logger = Logger.getLogger(InvoiceExtAdapter.class);
@@ -36,5 +38,10 @@ public class InvoiceExtAdapter {
 	public static InvoiceExt where(int invoiceid, int itemid){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
 		return HibernateUtil.getSingle("from InvoiceExt where invoiceId = :p0 and itemId = :p1", new Object[]{ invoiceid, itemid });
+	}
+	
+	public static boolean insertList(ObservableList<InvoiceExt> obj){
+		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+		return HibernateUtil.saveList(obj);
 	}
 }

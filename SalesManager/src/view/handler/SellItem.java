@@ -1,19 +1,27 @@
 package view.handler;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.jboss.logging.Message;
+import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.jfoenix.controls.*;
 import application.AppSession;
+import dao.hibernate_adapters.AccountAdapter;
 import dao.hibernate_adapters.CustomerAdapter;
+import dao.hibernate_adapters.InvoiceAdapter;
+import dao.hibernate_adapters.InvoiceExtAdapter;
 import dao.hibernate_adapters.ItemAdapter;
 import helper.FXUtil_Autocomplete;
+import helper.ITableCellEvent;
 import helper.MessageBox;
 import helper.ObservableListConverter;
 import helper.TableViewHelper;
@@ -23,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
+import pojo.Account;
 import pojo.Customer;
 import pojo.Invoice;
 import pojo.InvoiceExt;
@@ -34,6 +43,8 @@ public class SellItem {
 	@FXML
     private JFXComboBox<String> cb_nameitem;
     @FXML
+    private JFXCheckBox chk_Debt;
+    @FXML
     private JFXTextField txt_number;
     @FXML
     private JFXButton btn_inc;
@@ -44,26 +55,23 @@ public class SellItem {
     @FXML
     private JFXDatePicker datepicker_create;
     @FXML
-    private TableView<Item> table_insertitem;
+    private TableView<InvoiceExt> table_insertitem;
     @FXML
     private JFXTextField txt_totalmoney;
     @FXML
-    private JFXTextField txt_paymoney;
+    private TableColumn<Invoice, String> tb_cName;
     @FXML
-    private JFXTextField txt_returnmoney;
+    private TableColumn<Invoice, String> tb_cCat;
     @FXML
-    private TableColumn<Item, String> tb_cName;
+    private TableColumn<Invoice, String> tb_cPrice;
     @FXML
-    private TableColumn<Item, String> tb_cCat;
+    private TableColumn<Invoice, Integer> tb_cNum;
     @FXML
-    private TableColumn<Item, String> tb_cPrice;
+    private TableColumn<Invoice, String> tb_cTotal;
     @FXML
-    private TableColumn<Item, Integer> tb_cNum;
-    @FXML
-    private TableColumn<Item, String> tb_cTotal;
-    @FXML
-    private TableColumn<Item, Boolean> tb_cDelete;
+    private TableColumn<Invoice, Boolean> tb_cDelete;
 
+    private int max_num=2000;
     @FXML
     void btndec_Click() {
     	if (Integer.valueOf(txt_number.getText())<=1) {
@@ -76,7 +84,7 @@ public class SellItem {
 
     @FXML
     void btninc_Click() {
-    	if (Integer.valueOf(txt_number.getText())>=2000) {
+    	if (Integer.valueOf(txt_number.getText())>=max_num) {
 			return;
 		}
     	int a = Integer.valueOf(txt_number.getText());
@@ -90,13 +98,27 @@ public class SellItem {
     			return;
     		}
         	else{
-        		Item item = new Item();
         		for (Item i : list) {
     				if (i.getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
-    					item = i;
-    					item.setNum(2);
-    					table_insertitem.getItems().add(item);
+    					if (table_insertitem.getItems().size()>0) {
+							for (InvoiceExt item : table_insertitem.getItems()) {
+								if (item.getItem().getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
+									item.setNum(item.getNum()+Integer.valueOf(txt_number.getText()));
+									table_insertitem.refresh();
+									txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
+									return;
+								}
+							}
+						}
+    					InvoiceExt invoice_ex = new InvoiceExt();
+    					invoice_ex.setItem(i);
+    					invoice_ex.setNum(Integer.valueOf(txt_number.getText()));
+    					invoice_ex.setCost(i.getCost());
+    					invoice_ex.setItemId(i.getItemId());
+    					invoice_ex.setCreated(true);
+    					table_insertitem.getItems().add(invoice_ex);
     					table_insertitem.refresh();
+    					txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
     					return;
     				}
     			}
@@ -105,9 +127,26 @@ public class SellItem {
     }
 
     @FXML
+    void cb_Action() {
+    	for (Item item : list) {
+			if (item.getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
+				max_num= item.getNum();
+			}
+		}
+    }
+    
+    
+    public double getTotalMoney(){
+    	double a = 0;
+    	for (InvoiceExt item : table_insertitem.getItems()) {
+			a+= item.getCost()*item.getNum();
+		}
+    	return a;
+    }
+    @FXML
     void number_KeyPress(KeyEvent e){
-    	if (Integer.valueOf(txt_number.getText())>=2000) {
-    		txt_number.setText("2000");
+    	if (Integer.valueOf(txt_number.getText())>=max_num) {
+    		txt_number.setText(String.valueOf(max_num));
 			return;
 		}
     	if (e.getCode().isLetterKey() || e.getCode().isFunctionKey()) {
@@ -122,32 +161,79 @@ public class SellItem {
     	if (txt_personalcustomer.getText().equals("")) {
 			MessageBox.Show("Customer ID cannot Empty!", "Warning");
 		}else{
+			Customer c = CustomerAdapter.get(txt_personalcustomer.getText());
+			if (c==null) {
+				MessageBox.Show("Customer not exists!", "Alert");
+				return;
+			}
 			if (table_insertitem.getItems().size()>=1) {
-				if (datepicker_create.getValue().equals(LocalDate.now())) {
-					Invoice in = new Invoice();
-					String instant = LocalDate.now(ZoneId.systemDefault()).toString();
-				    DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
-					Date res = df.parse(instant);
+				if (datepicker_create.getValue().compareTo(LocalDate.now())>=0) {
+					logger.info("Begin Create New Invoice");
+					//create invoice
 					
-					in.setDate(res);
+					Invoice in = new Invoice();
 					in.setCreater(AppSession._currentUser);
+					in.setDate(java.sql.Date.valueOf(LocalDate.now()));
 					in.setCreated(true);
-					Customer c = CustomerAdapter.get(txt_personalcustomer.getText());
+					in.setCreaterId(AppSession._currentUser.getAccountId());
 					in.setCustomer(c);
-					in.setIsPayment(false);
-					in.setPaymentDate(null);
+					in.setCustomerId(c.getCustomerId());
+					if (chk_Debt.isSelected()) {
+						in.setIsPayment(true);
+						in.setPaymentDate(java.sql.Date.valueOf(datepicker_create.getValue()));
+					}
+					else {
+						in.setIsPayment(false);
+						in.setPaymentDate(null);
+					}
 					
 					ObservableList<InvoiceExt> list_ix = FXCollections.observableArrayList();
-					for (Item item : table_insertitem.getItems()) {
-						InvoiceExt ix = new InvoiceExt();
+					list_ix.addAll(table_insertitem.getItems());
+					
+					//add invoice - invoiceExt
+					InvoiceAdapter.insert(in);
+					logger.info("Saved New Invoice");
+					
+					List<Invoice> l = InvoiceAdapter.getAll();
+					int max = 0;
+					for (Invoice invoice : l) {
+						if (invoice.getInvoiceId() > max) {
+							max = invoice.getInvoiceId();
+						}
 					}
+					for (InvoiceExt invoiceExt : list_ix) {
+						invoiceExt.setInvoiceId(max);
+						invoiceExt.setItemId(invoiceExt.getItem().getItemId());
+					}
+					InvoiceExtAdapter.insertList(list_ix);
+					
+					//decrease number item in warehouse
+					for (InvoiceExt invoiceExt : list_ix) {
+						Item item = invoiceExt.getItem();
+						int a= item.getNum()-invoiceExt.getNum();
+						item.setNum(a);
+						ItemAdapter.updateNum(item);
+
+						
+						logger.info("Number of " + item.getName() +"________ -" + invoiceExt.getNum());
+					}
+					logger.info("Saved List Item of Invoice");
+					logger.info("End Save NewVoice");
+					MessageBox.Show("Transaction Complete!", "Success");
+					ClearAll();
 				}
-			}
+				else
+					MessageBox.Show("Day to Pay DebtMoney must after today  ", "Warning");
+			}	
 		}
     }
+    
     @FXML
-    public void cbMouse_Click(){
-    	
+    void chk_Action() {
+    	if (chk_Debt.isSelected()) 
+			datepicker_create.setDisable(false);
+    	else
+    		datepicker_create.setDisable(true);
     }
 
     @FXML
@@ -156,10 +242,9 @@ public class SellItem {
         assert datepicker_create != null : "fx:id=\"datepicker_create\" was not injected: check your FXML file 'SellItem.fxml'.";
         assert table_insertitem != null : "fx:id=\"table_insertitem\" was not injected: check your FXML file 'SellItem.fxml'.";
         assert txt_totalmoney != null : "fx:id=\"txt_totalmoney\" was not injected: check your FXML file 'SellItem.fxml'.";
-        assert txt_paymoney != null : "fx:id=\"txt_paymoney\" was not injected: check your FXML file 'SellItem.fxml'.";
-        assert txt_returnmoney != null : "fx:id=\"txt_returnmoney\" was not injected: check your FXML file 'SellItem.fxml'.";
 
         datepicker_create.setValue(LocalDate.now());
+        datepicker_create.setDisable(true);
         ObservableList<String> listitem = FXCollections.observableArrayList();
         for (Item item : ObservableListConverter.L2OL(ItemAdapter.getAll())) {
 			listitem.add(item.getName());
@@ -168,24 +253,51 @@ public class SellItem {
 		cb_nameitem.getItems().addAll(listitem);
 		new FXUtil_Autocomplete<String>(cb_nameitem);
 		
-		tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
+		tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("NameFormat"));
 		tb_cCat.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CategoryFormat"));
 		tb_cNum.setCellValueFactory(TableViewHelper.getPropertyValueFactory("num"));
 		tb_cPrice.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CostFormat"));
 		tb_cTotal.setCellValueFactory(TableViewHelper.getPropertyValueFactory("TotalFormat"));
+		
 		tb_cDelete.setStyle("-fx-alignment: CENTER;");
-		tb_cDelete.setCellFactory(new Callback<TableColumn<Item,Boolean>, TableCell<Item,Boolean>>() {
-			
+		tb_cDelete.setCellValueFactory(TableViewHelper.getPropertyValueFactory("Created"));
+		tb_cDelete.setCellFactory(TableViewHelper.getButtonCellFactory(null, "../view/img/Delete-48 (Red).png", new ITableCellEvent() {
 			@Override
-			public TableCell<Item, Boolean> call(TableColumn<Item, Boolean> param) {
-				//return new CustomCell(table_insertitem);
-				return null;
+			public void commit(Integer index, Object newValue) {
+				table_insertitem.getItems().remove(table_insertitem.getItems().get(index));
+				table_insertitem.refresh();
+				txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
+				return;
 			}
-			
-		});
+		}));
         //cb_nameitem.getItems().add(listitem);
         //cb_nameitem = new JFXComboBox<Item>(listitem);
         //helper.FXUtil_Autocomplete.autoCompleteComboBoxPlus(cb_nameitem, (typedText, itemToCompare) -> itemToCompare.getName().toLowerCase().contains(typedText.toLowerCase()) || itemToCompare.getAge().toString().equals(typedText));
         //FXUtil_Autocomplete.getComboBoxValue(cb_nameitem);
+    }
+
+    @FXML
+    void btnRefresh_Click() {
+		ClearAll();
+    }
+    
+    void ClearAll(){
+    	list.clear(); 
+    	list.addAll(ItemAdapter.getAll());
+    	ObservableList<String> listitem = FXCollections.observableArrayList();
+        for (Item item : list) {
+			listitem.add(item.getName());
+		}
+        //cb_nameitem.valueProperty().set(null);
+        //cb_nameitem.getItems().clear();
+        //cb_nameitem.getSelectionModel().clearSelection();
+        for (String string : listitem) {
+        	cb_nameitem.getItems().add(string);
+		}
+		txt_personalcustomer.setText("Chung");
+		txt_number.setText("1");
+		txt_totalmoney.setText(".00");
+		table_insertitem.getItems().clear();
+		table_insertitem.refresh();
     }
 }

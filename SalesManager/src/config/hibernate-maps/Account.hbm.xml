@@ -18,7 +18,7 @@
 		<property name="permissionId" type="int">
 			<column name="permissionid" not-null="true"/>
 		</property>
-		<many-to-one name="permission" class="pojo.Permission" fetch="join" lazy="false" insert="false" update="false" cascade="none" not-null="true" column="permissionId"/>
+		<many-to-one name="permission" class="pojo.Permission" fetch="join" lazy="false" insert="false" update="false" cascade="all" not-null="true" column="permissionId"/>
 		<property name="isDeleted" type="boolean">
 			<column name="isdeleted" not-null="true" default="False"/>
 		</property>
