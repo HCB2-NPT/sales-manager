@@ -27,6 +27,6 @@ public class ImportAdapter {
 	
 	public static pojo.Import getCreatedLast(){
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
-		return HibernateUtil.getSingle("from Import a where a.date in (select max(b.date) from Import b)", null);
+		return HibernateUtil.getSingle("from Import a where a.importId = (select max(b.importId) from Import b)", null);
 	}
 }

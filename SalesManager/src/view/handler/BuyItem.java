@@ -1,5 +1,6 @@
 package view.handler;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import pojo.ImportExt;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 public class BuyItem {
@@ -84,6 +86,7 @@ public class BuyItem {
     	ie.setCreated(true);
     	table.getItems().add(ie);
     	table.refresh();
+    	_total.setText(total());
     }
 
     @FXML
@@ -96,8 +99,6 @@ public class BuyItem {
     	table.getItems().clear();
     	_pro.setItems(ObservableListConverter.L2OL(ProviderAdapter.getAll()));
     	_item.setItems(ObservableListConverter.L2OL(ItemAdapter.getAll()));
-    	new FXUtil_Autocomplete<pojo.Provider>(_pro);
-        new FXUtil_Autocomplete<pojo.Item>(_item);
     }
 
     @FXML
@@ -149,6 +150,7 @@ public class BuyItem {
                     i.setCostFormat(t.getNewValue());
                     i.setEdited(true);
                     table.refresh();
+                    _total.setText(total());
                 }
              }
         );
@@ -164,6 +166,7 @@ public class BuyItem {
 	                i.setNum(value);
 	                i.setEdited(true);
                     table.refresh();
+                    _total.setText(total());
                 }
              }
         );
@@ -180,5 +183,18 @@ public class BuyItem {
         _creator.setText(String.format("%1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
         
         refresh();
+        
+        new FXUtil_Autocomplete<pojo.Provider>(_pro);
+        new FXUtil_Autocomplete<pojo.Item>(_item);
+        
+        _total.setText(total());
+    }
+    
+    String total(){
+    	double s = 0;
+    	for (ImportExt ie : table.getItems()) {
+			s += ie.getCost() * ie.getNum();
+		}
+    	return new DecimalFormat("#,###.00").format(s);
     }
 }

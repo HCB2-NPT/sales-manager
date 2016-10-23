@@ -9,7 +9,7 @@
 		<property name="createrId" type="int">
 			<column name="createrid" not-null="true"/>
 		</property>
-		<many-to-one name="creater" class="pojo.Account" insert="false" update="false" cascade="none" not-null="true" column="accountId"/>
+		<!-- <many-to-one name="creater" class="pojo.Account" insert="false" update="false" cascade="none" not-null="true" column="accountId"/> -->
 		<property name="date" type="date">
 			<column name="date" not-null="true"/>
 		</property>

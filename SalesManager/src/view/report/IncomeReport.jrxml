@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="IncomeReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0f8fa60c-39b3-463b-b533-10c53357e600">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="LocalImageDir" class="java.lang.String"/>
+	<parameter name="User" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT cat.id as CatId, cat.name as CatName, SUM(im.num) as Number, SUM(im.cost * im.num) as Income FROM importext im, category cat, item i WHERE im.itemid = i.id and i.catid = cat.id GROUP BY cat.id, cat.name]]>
+	</queryString>
+	<field name="CatName" class="java.lang.String"/>
+	<field name="Number" class="java.math.BigDecimal"/>
+	<field name="Income" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="b18960cd-6ee0-42d3-9f11-c63387b6de8b"/>
+				<imageExpression><![CDATA[$P{LocalImageDir} + "leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" forecolor="#339900" uuid="693f2007-84c3-4082-bb42-0ad3b7217149"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Income Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="46" width="194" height="24" uuid="f2c16ea7-797e-47d3-9df1-8faf1e72a66a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{User}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="46" width="48" height="24" uuid="7a187f8b-05c4-46e5-8783-d73b82558ce2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Creator:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="1bb421f2-e306-4adc-bf48-d8ba5f7186a7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="185" height="15" uuid="17cae5ca-c8ed-4301-983c-b8006408a55f"/>
+				<text><![CDATA[CatName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="185" y="19" width="185" height="15" uuid="aca64f84-9f59-400e-973c-430fa1976202"/>
+				<text><![CDATA[Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="370" y="19" width="185" height="15" uuid="7e967198-4c29-452d-bbd5-7cf8df4f884b"/>
+				<text><![CDATA[Income]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="43a2ff58-6a41-4db8-8200-3295f706e164"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="185" height="15" uuid="61516364-a540-47d7-9825-aa8900eb8d0e"/>
+				<textFieldExpression><![CDATA[$F{CatName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="197" y="0" width="173" height="15" uuid="48a573be-dacb-4b55-9641-d477e1f7087c"/>
+				<textFieldExpression><![CDATA[$F{Number}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement style="Detail" x="383" y="0" width="172" height="15" uuid="c5a2ce10-c12e-4493-bcdf-9b506ad272f4"/>
+				<textFieldExpression><![CDATA[$F{Income}]]></textFieldExpression>
+				<patternExpression><![CDATA["#,###.00"]]></patternExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="78112815-bb08-414c-946e-868450b53086"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="62cba2c8-1a41-412a-b4fb-c197ffbf1f0a"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="fd860876-3499-476d-9e91-5fe945c0c5c5"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="d678825a-85db-48c4-91f8-5a2806042450"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

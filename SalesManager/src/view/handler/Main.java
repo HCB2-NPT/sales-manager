@@ -2,10 +2,16 @@ package view.handler;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import com.jfoenix.controls.JFXTabPane;
 import application.AppSession;
 import config.AppConfig;
+import dao.HibernateUtil;
 import helper.AppUtil;
 import helper.FileIniCreater;
 import helper.JavaAppProjectURL;
@@ -22,6 +28,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Main {
 	private static final Logger logger = Logger.getLogger(Main.class);
@@ -87,6 +98,36 @@ public class Main {
     	}
     }
     
+    static HashMap<String, Object> parameters;
+    public static void callReport(String file, HashMap<String, Object> params){
+    	if (params == null)
+    		params = new HashMap<>();
+    	parameters = params;
+    	Session session = null;
+    	try{
+	    	session = HibernateUtil.getSessionFactory().openSession();
+			session.doWork(new Work() {
+				@Override
+				public void execute(Connection conn) throws SQLException {
+					try {
+						String s = AppSession._resourceProvider.getResource("../view/report/" + file).getPath();
+						JasperReport jr = JasperCompileManager.compileReport(s);
+						parameters.put("LocalImageDir", new File(s).getParent() + "\\");
+						parameters.put("User", String.format("%1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
+						JasperPrint jp = JasperFillManager.fillReport(jr, parameters, conn);
+						JasperViewer.viewReport(jp, false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}finally {
+    		session.close();
+		}
+    }
+    
     @FXML
     private JFXTabPane _tabMain;
     
@@ -112,11 +153,11 @@ public class Main {
         _user.setText(String.format("Current User: %1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
         notifyMsg("Welcome to our application and Thanks for using.");
         
-        if (AppSession._currentUser.getPermission().getName().equals("Personel")){
+        if (AppSession._currentUser.getPermission().getPermissionId() == 2){
         	_tabMain.getTabs().remove(1); //remove 1
         	_tabMain.getTabs().remove(1); //remove 2
         	_tabMain.getTabs().remove(1); //remove 3
-        } else if (AppSession._currentUser.getPermission().getName().equals("Manager")) {
+        } else if (AppSession._currentUser.getPermission().getPermissionId() == 1) {
         	_tabMain.getTabs().remove(0); //remove 0
         }
         
@@ -147,7 +188,7 @@ public class Main {
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Personel", "../view/AccountOsin.fxml");
+    	Tab t = callTab("Account", "../view/AccountOsin.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -216,7 +257,7 @@ public class Main {
     		MessageBox.Show("Many tabs are opened.", "Warn");
     		return;
     	}
-    	Tab t = callTab("Guest", "../view/Customer.fxml");
+    	Tab t = callTab("Customer", "../view/Customer.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
     }
@@ -298,6 +339,10 @@ public class Main {
 
     @FXML
     void pro() {
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
     	Tab t = callTab("Partner", "../view/Provider.fxml");
     	_tabpane.getTabs().add(t);
     	_tabpane.getSelectionModel().select(t);
@@ -305,17 +350,17 @@ public class Main {
 
     @FXML
     void rpIn() {
-    	MessageBox.Show("Coming Soon!", "Message");
+    	callReport("ImportsReport.jrxml", null);
     }
 
     @FXML
     void rpIncome() {
-    	MessageBox.Show("Coming Soon!", "Message");
+    	callReport("IncomeReport.jrxml", null);
     }
 
     @FXML
     void rpOut() {
-    	MessageBox.Show("Coming Soon!", "Message");
+    	callReport("SellsReport.jrxml", null);
     }
 
     @FXML
