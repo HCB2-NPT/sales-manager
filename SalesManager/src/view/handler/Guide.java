@@ -119,47 +119,77 @@ public class Guide {
 
 	    @FXML
 	    void Parts_Click() {
-	    	
+	    	textarea.setText("Quản lý loại phân quyền nhân viên \r\n\r\n"
+	    			+ "THÊM MỚI PHÂN QUYỀN \r\n"
+	    			+ "Quản lý nhập tên phân quyền mới.\r\n"
+	    			+ "Nhấn '+' để thêm mới vào bảng danh sách phân quyền.\r\n"
+	    			+ "Nhấn 'Save' để lưu lại thông tin.\r\n"
+	    			+ "Nhấn 'Refresh' để hoàn tác.\r\n"
+	    			+ "Lưu ý: thông tin mô tả có thể tuỳ chỉnh trực tiếp trên bảng.");
 	    }
 
 	    @FXML
 	    void Payment_Click() {
-
+	    	textarea.setText("Xem thông tin danh sách phiếu chi để nhập hàng\r\n \r\n"
+	    			+ "XEM DANH SÁCH PHIẾU CHI-TỔNG TIỀN NHẬP HÀNG \r\n"
+	    			+ "Chọn ngày muốn xem, bảng sẽ show ra danh sách hoá đơn nhập hàng trong ngày hôm đó \r\n"
+	    			+ "Nhấn 'Refresh' để load toàn bộ danh sách");
 	    }
 
 	    @FXML
 	    void ReportImport_Click() {
-
+	    	textarea.setText("Thống kê số lượng sản phẩm, tổng tiền nhập kho theo thời gian");
 	    }
 
 	    @FXML
 	    void ReportIncome_Click() {
-
+	    	textarea.setText("Thống kê doanh thu theo thời gian");
 	    }
+	    
+	    @FXML
+	    void Partner_Click() {
+	    	textarea.setText("Quản lý thông tin đối tác sản xuất \r\n\r\n"
+	    			+ "THÊM NSX MỚI \r\n"
+	    			+ "Nhập tên NSX mới \r\n"
+	    			+ "Nhấn '+' để lưu nsx vào bảng dang sách nsx \r\n"
+	    			+ "Nhấn 'Save' để lưu xuống csdl \r\n"
+	    			+ "Nhấn 'Refresh' để làm mới lại bảng danh sách \r\n"
+	    			+ "Lưu ý: Thông tin mô tả của nsx có thể điều chỉnh trực tiếp trên bảng.");
+	    }
+	    
 
 	    @FXML
 	    void ReportSell_Click() {
-
+	    	textarea.setText("Thống kê bán hàng theo thời gian");
 	    }
 
 	    @FXML
 	    void Restore_Click() {
-
+	    	textarea.setText("Phục hồi bản sao cơ sở dữ liệu đã tạo trước đó");
 	    }
 
 	    @FXML
 	    void Sell_Click() {
-
+	    	textarea.setText("Bán hàng cho khách \r\n \r\n"
+	    			+ "Nhân viên điền CMND của khách hàng \r\n"
+	    			+ "Chọn sản phẩm có trong cửa hàng\r\n"
+	    			+ "Nhấn 'Add Item' để thêm vào giỏ hàng\r\n"
+	    			+ "Có thể xoá sản phẩm khỏi giỏ hàng bằng biểu tượng kế bên"
+	    			+ "Hoá đơn có nợ hay không thì đánh vào 'Isdebt' và chọn ngày nợ nếu có"
+	    			+ "Nhấn 'Finish' để hoàn tất hoá đơn \r\n");
 	    }
 
 	    @FXML
 	    void Storage_Click() {
-
+	    	textarea.setText("Tra cứu số lượng và đơn giá của sản phẩm \r\n"
+	    			+ "Nhân viên nhập tên sản phẩm cần tìm"
+	    			+ "Bảng sẽ trả về danh sách có chứa giá trị cần tìm.");
 	    }
 
 	    @FXML
 	    void initialize() {
 	        assert textarea != null : "fx:id=\"textarea\" was not injected: check your FXML file 'Guide.fxml'.";
 
+	        textarea.setEditable(false);
 	    }
 }
