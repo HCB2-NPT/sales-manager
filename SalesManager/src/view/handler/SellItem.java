@@ -41,15 +41,11 @@ public class SellItem {
 	private static final Logger logger = Logger.getLogger(SellItem.class);
 	ObservableList<Item> list = FXCollections.observableArrayList();
 	@FXML
-    private JFXComboBox<String> cb_nameitem;
+    private JFXComboBox<Item> cb_nameitem;
     @FXML
     private JFXCheckBox chk_Debt;
     @FXML
     private JFXTextField txt_number;
-    @FXML
-    private JFXButton btn_inc;
-    @FXML
-    private JFXButton btn_dec;
     @FXML
     private JFXTextField txt_personalcustomer;
     @FXML
@@ -73,66 +69,43 @@ public class SellItem {
 
     private int max_num=2000;
     @FXML
-    void btndec_Click() {
-    	if (Integer.valueOf(txt_number.getText())<=1) {
-			return;
-		}
-    	int a = Integer.valueOf(txt_number.getText());
-    	a--;
-    	txt_number.setText(""+a);
-    }
-
-    @FXML
-    void btninc_Click() {
-    	if (Integer.valueOf(txt_number.getText())>=max_num) {
-			return;
-		}
-    	int a = Integer.valueOf(txt_number.getText());
-    	a++;
-    	txt_number.setText(""+a);
-    }
-    @FXML
     void btnAdd_Click() {
     	if (cb_nameitem.getSelectionModel().getSelectedItem()!=null) {
     		if (cb_nameitem.getSelectionModel().getSelectedItem().toString().equals("")) {
     			return;
     		}
         	else{
-        		for (Item i : list) {
-    				if (i.getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
-    					if (table_insertitem.getItems().size()>0) {
-							for (InvoiceExt item : table_insertitem.getItems()) {
-								if (item.getItem().getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
-									item.setNum(item.getNum()+Integer.valueOf(txt_number.getText()));
-									table_insertitem.refresh();
-									txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
-									return;
-								}
+        		Item item = cb_nameitem.getSelectionModel().getSelectedItem();
+				if (table_insertitem.getItems().size()>0) {
+					for (InvoiceExt invoice : table_insertitem.getItems()) {
+						if (invoice.getItemId()==item.getItemId()) {
+							if (invoice.getNum()<item.getNum()) {
+								invoice.setNum(invoice.getNum()+1);
+								table_insertitem.refresh();
+								txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
+								return;
 							}
+							return;
 						}
-    					InvoiceExt invoice_ex = new InvoiceExt();
-    					invoice_ex.setItem(i);
-    					invoice_ex.setNum(Integer.valueOf(txt_number.getText()));
-    					invoice_ex.setCost(i.getCost());
-    					invoice_ex.setItemId(i.getItemId());
-    					invoice_ex.setCreated(true);
-    					table_insertitem.getItems().add(invoice_ex);
-    					table_insertitem.refresh();
-    					txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
-    					return;
-    				}
-    			}
+					}
+				}
+				InvoiceExt invoice_ex = new InvoiceExt();
+				invoice_ex.setItem(cb_nameitem.getSelectionModel().getSelectedItem());
+				invoice_ex.setNum(1);
+				invoice_ex.setCost(item.getCost());
+				invoice_ex.setItemId(item.getItemId());
+				invoice_ex.setCreated(true);
+				table_insertitem.getItems().add(invoice_ex);
+				table_insertitem.refresh();
+				txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
+				return;
         	}	
 		}
     }
 
     @FXML
     void cb_Action() {
-    	for (Item item : list) {
-			if (item.getName().equals(cb_nameitem.getSelectionModel().getSelectedItem().toString())) {
-				max_num= item.getNum();
-			}
-		}
+    	txt_number.setText(String.valueOf(cb_nameitem.getSelectionModel().getSelectedItem().getNum()));
     }
     
     
@@ -248,8 +221,8 @@ public class SellItem {
 			listitem.add(item.getName());
 			list.add(item);
 		}
-		cb_nameitem.getItems().addAll(listitem);
-		new FXUtil_Autocomplete<String>(cb_nameitem);
+		cb_nameitem.setItems(ObservableListConverter.L2OL(ItemAdapter.getAll()));
+		new FXUtil_Autocomplete<Item>(cb_nameitem);
 		
 		tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("NameFormat"));
 		tb_cCat.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CategoryFormat"));
@@ -268,10 +241,6 @@ public class SellItem {
 				return;
 			}
 		}));
-        //cb_nameitem.getItems().add(listitem);
-        //cb_nameitem = new JFXComboBox<Item>(listitem);
-        //helper.FXUtil_Autocomplete.autoCompleteComboBoxPlus(cb_nameitem, (typedText, itemToCompare) -> itemToCompare.getName().toLowerCase().contains(typedText.toLowerCase()) || itemToCompare.getAge().toString().equals(typedText));
-        //FXUtil_Autocomplete.getComboBoxValue(cb_nameitem);
     }
 
     @FXML
@@ -282,16 +251,8 @@ public class SellItem {
     void ClearAll(){
     	list.clear(); 
     	list.addAll(ItemAdapter.getAll());
-    	ObservableList<String> listitem = FXCollections.observableArrayList();
-        for (Item item : list) {
-			listitem.add(item.getName());
-		}
-        //cb_nameitem.valueProperty().set(null);
-        //cb_nameitem.getItems().clear();
-        //cb_nameitem.getSelectionModel().clearSelection();
-        for (String string : listitem) {
-        	cb_nameitem.getItems().add(string);
-		}
+    	cb_nameitem.setItems(ObservableListConverter.L2OL(ItemAdapter.getAll()));
+    	new FXUtil_Autocomplete<Item>(cb_nameitem);
 		txt_personalcustomer.setText("Chung");
 		txt_number.setText("1");
 		txt_totalmoney.setText(".00");

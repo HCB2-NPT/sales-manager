@@ -92,34 +92,12 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <Label text="Number" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label text="Number in Storage" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <children>
-                        <JFXTextField fx:id="txt_number" maxWidth="1.7976931348623157E308" onKeyPressed="#number_KeyPress" promptText="Number" text="1" />
-                        <JFXButton fx:id="btn_inc" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btninc_Click">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/Plus%20Math-48%20(Silver).png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="btn_dec" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" onAction="#btndec_Click">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@img/Minus%20Math%20-48%20(Silver).png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </HBox>
+                  <JFXTextField fx:id="txt_number" maxWidth="1.7976931348623157E308" promptText="Number" text="0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                   <JFXButton buttonType="RAISED" onAction="#btnRefresh_Click" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Refresh" GridPane.columnIndex="6">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -137,7 +115,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="16.0" />
                </VBox.margin>
             </GridPane>
-            <TableView fx:id="table_insertitem" maxHeight="180.0">
+            <TableView fx:id="table_insertitem" editable="true" maxHeight="180.0">
                <columns>
                   <TableColumn fx:id="tb_cName" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="500.0" text="Name Item" />
                   <TableColumn fx:id="tb_cCat" prefWidth="100.0" text="Category" />
@@ -159,7 +137,7 @@
                <rowConstraints>
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
                </rowConstraints>
                <children>
                   <Label text="Tổng tiền" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
