@@ -91,10 +91,14 @@ public class AddNewItem {
     	i.setDram(d);
     	i.setCost(cost);
     	i.setImg(_imgURL);
-    	if (ItemAdapter.insert(i))
+    	if (ItemAdapter.insert(i)){
     		logger.info("Save a New Item into Database: " + n);
-    	else
+    		MessageBox.Show("Success.", "Info");
+    	}
+    	else{
     		logger.warn("Save fail!");
+    		MessageBox.Show("Fail.", "Info");
+    	}
     }
 
     @FXML

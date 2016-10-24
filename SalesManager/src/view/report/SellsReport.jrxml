@@ -9,8 +9,10 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="LocalImageDir" class="java.lang.String"/>
 	<parameter name="User" class="java.lang.String"/>
+	<parameter name="From" class="java.lang.String"/>
+	<parameter name="To" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT c.id as CatId, c.name as CatName, i.id as ItemId, i.name as ItemName, SUM(ie.num) as TotalNum, SUM(ie.cost) as TotalMoney, cus.name as CusName, cus.company as Company FROM category c, invoiceext ie, item i, customer cus, invoice inv WHERE c.id = i.catid and ie.itemid = i.id and ie.invoiceid = inv.id and inv.customerid = cus.id and (inv.ispayment = false or (inv.ispayment = true && inv.paymentdate is NOT NULL)) GROUP BY c.id, c.name, i.id, i.name, ie.num, ie.cost, cus.name, cus.company]]>
+		<![CDATA[SELECT c.id as CatId, c.name as CatName, i.id as ItemId, i.name as ItemName, SUM(ie.num) as TotalNum, SUM(ie.cost) as TotalMoney, cus.name as CusName, cus.company as Company FROM category c, invoiceext ie, item i, customer cus, invoice inv WHERE c.id = i.catid and ie.itemid = i.id and ie.invoiceid = inv.id and inv.customerid = cus.id and (inv.ispayment = false or (inv.ispayment = true && inv.paymentdate is NOT NULL)) and inv.date between $P{From} and $P{To} GROUP BY c.id, c.name, i.id, i.name, ie.num, ie.cost, cus.name, cus.company]]>
 	</queryString>
 	<field name="CatName" class="java.lang.String"/>
 	<field name="ItemId" class="java.lang.Integer"/>
@@ -134,7 +136,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{TotalNum}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,###.00">
 				<reportElement style="Detail" x="457" y="0" width="96" height="15" uuid="3c15e242-1b33-486f-89e1-23062657c24d"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{TotalMoney}]]></textFieldExpression>
