@@ -1,8 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.handler.Guide">
+   <left>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefWidth="150.0">
+         <content>
+            <VBox>
+               <children>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Sell_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Sell">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Storage_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Storage">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Bill_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Bill">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Payment_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Payment">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Debt_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Debt">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Import_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Import">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Items_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Items">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Category_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Category">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Dram_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Dram">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Customer_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Customer">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Partner">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Account_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Account">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Parts_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Parts">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#ReportImport_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Report Import">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#ReportSell_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Report Sell">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#ReportIncome_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Report Income">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Log_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Log">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Details_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Details">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Backup_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Backup">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#Restore_Click" style="-fx-background-color: #ffffff; -fx-background-radius: 45;" text="Restore">
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </left>
+   <center>
+      <JFXTextArea fx:id="textarea" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
-

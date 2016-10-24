@@ -244,7 +244,13 @@ public class Main {
 
     @FXML
     void help() {
-    	MessageBox.Show("Coming Soon!", "Message");
+    	if (_tabpane.getTabs().size() > AppConfig.LIMIT_NUMBER_TABS){
+    		MessageBox.Show("Many tabs are opened.", "Warn");
+    		return;
+    	}
+    	Tab t = callTab("Guide", "../view/Guide.fxml");
+    	_tabpane.getTabs().add(t);
+    	_tabpane.getSelectionModel().select(t);
     }
 
     @FXML

@@ -1,0 +1,142 @@
+package view.handler;
+
+import com.jfoenix.controls.JFXTextArea;
+
+import javafx.fxml.FXML;
+
+public class Guide {
+	 	@FXML
+	    private JFXTextArea textarea;
+
+	    @FXML
+	    void About_Click() {
+	    	textarea.setText("Thông tin liên lạc của nhóm \r\n");
+	    }
+
+	    @FXML
+	    void Account_Click() {
+	    	textarea.setText("Quản lý tài khoản của công ty \r\n \r\n"
+	    			+ "THÊM MỚI \r\n"
+	    			+ "Nhập tên người, nhập tên tài khoản, chọn phân quyền cho tài khoản\r\n"
+	    			+ "Click '+' \r\n"
+	    			+ "Lưu ý : tài khoản vừa được tạo sẽ có ID - Password giống nhau ( có thể tuỳ chỉnh lại sau )\r\n \r\n"
+	    			+ "CHỈNH SỬA \r\n"
+	    			+ "Người quản lý thao tác trực tiếp trên bảng \r\n"
+	    			+ "Lưu thay đổi bằng cách nhấn 'SAVE' \r\n"
+	    			+ "Quay lại như lúc ban đầu thì nhấn 'REFRESH'");
+	    }
+
+	    @FXML
+	    void Backup_Click() {
+	    	textarea.setText("Tạo bản sao lưu cơ sở dữ liệu hiện tại");
+	    }
+
+	    @FXML
+	    void Bill_Click() {
+	    	textarea.setText("Kiểm tra hoá đơn đã bán của công ty \r\n \r\n"
+	    			+ "TÌM HOÁ ĐƠN THEO NGÀY \r\n"
+	    			+ "Nhân viên chọn ngày cần tìm \r\n"
+	    			+ "Bảng sẽ hiển thị danh sách hoá đơn đã tạo trong ngày\r\n"
+	    			+ "Quay trở lại toàn bộ danh sách hoá đơn thì nhấn 'Refresh'\r\n \r\n"
+	    			+ "Xoá HOÁ ĐƠN\r\n"
+	    			+ "Nhấn biểu tượng thùng rác ở dòng hoá đơn muốn xoá\r\n"
+	    			+ "Nhấn 'Save' để lưu lại hành động");
+	    }
+
+	    @FXML
+	    void Category_Click() {
+	    	textarea.setText("Quản lý phân loại sản phẩm \r\n\r\n"
+	    			+ "THÊM MỚI PHÂN LOẠI \r\n"
+	    			+ "Quản lý nhập tên phân loại mới.\r\n"
+	    			+ "Nhấn '+' để thêm mới vào bảng danh sách phân loại.\r\n"
+	    			+ "Nhấn 'Save' để lưu lại thông tin.\r\n"
+	    			+ "Nhấn 'Refresh' để hoàn tác.");
+	    }
+
+
+	    @FXML
+	    void Customer_Click() {
+	    	textarea.setText("Quản Lý Khách Hàng");
+	    }
+
+	    @FXML
+	    void Debt_Click() {
+	    	textarea.setText("Quản lý những hoá đơn nợ của công ty\r\n \r\n"
+	    			+ "TÌM HOÁ ĐƠN NỢ \r\n"
+	    			+ "Nhân viên nhập mã hoá đơn sau đó 'Enter' hoặc 'Search' \r\n"
+	    			+ "Bảng danh sách hoá đơn nợ sẽ hiện hoá đơn nếu tìm thấy\r\n\r\n"
+	    			+ "THANH TOÁN HOÁ ĐƠN NỢ"
+	    			+ "Nhân viên nhấn vào 'Check' hoá đơn nợ sẽ được hỏi lại lần nữa là có thanh toán hay không");
+	    }
+
+	    @FXML
+	    void Details_Click() {
+
+	    }
+
+	    @FXML
+	    void Dram_Click() {
+
+	    }
+
+	    @FXML
+	    void Import_Click() {
+
+	    }
+
+	    @FXML
+	    void Items_Click() {
+
+	    }
+
+	    @FXML
+	    void Log_Click() {
+
+	    }
+
+	    @FXML
+	    void Parts_Click() {
+
+	    }
+
+	    @FXML
+	    void Payment_Click() {
+
+	    }
+
+	    @FXML
+	    void ReportImport_Click() {
+
+	    }
+
+	    @FXML
+	    void ReportIncome_Click() {
+
+	    }
+
+	    @FXML
+	    void ReportSell_Click() {
+
+	    }
+
+	    @FXML
+	    void Restore_Click() {
+
+	    }
+
+	    @FXML
+	    void Sell_Click() {
+
+	    }
+
+	    @FXML
+	    void Storage_Click() {
+
+	    }
+
+	    @FXML
+	    void initialize() {
+	        assert textarea != null : "fx:id=\"textarea\" was not injected: check your FXML file 'Guide.fxml'.";
+
+	    }
+}
