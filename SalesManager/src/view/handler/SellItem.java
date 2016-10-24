@@ -27,8 +27,10 @@ import helper.ObservableListConverter;
 import helper.TableViewHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 import pojo.Account;
@@ -55,17 +57,17 @@ public class SellItem {
     @FXML
     private JFXTextField txt_totalmoney;
     @FXML
-    private TableColumn<Invoice, String> tb_cName;
+    private TableColumn<InvoiceExt, String> tb_cName;
     @FXML
-    private TableColumn<Invoice, String> tb_cCat;
+    private TableColumn<InvoiceExt, String> tb_cCat;
     @FXML
-    private TableColumn<Invoice, String> tb_cPrice;
+    private TableColumn<InvoiceExt, String> tb_cPrice;
     @FXML
-    private TableColumn<Invoice, Integer> tb_cNum;
+    private TableColumn<InvoiceExt, Integer> tb_cNum;
     @FXML
-    private TableColumn<Invoice, String> tb_cTotal;
+    private TableColumn<InvoiceExt, String> tb_cTotal;
     @FXML
-    private TableColumn<Invoice, Boolean> tb_cDelete;
+    private TableColumn<InvoiceExt, Boolean> tb_cDelete;
 
     private int max_num=2000;
     @FXML
@@ -75,6 +77,10 @@ public class SellItem {
     			return;
     		}
         	else{
+        		if (txt_number.getText().equals("0")) {
+					MessageBox.Show("Item not enought number for buy", "Alert");
+					return;
+				}
         		Item item = cb_nameitem.getSelectionModel().getSelectedItem();
 				if (table_insertitem.getItems().size()>0) {
 					for (InvoiceExt invoice : table_insertitem.getItems()) {
@@ -226,7 +232,36 @@ public class SellItem {
 		
 		tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("NameFormat"));
 		tb_cCat.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CategoryFormat"));
+		
 		tb_cNum.setCellValueFactory(TableViewHelper.getPropertyValueFactory("num"));
+        tb_cNum.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cNum.setOnEditCommit(
+            new EventHandler<CellEditEvent<InvoiceExt, Integer>>() {
+                @Override
+                public void handle(CellEditEvent<InvoiceExt, Integer> t) {
+                	InvoiceExt i = (InvoiceExt)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue()==Integer.valueOf(i.getNum()))
+                		return;
+                	try {
+                		int a =Integer.valueOf(String.valueOf(t.getNewValue()));
+                		if (a>=ItemAdapter.get(i.getItemId()).getNum())
+                			i.setNum(ItemAdapter.get(i.getItemId()).getNum());
+                		else
+                			i.setNum(a);
+					} catch (Exception e) {
+						i.setNum(t.getOldValue());
+					}
+                    i.setEdited(true);
+                    txt_totalmoney.setText(String.valueOf(new DecimalFormat("#,###.00").format(getTotalMoney())));
+                    table_insertitem.refresh();
+                }
+             }
+        );
+		
+		
+		
+		
+		
 		tb_cPrice.setCellValueFactory(TableViewHelper.getPropertyValueFactory("CostFormat"));
 		tb_cTotal.setCellValueFactory(TableViewHelper.getPropertyValueFactory("TotalFormat"));
 		

@@ -37,6 +37,11 @@ public class InvoiceExt extends _pojo_Initializer {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	
+	public void setNum(Integer num) {
+		this.num = num;
+	}
+	
 	public Item getItem() {
 		return item;
 	}
