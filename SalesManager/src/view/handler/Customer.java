@@ -1,5 +1,7 @@
 package view.handler;
 
+import org.apache.log4j.Logger;
+
 import com.jfoenix.controls.JFXTextField;
 
 import dao.hibernate_adapters.CustomerAdapter;
@@ -8,13 +10,16 @@ import helper.ObservableListConverter;
 import helper.TableViewHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.input.KeyEvent;
 import pojo.*;
 
 public class Customer {
+	private static final Logger logger = Logger.getLogger(Customer.class);
 	@FXML
     private JFXTextField txt_name;
 
@@ -96,7 +101,14 @@ public class Customer {
 
     @FXML
     void save() {
-    	
+    	for (pojo.Customer c : tb_listcustomer.getItems()) {
+			if (c.getCreated()) {
+				CustomerAdapter.insert(c);
+			}
+			else if (c.getEdited()) {
+				CustomerAdapter.update(c);
+			}
+		}
     }
 
     @FXML
@@ -113,10 +125,67 @@ public class Customer {
         assert tb_cCompany != null : "fx:id=\"tb_cCompany\" was not injected: check your FXML file 'Customer.fxml'.";
 
         tb_cName.setCellValueFactory(TableViewHelper.getPropertyValueFactory("name"));
+        tb_cName.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cName.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Customer, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Customer, String> t) {
+                	pojo.Customer i = (pojo.Customer)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getName()))
+                		return;
+                    i.setName(t.getNewValue());
+                    i.setEdited(true);
+                    tb_listcustomer.refresh();
+                }
+             }
+        );
 		tb_cpersonalid.setCellValueFactory(TableViewHelper.getPropertyValueFactory("personalId"));
+        tb_cpersonalid.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cpersonalid.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Customer, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Customer, String> t) {
+                	pojo.Customer i = (pojo.Customer)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getPersonalId()))
+                		return;
+                    i.setPersonalId(t.getNewValue());
+                    i.setEdited(true);
+                    tb_listcustomer.refresh();
+                }
+             }
+        );
 		tb_cPhone.setCellValueFactory(TableViewHelper.getPropertyValueFactory("phoneNumber"));
+        tb_cPhone.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cPhone.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Customer, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Customer, String> t) {
+                	pojo.Customer i = (pojo.Customer)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getPhoneNumber()))
+                		return;
+                    i.setPhoneNumber(t.getNewValue());
+                    i.setEdited(true);
+                    tb_listcustomer.refresh();
+                }
+             }
+        );
 		tb_cCompany.setCellValueFactory(TableViewHelper.getPropertyValueFactory("company"));
+        tb_cCompany.setCellFactory(TableViewHelper.getCellFactory());
+        tb_cCompany.setOnEditCommit(
+            new EventHandler<CellEditEvent<pojo.Customer, String>>() {
+                @Override
+                public void handle(CellEditEvent<pojo.Customer, String> t) {
+                	pojo.Customer i = (pojo.Customer)t.getTableView().getItems().get(t.getTablePosition().getRow());
+                	if (t.getNewValue().equals(i.getCompany()))
+                		return;
+                    i.setCompany(t.getNewValue());
+                    i.setEdited(true);
+                    tb_listcustomer.refresh();
+                }
+             }
+        );
 		
+		tb_listcustomer.setEditable(true);
 		tb_listcustomer.setItems(ObservableListConverter.L2OL(CustomerAdapter.getAll()));
     }
 }
