@@ -53,19 +53,20 @@ public class Guide {
 	    			+ "Nhấn 'Refresh' để hoàn tác.");
 	    }
 
-	    @FXML
-	    void Contacts_Click() {
-
-	    }
 
 	    @FXML
 	    void Customer_Click() {
-
+	    	textarea.setText("Quản Lý Khách Hàng");
 	    }
 
 	    @FXML
 	    void Debt_Click() {
-
+	    	textarea.setText("Quản lý những hoá đơn nợ của công ty\r\n \r\n"
+	    			+ "TÌM HOÁ ĐƠN NỢ \r\n"
+	    			+ "Nhân viên nhập mã hoá đơn sau đó 'Enter' hoặc 'Search' \r\n"
+	    			+ "Bảng danh sách hoá đơn nợ sẽ hiện hoá đơn nếu tìm thấy\r\n\r\n"
+	    			+ "THANH TOÁN HOÁ ĐƠN NỢ"
+	    			+ "Nhân viên nhấn vào 'Check' hoá đơn nợ sẽ được hỏi lại lần nữa là có thanh toán hay không");
 	    }
 
 	    @FXML
