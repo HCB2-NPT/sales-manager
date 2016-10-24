@@ -45,7 +45,12 @@ public class Guide {
 
 	    @FXML
 	    void Category_Click() {
-	    	
+	    	textarea.setText("Quản lý phân loại sản phẩm \r\n\r\n"
+	    			+ "THÊM MỚI PHÂN LOẠI \r\n"
+	    			+ "Quản lý nhập tên phân loại mới.\r\n"
+	    			+ "Nhấn '+' để thêm mới vào bảng danh sách phân loại.\r\n"
+	    			+ "Nhấn 'Save' để lưu lại thông tin.\r\n"
+	    			+ "Nhấn 'Refresh' để hoàn tác.");
 	    }
 
 	    @FXML

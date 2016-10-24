@@ -62,7 +62,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
                   </Label>
-                  <JFXTextField fx:id="txt_personalcustomer" text="Chung" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                  <JFXTextField fx:id="txt_personalcustomer" text="0000000000" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                      <GridPane.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </GridPane.margin>
