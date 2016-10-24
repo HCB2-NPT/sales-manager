@@ -9,8 +9,10 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="LocalImageDir" class="java.lang.String"/>
 	<parameter name="User" class="java.lang.String"/>
+	<parameter name="From" class="java.lang.String"/>
+	<parameter name="To" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT cat.id as CatId, cat.name as CatName, SUM(im.num) as Number, SUM(im.cost * im.num) as Income FROM importext im, category cat, item i WHERE im.itemid = i.id and i.catid = cat.id GROUP BY cat.id, cat.name]]>
+		<![CDATA[SELECT cat.id as CatId, cat.name as CatName, SUM(ine.num) as Number, SUM(ine.cost * ine.num) as Income FROM invoiceext ine, category cat, item i, invoice inv WHERE inv.date between $P{From} and $P{To} and ine.itemid = i.id and i.catid = cat.id and inv.id = ine.invoiceid GROUP BY cat.id, cat.name]]>
 	</queryString>
 	<field name="CatName" class="java.lang.String"/>
 	<field name="Number" class="java.math.BigDecimal"/>
@@ -86,10 +88,9 @@
 				<reportElement style="Detail" x="197" y="0" width="173" height="15" uuid="48a573be-dacb-4b55-9641-d477e1f7087c"/>
 				<textFieldExpression><![CDATA[$F{Number}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,###.00">
 				<reportElement style="Detail" x="383" y="0" width="172" height="15" uuid="c5a2ce10-c12e-4493-bcdf-9b506ad272f4"/>
 				<textFieldExpression><![CDATA[$F{Income}]]></textFieldExpression>
-				<patternExpression><![CDATA["#,###.00"]]></patternExpression>
 			</textField>
 		</band>
 	</detail>

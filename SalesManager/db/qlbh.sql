@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 22, 2016 lúc 04:49 SA
+-- Thời gian đã tạo: Th10 24, 2016 lúc 05:44 SA
 -- Phiên bản máy phục vụ: 5.7.14
 -- Phiên bản PHP: 5.6.25
 
@@ -91,6 +91,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `personalid`, `phonenumber`, `company`) VALUES
+(0, 'Unknown', '000000000', '0000000000', NULL),
 (1, 'Nguyễn Thị Lạ', '028441254', '0909776724', 'Tin Học Hoàng'),
 (2, 'Huỳnh Thị Út', '021342525', '0909232323', 'Tin Học Linh Trung'),
 (3, 'Nguyễn Thị Đẹt', '025355452', '7878343434', 'Tin Học B'),
@@ -425,7 +426,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT cho bảng `dram`
 --

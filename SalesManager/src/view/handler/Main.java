@@ -98,36 +98,6 @@ public class Main {
     	}
     }
     
-    static HashMap<String, Object> parameters;
-    public static void callReport(String file, HashMap<String, Object> params){
-    	if (params == null)
-    		params = new HashMap<>();
-    	parameters = params;
-    	Session session = null;
-    	try{
-	    	session = HibernateUtil.getSessionFactory().openSession();
-			session.doWork(new Work() {
-				@Override
-				public void execute(Connection conn) throws SQLException {
-					try {
-						String s = AppSession._resourceProvider.getResource("../view/report/" + file).getPath();
-						JasperReport jr = JasperCompileManager.compileReport(s);
-						parameters.put("LocalImageDir", new File(s).getParent() + "\\");
-						parameters.put("User", String.format("%1$s (Id-%2$s)", AppSession._currentUser.getName(), AppSession._currentUser.getAccountId()));
-						JasperPrint jp = JasperFillManager.fillReport(jr, parameters, conn);
-						JasperViewer.viewReport(jp, false);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}finally {
-    		session.close();
-		}
-    }
-    
     @FXML
     private JFXTabPane _tabMain;
     
@@ -349,17 +319,17 @@ public class Main {
 
     @FXML
     void rpIn() {
-    	callReport("ImportsReport.jrxml", null);
+    	Report.callReport(Report.ReportType.In);
     }
 
     @FXML
     void rpIncome() {
-    	callReport("IncomeReport.jrxml", null);
+    	Report.callReport(Report.ReportType.Income);
     }
 
     @FXML
     void rpOut() {
-    	callReport("SellsReport.jrxml", null);
+    	Report.callReport(Report.ReportType.Out);
     }
 
     @FXML

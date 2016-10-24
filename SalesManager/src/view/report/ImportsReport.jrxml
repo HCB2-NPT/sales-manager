@@ -9,8 +9,10 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="LocalImageDir" class="java.lang.String"/>
 	<parameter name="User" class="java.lang.String"/>
+	<parameter name="From" class="java.lang.String"/>
+	<parameter name="To" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT c.id as CatId, c.name as CatName, i.id as ItemId, i.name as ItemName, p.name as ProName, SUM(ie.num) as TotalNum, SUM(ie.cost) as TotalMoney FROM category c, importext ie, item i, provider p WHERE c.id = i.catid and ie.itemid = i.id and p.id = ie.providerid GROUP BY c.id, c.name, i.id, i.name, p.name, ie.num, ie.cost]]>
+		<![CDATA[SELECT c.id as CatId, c.name as CatName, i.id as ItemId, i.name as ItemName, p.name as ProName, SUM(ie.num) as TotalNum, SUM(ie.cost) as TotalMoney FROM category c, importext ie, item i, provider p, import im WHERE im.id = ie.importid and im.date between $P{From} and $P{To} and c.id = i.catid and ie.itemid = i.id and p.id = ie.providerid GROUP BY c.id, c.name, i.id, i.name, p.name, ie.num, ie.cost]]>
 	</queryString>
 	<field name="CatName" class="java.lang.String"/>
 	<field name="ItemId" class="java.lang.Integer"/>
