@@ -161,7 +161,7 @@ public class BuyItem {
                 @Override
                 public void handle(CellEditEvent<pojo.ImportExt, String> t) {
                 	int value;
-                	try {value = Integer.valueOf(t.getNewValue());}catch(Exception e){return;}
+                	try {value = Integer.valueOf(t.getNewValue());}catch(Exception e){table.refresh();return;}
                 	pojo.ImportExt i = (pojo.ImportExt)t.getTableView().getItems().get(t.getTablePosition().getRow());
 	                i.setNum(value);
 	                i.setEdited(true);
@@ -196,5 +196,10 @@ public class BuyItem {
 			s += ie.getCost() * ie.getNum();
 		}
     	return new DecimalFormat("#,###.00").format(s);
+    }
+    
+    @FXML
+    void datepicker_Change() {
+    	_dateCreate.setValue(LocalDate.now());
     }
 }

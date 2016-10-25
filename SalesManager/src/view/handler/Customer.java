@@ -52,8 +52,16 @@ public class Customer {
 
     @FXML
     void Add_Click() {
+    	try {
+			Double.valueOf(txt_phone.getText());
+		} catch (Exception e) {
+			MessageBox.Show("Phone Number is Numberial only", "Alert");
+			txt_phone.setText("");
+			return;
+		}
     	if (CustomerAdapter.get(txt_personalid.getText())!=null) {
 			MessageBox.Show("Personal ID had exsisted", "Alert");
+			return;
 		}
     	if (txt_name!= null && !txt_name.getText().equals("") ) {
 			if (txt_personalid!=null && !txt_personalid.getText().equals("")) {
@@ -99,8 +107,10 @@ public class Customer {
     	
     }
 
+
     @FXML
     void save() {
+    	
     	for (pojo.Customer c : tb_listcustomer.getItems()) {
 			if (c.getCreated()) {
 				CustomerAdapter.insert(c);

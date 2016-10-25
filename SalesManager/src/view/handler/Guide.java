@@ -91,7 +91,14 @@ public class Guide {
 
     @FXML
     void Customer_Click() {
-    	textarea.setText("Quản Lý Khách Hàng");
+    	textarea.setText("Quản lý khách hàng\r\n \r\n"
+    			+ "THÊM KHÁCH HÀNG MỚI\r\n"
+    			+ "Quản lý mở Title 'Add New User'\r\n"
+    			+ "Nhập các thông tin của khách hàng rồi nhấn 'Save'\r\n\r\n"
+    			+ "TÌM KIẾM KHÁCH HÀNG\r\n"
+    			+ "Nhập tên khách hàng cần tìm, sau đó nhấn 'Search'\r\n"
+    			+ "Bảng sẽ trả về danh sách khách hàng chứa giá trị cần tìm\r\n"
+    			+ "Nhấn 'Refresh' để load lại bảng dữ liệu");
     }
 
     @FXML

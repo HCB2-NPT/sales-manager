@@ -199,8 +199,12 @@ public class SellItem {
 					MessageBox.Show("Transaction Complete!", "Success");
 					ClearAll();
 				}
-				else
+				else{
 					MessageBox.Show("Day to Pay DebtMoney must after today  ", "Warning");
+					datepicker_create.setValue(LocalDate.now());
+				}
+					
+					
 			}	
 		}
     }
@@ -288,8 +292,7 @@ public class SellItem {
     	list.addAll(ItemAdapter.getAll());
     	cb_nameitem.setItems(ObservableListConverter.L2OL(ItemAdapter.getAll()));
     	new FXUtil_Autocomplete<Item>(cb_nameitem);
-		txt_personalcustomer.setText("Chung");
-		txt_number.setText("1");
+		txt_personalcustomer.setText("0000000000");
 		txt_totalmoney.setText(".00");
 		table_insertitem.getItems().clear();
 		table_insertitem.refresh();
