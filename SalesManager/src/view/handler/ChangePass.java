@@ -27,7 +27,7 @@ public class ChangePass {
 				if (_currentStage != null){
 					_currentStage.centerOnScreen();
 					_currentStage.setResizable(false);
-					_currentStage.setAlwaysOnTop(true);
+					//_currentStage.setAlwaysOnTop(true);
 					_currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						public void handle(WindowEvent event) {
 							callQuit();

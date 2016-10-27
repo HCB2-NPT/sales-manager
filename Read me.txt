@@ -1,0 +1,14 @@
+Tài khoản đăng nhập:
+	+ Administrator:
+		Username: admin
+		Password: admin
+	+ Quản lý:
+		Username: hcphong
+		Password: hcphong
+	+ Nhân viên:
+		Username: tctin
+		Password: tctin
+		
+Ghi chú:
+	- Backup được tạo trong thư mục target/db_backup
+	- Image của hình ảnh mặt hàng được lưu trong target/img
