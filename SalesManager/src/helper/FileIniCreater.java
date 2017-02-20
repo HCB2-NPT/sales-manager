@@ -1,67 +1,109 @@
 package helper;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class FileIniCreater {
-	private static final String END_DATA = "#\r\n";
-	
-	public static boolean load(String filePath, String formatData){
-		if (!new File(filePath).exists()){
-			return write(filePath, formatData);
-		}
-		return true;
-	}
-	
-	public static boolean write(String filePath, String formatData){
-		boolean success = false;
-		File f = new File(filePath);
-		try {
-			if (!f.exists())
-				f.createNewFile();
-			FileWriter fw = new FileWriter(f.getAbsoluteFile());
+    private String FullText;
+    private String FilePath;
+    private FileIniCreater(String filepath, String fulltext)
+    {
+        FullText = fulltext;
+        FilePath = filepath;
+    }
+    public String FullText(){
+    	return FullText;
+    }
+    public String FilePath(){
+    	return FilePath;
+    }
+
+    private final String END_DATA = "#\r\n";
+
+    public static FileIniCreater Load(String filePath, String formatData)
+    {
+    	File f = new File(filePath);
+        if (f.exists())
+        {
+        	try{
+	        	char[] text = new char[(int) f.length()];
+	        	FileReader fr = new FileReader(f.getAbsoluteFile());
+				BufferedReader br = new BufferedReader(fr);
+				br.read(text);
+				br.close();
+	            return new FileIniCreater(filePath, new String(text));
+	        } catch (Exception e) {
+				return null;
+			}
+        }
+        return Write(filePath, formatData);
+    }
+
+    public static FileIniCreater Write(String filePath, String formatData)
+    {
+    	File f = new File(filePath);
+        try
+        {
+            if (!f.exists())
+                f.createNewFile();
+            FileWriter fw = new FileWriter(f.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(formatData);
 			bw.close();
-			success = true;
-		} catch (Exception e) {
-			success = false;
-		}
-		return success;
-	}
-	
-	public static boolean setValue(String filePath, String key, String value){
-		boolean success = false;
-		try {
-			Path path = Paths.get(filePath);
-			String content = new String(Files.readAllBytes(path));
-			int from = content.indexOf(key);
-			int to = content.indexOf(END_DATA, from);
-			content = content.replace(content.substring(from, to), String.format("%1$s=%2$s", key, value));
-			Files.write(path, content.getBytes());
-			success = true;
-		} catch (IOException e) {
-			success = false;
-		}
-		return success;
-	}
-	
-	public static String getValue(String filePath, String key){
-		String value = null;
-		try {
-			Path path = Paths.get(filePath);
-			String content = new String(Files.readAllBytes(path));
-			int from = content.indexOf(key);
-			int to = content.indexOf(END_DATA, from);
-			value = content.substring(from + key.length() + 1, to);
-		} catch (IOException e) {
-			value = null;
-		}
-		return value;
-	}
+            return new FileIniCreater(filePath, formatData);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    public boolean Save()
+    {
+        try
+        {
+        	File f = new File(FilePath);
+        	FileWriter fw = new FileWriter(f.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(FullText);
+			bw.close();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean Set(String key, String value)
+    {
+        try
+        {
+            int from = FullText.indexOf(key), to = FullText.indexOf(END_DATA, from);
+            FullText = FullText.replace(FullText.substring(from, to - from), String.format("%1$s=%2$s", key, value));
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    public String Get(String key)
+    {
+        String value = null;
+        try
+        {
+            int from = FullText.indexOf(key) + key.length() + 1, to = FullText.indexOf(END_DATA, from);
+            value = FullText.substring(from, to - from);
+        }
+        catch (Exception e)
+        {
+            value = null;
+        }
+        return value;
+    }
 }
